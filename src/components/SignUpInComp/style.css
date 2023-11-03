@@ -123,6 +123,7 @@
 .alr-ave span {
   color: #4f0da3;
   font-weight: 500;
+  cursor: pointer;
 }
 .bvb {
   visibility: hidden;

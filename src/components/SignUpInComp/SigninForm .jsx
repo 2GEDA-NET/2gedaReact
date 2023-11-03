@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ActionButton from "../Commons/Button";
 import InputField from "../Commons/InputField";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../App";
+import { AuthCtx } from "../../Context/AuthContext";
 
 const SigninForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -16,10 +17,15 @@ const SigninForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { userAuth, setUserAuth } = useContext(AuthCtx);
+
   const navigate = useNavigate();
   console.log(API_BASE_URL);
   const goToForgot = () => {
     navigate("/forgot");
+  };
+  const gotoSignUp = () => {
+    navigate("/signup");
   };
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -59,9 +65,9 @@ const SigninForm = () => {
       });
       console.log(phone_number);
       localStorage.setItem("authToken", response.data?.token);
-
-      console.log(response.data); // assuming the response is JSON
-      // Handle successful login, e.g., store the token in local storage
+      setUserAuth({ token: response.data?.token });
+      console.log(response.data);
+      console.log(userAuth);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.error);
@@ -153,12 +159,7 @@ const SigninForm = () => {
           <ActionButton label={"Continue"} bg={"ma-d"} />
         </div>
         <div className="alr-ave">
-          New user?{" "}
-          <span>
-            <NavLink className="goto-link" to="/signup">
-              Sign up
-            </NavLink>
-          </span>
+          New user? <span onClick={gotoSignUp}>Sign up</span>
         </div>
       </form>
     </div>

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ActionButton from "../Commons/Button";
 import InputField from "../Commons/InputField";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useNavigate } from "react-router-dom";
+import { AuthCtx } from "../../Context/AuthContext";
 
 const SignForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -13,10 +14,16 @@ const SignForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { userAuth, setUserAuth } = useContext(AuthCtx);
+  console.log(userAuth);
+
   console.log(phone);
   const navigate = useNavigate();
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+  };
+  const gotoSignIn = () => {
+    navigate("/signin");
   };
 
   const handleEmailChange = (event) => {
@@ -53,10 +60,11 @@ const SignForm = () => {
       .then((data) => {
         console.log(data.token);
         localStorage.setItem("authToken", data?.token);
+        setUserAuth({ token: data?.token });
+        console.log(userAuth);
         navigate("/verify");
       })
       .catch((error) => {
-        // Handle any errors
         console.error("Error:", error);
       });
   };
@@ -79,7 +87,6 @@ const SignForm = () => {
               placeholder="+234 80 2015 5501"
               required
             />
-            {/* <InputField placeholder={"Input Phone Number"} type={"tel"} /> */}
             <div className="ins-bx-txt">
               We’ll verify the phone provided to be sure it belongs to you
             </div>
@@ -131,12 +138,7 @@ const SignForm = () => {
           <ActionButton label={"Continue"} bg={"ma-d"} type={"submit"} />
         </div>
         <div className="alr-ave">
-          Already have an account?{" "}
-          <span>
-            {/* <NavLink className="goto-link" to="/signin"> */}
-            Sign in
-            {/* </NavLink> */}
-          </span>
+          Already have an account? <span onClick={gotoSignIn}>Sign in</span>
         </div>
       </form>
     </div>
