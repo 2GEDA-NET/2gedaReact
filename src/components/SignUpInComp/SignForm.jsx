@@ -1,14 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ActionButton from "../Commons/Button";
 import InputField from "../Commons/InputField";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { NavLink } from "react-router-dom";
-// import AuthContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
-import { Slide, ToastContainer, toast } from "react-toastify";
 
 const SignForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);

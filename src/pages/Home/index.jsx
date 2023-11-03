@@ -12,7 +12,6 @@ import MovieDashCard from "../../components/Dashboard/MovieDas";
 import Stick from "../../components/Dashboard/Stick";
 import MovieSlider from "../../components/Dashboard/Slider";
 import Data from "../../utils/datahome.json";
-import { NavLink } from "react-router-dom";
 import StatusContainer from "../../components/Dashboard/StatusContainer";
 import FeedDetail from "./FeedDetail";
 import { useState } from "react";
@@ -46,7 +45,7 @@ const Home = () => {
           {!isFeedOpen && (
             <div className="left-side-container">
               <FirstSide />
-              <img src="images/jumia.png" alt="" className="ads-img" />
+              <img src="/images/jumia.png" alt="" className="ads-img" />
               <div className="status-row">
                 <StatusContainer />
               </div>
@@ -134,9 +133,9 @@ const Home = () => {
             </div>
           )}
           <div className="middle-side-container">
-            <img src="images/ads1.png" alt="" />
-            <img src="images/ads2.png" alt="" />
-            <img src="images/ads3.png" alt="" />
+            <img src="/images/ads1.png" alt="" />
+            <img src="/images/ads2.png" alt="" />
+            <img src="/images/ads3.png" alt="" />
           </div>
           <div className="right-side-container">
             <SelectCategory />

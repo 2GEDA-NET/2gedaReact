@@ -38,24 +38,24 @@ function App() {
       {/* <AuthProvider> */}
       <Routes>
         <Route index path="/" element={<Home />} />
-        <Route index path="/signup" element={<Signup />} />
-        <Route index path="/signin" element={<Signin />} />
-        <Route index path="/landing" element={<Landing />} />
-        <Route index path="/verify" element={<Verify />} />
-        <Route index path="/forgot" element={<ForgotPassword />} />
-        <Route index path="/personaldetail" element={<PersonalDetails />} />
-        <Route index path="/search" element={<SearchPage />} />
-        <Route index path="/chat" element={<Chat />} />
-        <Route index path="/commerce" element={<Commerce />} />
-        <Route index path="/category" element={<CategoryPage />} />
-        <Route index path="/business" element={<BusinessDirectory />} />
-        <Route index path="/ticket" element={<Ticket />} />
-        <Route index path="/connect" element={<Connect />} />
-        <Route index path="/addprofile" element={<AddProfile />} />
-        <Route index path="/profile" element={<Profile />} />
-        <Route index path="/stereo" element={<Stereo />} />
-        <Route index path="/bussprofile" element={<BusinessProfile />} />
-        <Route index path="/stereo/nonauth" element={<NonAuthStero />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/verify" element={<Verify />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/personaldetail" element={<PersonalDetails />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/commerce" element={<Commerce />} />
+        <Route path="/category" element={<CategoryPage />} />
+        <Route path="/business" element={<BusinessDirectory />} />
+        <Route path="/ticket" element={<Ticket />} />
+        <Route path="/connect" element={<Connect />} />
+        <Route path="/addprofile" element={<AddProfile />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/stereo" element={<Stereo />} />
+        <Route path="/bussprofile" element={<BusinessProfile />} />
+        <Route path="/stereo/nonauth" element={<NonAuthStero />} />
       </Routes>
       {/* </AuthProvider> */}
     </div>

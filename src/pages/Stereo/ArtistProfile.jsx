@@ -1,5 +1,4 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import QuickPickCol from "../../components/StereoComp/QuickPickCol";
 import { useEffect } from "react";
 import ArtisitSong from "../../components/StereoComp/ArtisitSong";
 import MusicStero from "../../components/StereoComp/MusicStero";

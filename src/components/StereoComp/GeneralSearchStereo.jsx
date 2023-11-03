@@ -1,13 +1,6 @@
 import { AiOutlineClose } from "react-icons/ai";
-import { IoSendSharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 
-const GeneralSearchStereo = ({}) => {
-  const navigate = useNavigate();
-
-  const gotoSearch = () => {
-    navigate("/search");
-  };
+const GeneralSearchStereo = () => {
   return (
     <div className="general-search-container join-str">
       <div className="down-cont colorrr">
