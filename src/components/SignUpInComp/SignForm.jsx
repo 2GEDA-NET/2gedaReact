@@ -62,7 +62,9 @@ const SignForm = () => {
         localStorage.setItem("authToken", data?.token);
         setUserAuth({ token: data?.token });
         console.log(userAuth);
-        navigate("/verify");
+        {
+          data?.token?.ok && navigate("/verify");
+        }
       })
       .catch((error) => {
         console.error("Error:", error);

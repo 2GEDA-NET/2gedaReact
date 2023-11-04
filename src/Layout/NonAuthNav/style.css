@@ -50,6 +50,7 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+  display: none;
 }
 .log-btn {
   background: #4f0da3;
