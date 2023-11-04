@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ActionButton from "../Commons/Button";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const VerifyForm = ({ setIsVerify, handleVerifyClick }) => {
   const [inputValues, setInputValues] = useState({
@@ -14,13 +14,13 @@ const VerifyForm = ({ setIsVerify, handleVerifyClick }) => {
   const [seconds, setSeconds] = useState(42);
   const [isActive, setIsActive] = useState(true);
   const [timerExpired, setTimerExpired] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const authToken = localStorage.getItem("authToken");
   // console.log(authToken);
 
   const [inputRefs, setInputRefs] = useState([null, null, null, null, null]);
-  // console.log(setInputRefs);
+  console.log(setInputRefs);
   useEffect(() => {
     if (inputRefs[0]) {
       inputRefs[0].focus();

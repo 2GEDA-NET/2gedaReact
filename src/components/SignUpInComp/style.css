@@ -7,7 +7,7 @@
 
 .welcome-comp-box img {
   height: 84.3vh;
-  width: 80%;
+  width: 60%;
   object-fit: cover;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -61,7 +61,7 @@
   cursor: pointer;
 }
 .sign-form {
-  width: 60%;
+  width: 80%;
   padding-right: 50px;
   /* margin-left: -40px; */
   margin-right: 40px;
@@ -323,3 +323,17 @@
     width: 90%;
   }
 }
+.welcome-comp-box {
+  position: relative;
+}
+
+/* @media only screen and (max-height: 281px) {
+  .welcome-comp-box img {
+    height: 84.3vh;
+    width: 100%;
+    object-fit: cover;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: -63px;
+  }
+} */
