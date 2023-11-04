@@ -84,6 +84,13 @@
 .orq {
   background: #ff8a15;
 }
+.redo {
+  background: #ff0002;
+}
+.cat-red {
+  background: #ff0002;
+  color: #fff;
+}
 .busi-abt {
   font-size: 18px;
   font-weight: 500;

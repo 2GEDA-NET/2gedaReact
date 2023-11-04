@@ -1,7 +1,7 @@
 import { BiSearch } from "react-icons/bi";
 import { GoFilter } from "react-icons/go";
 import { useState } from "react";
-import BussinessFilterModal from "../Modals/BussinessFilterModal";
+// import BussinessFilterModal from "../Modals/BussinessFilterModal";
 import SortByModal from "../Modals/SortByModal";
 
 const ConnectSearch = ({ handleSearchResultContainerClick }) => {
@@ -30,7 +30,7 @@ const ConnectSearch = ({ handleSearchResultContainerClick }) => {
         <input
           type="text"
           className="search-inp-bus"
-          placeholder="Find event"
+          placeholder="Search users, business"
           value={inputValue}
           onChange={handleInputChange}
           // onKeyDown={handleKeyDown}

@@ -31,7 +31,7 @@ const Navbar = () => {
 
         <div className="searc-container  nil" onClick={handleToggledIcon}>
           <div type="text" className="searc-inp" placeholder="">
-            Search Anythings
+            Search anything
           </div>
           <BiSearch className="sea-icon " />
         </div>

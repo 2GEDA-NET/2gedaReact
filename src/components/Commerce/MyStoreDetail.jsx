@@ -91,7 +91,7 @@ const MyStoreDetail = ({ handleProductClose }) => {
           )}
           <div className="mess-cart-btns">
             <button
-              className="mess-cart-btn orq"
+              className="mess-cart-btn redo"
               onClick={handleDeleteModalClick}
             >
               Delete product

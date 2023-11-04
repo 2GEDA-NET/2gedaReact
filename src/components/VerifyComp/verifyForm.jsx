@@ -173,7 +173,7 @@ const VerifyForm = ({ setIsVerify, handleVerifyClick }) => {
           </div>
           <div className="veri-bttn-bx">
             <ActionButton
-              label={"verify"}
+              label={"Verify"}
               bg={allInputsComplete ? "complete-button ver-uncop" : "ver-uncop"}
               type={allInputsComplete ? "submit" : "button"}
             />

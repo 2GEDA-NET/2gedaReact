@@ -36,8 +36,8 @@ function App() {
     <div className="App">
       <ScrollToTop />
       <Routes>
-        <Route index path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route index path="/home" element={<Home />} />
+        <Route path="/" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/verify" element={<Verify />} />

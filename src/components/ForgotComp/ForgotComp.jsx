@@ -6,11 +6,18 @@ import InputField from "../Commons/InputField";
 import ActionButton from "../Commons/Button";
 import "./style.css";
 import NewPassword from "./NewPassword";
+import { useNavigate } from "react-router-dom";
 
 const ForgotComponent = () => {
   const [phone, setPhone] = useState("");
   const [isUsingPhone, setIsUsingPhone] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+
+  const navigate = useNavigate();
+
+  const gotoSignIn = () => {
+    navigate("/signin");
+  };
 
   const handleUsePhoneClick = () => {
     setIsUsingPhone(!isUsingPhone);
@@ -64,7 +71,7 @@ const ForgotComponent = () => {
           <div className="btn-continu" onClick={handleSendCodeClick}>
             <ActionButton label={"Send code"} bg={"ma-d"} />
           </div>
-          <div className="btn-continu upp">
+          <div className="btn-continu upp" onClick={gotoSignIn}>
             <ActionButton label={"Back to Login"} bg={"ash"} />
           </div>
         </>

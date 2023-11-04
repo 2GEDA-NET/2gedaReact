@@ -136,6 +136,7 @@
 .reset-txt {
   font-size: 14px;
   cursor: pointer;
+  color: #ff0000;
 }
 .gend-txt {
   font-size: 16px;
@@ -182,7 +183,7 @@
   margin: 50px 0;
 }
 .line-ran {
-  border: 1px solid #0e0d0d;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 10px 0;
 }
 .main-slider {

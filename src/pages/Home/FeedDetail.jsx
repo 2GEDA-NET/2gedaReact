@@ -160,8 +160,8 @@ const FeedDetail = ({ handleFeedClose }) => {
         <div className="commen-slect flex">
           <div className="comm-txt">Comments</div>
           <select name="" id="" className="sort-comm-sel">
-            <option value="">most relevant</option>
-            <option value="">Popular</option>
+            <option value="">Most relevant</option>
+            <option value="">Newest</option>
           </select>
         </div>
         <CommentPerPost />

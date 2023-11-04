@@ -106,10 +106,11 @@ const Home = () => {
                       <MovieDashCard />
                     </div>
                   </div>
+                  <img src="/images/jumia.png" alt="" className="ads-img" />
+
                   <div className="you-may-know">
                     <div className="post-ead">People you may know</div>
-                    <div className="may-know-box">
-                      <Stick />
+                    <div className="may-know-box stic-ind">
                       <Stick />
                       <Stick />
                       <Stick />

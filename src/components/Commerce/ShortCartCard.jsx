@@ -12,7 +12,7 @@ const SortCartCard = () => {
         </div>
       </div>
       <form action="" className="btn-e-cat">
-        <button className="del-cat-btn">
+        <button className="del-cat-btn cat-red">
           <MdDelete />
         </button>
         <button className="del-cat-btn mesc">
