@@ -10,7 +10,7 @@ const Verify = () => {
   const handleVerifyClick = () => {
     setIsVerify(true);
     setTimeout(() => {
-      navigate("/");
+      navigate("/home");
     }, 1000);
   };
   // const handleCloseVerifyClick = () => {
