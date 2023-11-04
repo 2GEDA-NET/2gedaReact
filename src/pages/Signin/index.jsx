@@ -7,7 +7,7 @@ const Signin = () => {
     <div className="signup-container">
       <NonAuthNavbar nono={"nono"} />
       <div className="welc-form-containr">
-        <WelcomeComp />
+        {/* <WelcomeComp /> */}
         <SigninForm />
       </div>
     </div>
