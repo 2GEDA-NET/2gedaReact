@@ -9,13 +9,13 @@ const Signup = () => {
       <NonAuthNavbar nono={"nono"} />
       <div className="welc-form-containr">
         {/* <WelcomeComp /> */}
-        <div className="rit-txt-box">
+        {/* <div className="rit-txt-box">
           <div className="ad-text-main rddx">
             Explore Our Inclusive Business Directory <br />
             Discover a diverse array of businesses in our inclusive directory
             today.
           </div>
-        </div>
+        </div> */}
         <SignForm />
       </div>
     </div>
