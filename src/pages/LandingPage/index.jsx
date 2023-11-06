@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <div className="landing-container">
       <NonAuthNavbar />
-      <div className="top-mrg"></div>
+      {/* <div className="top-mrg"></div> */}
       <HeroSection />
       <AboutLanding />
       <OurFeature />
