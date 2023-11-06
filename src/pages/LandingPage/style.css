@@ -1,4 +1,7 @@
-.landing-container{
-    width: 100%;
-    overflow-x: hidden;
+.landing-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+.top-mrg {
+  margin-top: 100px;
 }

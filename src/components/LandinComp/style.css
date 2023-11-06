@@ -71,14 +71,129 @@
 .about-landing-container {
   padding: 30px 10em;
 }
+.hr-ab-con {
+  position: relative;
+  margin: 40px 0;
+}
 .about-hr {
   border: 1px solid #4f0da3;
 }
 .abt-text {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   color: #4f0da3;
+}
+.learn-mor {
+  font-size: 16px;
+  margin-top: -5px;
+}
+.abt-us-cont {
+  text-align: center;
   background: #fff;
+  width: 200px;
+  position: absolute;
+  bottom: -20px;
+  left: 45%;
+}
+.about-body {
+  font-size: 16px;
+}
+.about-btn {
+  margin: 20px 0;
+  justify-content: center;
+  margin-left: 60px;
+}
+.feature-card-row {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.our-fearture-card {
+  background: #f5f5f5;
+  width: 400px;
+  padding: 30px 15px;
+  height: 300px;
+}
+.our-fearture-card:hover {
+  background: #4f0da3;
+  color: #fff;
+}
+.top-txtt {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.icon-image-feat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+}
+.icon-image-feat img {
+  width: 150px;
+}
+.fear-card-tst {
+  font-size: 14px;
+  text-align: center;
+}
+
+/* download */
+.doownload-container {
+  background: #4f0da3;
+  width: 100%;
+  color: #fff;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding: 20px 15em;
+  position: relative;
+}
+.im-start {
+  position: absolute;
+  top: 5%;
+}
+.im-leff {
+  position: absolute;
+  left: -2%;
+}
+.im-dwn {
+  position: absolute;
+  bottom: 0%;
+  left: 60%;
+}
+.main-txt-down {
+  font-size: 45px;
+  font-weight: 500;
+}
+.download-btnnt {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background: #fff;
+  color: #4f0da3;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 1px 6px 15px 0px rgba(0, 0, 0, 0.25);
+  margin-left: 5px;
+  margin-top: 20px;
+}
+.download-btnnt:hover {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.no-bg {
+  background: transparent;
+  color: #fff;
+  box-shadow: 1px 6px 15px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid #fff;
+}
+.no-bg:hover {
+  border: none;
+  background: #fff;
+  color: #4f0da3;
+}
+.right-downlaod img {
+  width: 400px;
 }
 @media only screen and (max-width: 1150px) {
   .hero-hedline {
@@ -86,6 +201,21 @@
   }
   .hero-simple {
     margin: 18px;
+  }
+  .about-landing-container {
+    padding: 25px 6em;
+  }
+  .abt-us-cont {
+    left: 38%;
+  }
+  .about-btn {
+    margin-left: 0;
+  }
+  .doownload-container {
+    padding: 20px 5em;
+  }
+  .right-downlaod img {
+    width: 330px;
   }
 }
 @media only screen and (max-width: 940px) {
@@ -97,6 +227,72 @@
   }
   .text-overlay {
     padding: 0 3px;
+  }
+  .abt-text {
+    font-size: 18px;
+  }
+  .learn-mor {
+    font-size: 14px;
+  }
+  .abt-us-cont {
+    left: 32%;
+  }
+  .about-body {
+    font-size: 14px;
+  }
+  .about-landing-container {
+    padding: 25px 4em;
+  }
+  .doownload-container {
+    padding: 20px 2em;
+  }
+  .right-downlaod img {
+    width: 250px;
+  }
+  .main-txt-down {
+    font-size: 30px;
+  }
+
+  .im-leff {
+    left: 50%;
+  }
+  .im-dwn {
+    bottom: 0%;
+    left: 60%;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .our-fearture-card {
+    width: 350px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .our-fearture-card {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .our-fearture-card {
+    width: 250px;
+  }
+  .doownload-container {
+    padding: 20px 2em;
+  }
+  .right-downlaod {
+    display: none;
+  }
+  .main-txt-down {
+    font-size: 40px;
+  }
+  .im-start {
+    top: 5%;
+    right: 0;
+  }
+  .im-leff {
+    left: 90%;
+  }
+  .im-dwn {
+    left: 80%;
   }
 }
 @media only screen and (max-width: 600px) {
@@ -111,6 +307,43 @@
   }
   .image-container {
     height: 60vh;
+  }
+  .abt-text {
+    font-size: 16px;
+  }
+  .learn-mor {
+    font-size: 12px;
+    margin-top: -5px;
+  }
+  .abt-us-cont {
+    left: 28%;
+  }
+  .about-body {
+    font-size: 12px;
+  }
+  .our-fearture-card {
+    width: 100%;
+  }
+  .im-start img {
+    width: 40px;
+  }
+  .im-leff img {
+    width: 40px;
+  }
+  .im-dwn img {
+    width: 30px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .abt-us-cont {
+    left: 23%;
+    width: 50%;
+  }
+  .about-landing-container {
+    padding: 20px 20px;
+  }
+  .main-txt-down {
+    font-size: 30px;
   }
 }
 @media only screen and (max-width: 450px) {
@@ -130,5 +363,20 @@
   }
   .action-btn {
     width: 120px;
+  }
+  .main-txt-down {
+    font-size: 25px;
+  }
+}
+@media only screen and (max-width: 321px) {
+  .main-txt-down {
+    font-size: 22px;
+  }
+  .btn-download {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .download-btnnt {
+    margin-top: 5px;
   }
 }

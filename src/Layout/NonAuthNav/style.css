@@ -1,3 +1,9 @@
+.non-nv-b {
+  position: fixed;
+  top: 0;
+  z-index: 1333;
+  width: 100%;
+}
 .non-navbar-container {
   display: flex;
   justify-content: space-between;
@@ -50,7 +56,7 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
-  display: none;
+  /* display: none; */
 }
 .log-btn {
   background: #4f0da3;
@@ -89,7 +95,7 @@
     padding: 20px;
   }
   .nav-icon {
-    display: initial;
+    display: none;
     color: #4f0da3;
   }
   .nono {
@@ -119,7 +125,7 @@
 
   .active {
     background: #fff;
-    left: 50%;
+    left: 110%;
     opacity: 1;
     z-index: 99999;
     height: 84vh;
@@ -151,6 +157,9 @@
   }
   .nonn {
     display: flex;
+  }
+  .nav-icon {
+    display: initial;
   }
 }
 @media only screen and (max-width: 430px) {

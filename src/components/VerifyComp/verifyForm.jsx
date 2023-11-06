@@ -39,7 +39,6 @@ const VerifyForm = ({ setIsVerify, handleVerifyClick }) => {
         },
         {
           headers: {
-            // Authorization: `Bearer ${authToken}`,
             Authorization: `Token ${authToken}`,
           },
         }

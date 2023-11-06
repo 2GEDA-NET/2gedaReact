@@ -1,11 +1,15 @@
+import ActionButton from "../Commons/Button";
+
 const AboutLanding = () => {
   return (
     <div className="about-landing-container">
       <div className="about-box-con">
         <div className="hr-ab-con">
           <hr className="about-hr" />
-          <div className="abt-text">About Us</div>
-          <div className="learn-mor">Learn more about 2geda</div>
+          <div className="abt-us-cont">
+            <div className="abt-text">About Us</div>
+            <div className="learn-mor">Learn more about 2geda</div>
+          </div>
         </div>
 
         <div className="about-body">
@@ -24,6 +28,9 @@ const AboutLanding = () => {
           world is the most important. We also implement Social Media marketing
           for clients adding values to potential and existing stakeholders.
         </div>
+      </div>
+      <div className="about-btn flex">
+        <ActionButton label={"Register on 2geda"} />
       </div>
     </div>
   );
