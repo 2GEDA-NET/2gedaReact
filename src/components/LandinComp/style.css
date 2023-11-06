@@ -15,10 +15,11 @@
 
 .hero-container {
   position: relative;
+  height: 90;
 }
 
 .image-container {
-  height: 90vh;
+  /* height: 90vh; */
 }
 .text-overlay {
   position: absolute;
