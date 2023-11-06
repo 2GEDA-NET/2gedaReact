@@ -1,5 +1,6 @@
 import NonAuthNavbar from "../../Layout/NonAuthNav/NonAuthNavbar";
 import SignForm from "../../components/SignUpInComp/SignForm";
+import WelcomeComp from "../../components/SignUpInComp/WelcomeComp";
 import "./style.css";
 
 const Signup = () => {

@@ -30,7 +30,7 @@ const AboutLanding = () => {
         </div>
       </div>
       <div className="about-btn flex">
-        <ActionButton label={"Register on 2geda"} />
+        <ActionButton label={"Register on 2geda"} bg={"wd-add"} />
       </div>
     </div>
   );

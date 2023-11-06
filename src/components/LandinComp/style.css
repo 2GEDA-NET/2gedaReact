@@ -354,6 +354,17 @@
     font-size: 12px;
   }
 }
+@media only screen and (max-width: 450px) {
+  .hero-hedline {
+    font-size: 20px;
+  }
+  .hero-simple {
+    font-size: 12px;
+  }
+  .wd-add {
+    padding: 0 10px;
+  }
+}
 @media only screen and (max-width: 370px) {
   .hero-hedline {
     font-size: 16px;
@@ -378,5 +389,9 @@
   }
   .download-btnnt {
     margin-top: 5px;
+  }
+  .wd-add {
+    padding: 0 1px;
+    font-size: 12px;
   }
 }
