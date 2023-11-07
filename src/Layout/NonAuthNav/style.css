@@ -106,7 +106,7 @@
     width: 50%;
     position: absolute;
     top: 90%;
-    right: 110%;
+    right: 125%;
     opacity: 1;
     transition: all 0.5s ease;
     /* justify-content: center; */
@@ -125,7 +125,7 @@
 
   .active {
     background: #fff;
-    left: 110%;
+    left: 125%;
     opacity: 1;
     z-index: 99999;
     height: 84vh;
@@ -158,9 +158,9 @@
   .nonn {
     display: flex;
   }
-  .nav-icon {
+  /* .nav-icon {
     display: initial;
-  }
+  } */
 }
 @media only screen and (max-width: 430px) {
   .nav-ul {

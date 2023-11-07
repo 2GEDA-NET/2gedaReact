@@ -1,8 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import ActionButton from "../Commons/Button";
 
 const AboutLanding = () => {
+  const navigate = useNavigate();
+  const goToCreate = () => {
+    navigate("/signup");
+  };
   return (
-    <div className="about-landing-container">
+    <div className="about-landing-container" id="about-section">
       <div className="about-box-con">
         <div className="hr-ab-con">
           <hr className="about-hr" />
@@ -30,7 +35,11 @@ const AboutLanding = () => {
         </div>
       </div>
       <div className="about-btn flex">
-        <ActionButton label={"Register on 2geda"} bg={"wd-add"} />
+        <ActionButton
+          label={"Register on 2geda"}
+          bg={"wd-add"}
+          onclick={goToCreate}
+        />
       </div>
     </div>
   );
