@@ -56,15 +56,26 @@ const SignForm = () => {
       },
       body: JSON.stringify(userData),
     })
+      // .then((response) => response.json())
+      // .then((data) => {
+      //   console.log(data.token);
+      //   localStorage.setItem("authToken", data?.token);
+      //   setUserAuth({ token: data?.token });
+      //   console.log(userAuth);
+      //   {
+      //     data?.token?.ok && navigate("/verify");
+      //   }
+      // })
+      // .catch((error) => {
+      //   console.error("Error:", error);
+      // });
       .then((response) => response.json())
       .then((data) => {
         console.log(data.token);
         localStorage.setItem("authToken", data?.token);
         setUserAuth({ token: data?.token });
         console.log(userAuth);
-        {
-          data?.token?.ok && navigate("/verify");
-        }
+        data?.token?.ok && navigate("/verify");
       })
       .catch((error) => {
         console.error("Error:", error);

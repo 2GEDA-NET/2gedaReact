@@ -1,5 +1,3 @@
-import { BsPlayFill } from "react-icons/bs";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import "./style.css";
 
 const ListenStereoCard = ({ rem }) => {

@@ -5,7 +5,7 @@ import {
   BsAndroid2,
   BsFiletypeExe,
 } from "react-icons/bs";
-import { FaVideo, FaMusic, FaFileAlt } from "react-icons/fa";
+import { FaMusic, FaFileAlt } from "react-icons/fa";
 import { PiMicrosoftPowerpointLogo } from "react-icons/pi";
 import { SiMicrosoftword, SiMicrosoftexcel } from "react-icons/si";
 import { IoLocation, IoCloseSharp } from "react-icons/io5";

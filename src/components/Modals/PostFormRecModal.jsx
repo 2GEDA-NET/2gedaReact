@@ -1,8 +1,6 @@
 import { AiFillDelete } from "react-icons/ai";
 import "./style.css";
 import { useState } from "react";
-
-import { FaCircle } from "react-icons/fa";
 import { BsMicFill, BsSoundwave } from "react-icons/bs";
 import { IoMdMicOff } from "react-icons/io";
 import { useRef } from "react";

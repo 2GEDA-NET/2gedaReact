@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../../Layout/MainLayout";
-import DashMessage from "../../components/Dashboard/DasMess";
-import Follower from "../../components/Dashboard/Follower";
 import "./style.css";
 import ConnectSearch from "../../components/ConnectComp/ConnectSearch";
 import SelectCategory from "../../components/Dashboard/SelectCategory";

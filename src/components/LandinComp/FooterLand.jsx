@@ -6,6 +6,9 @@ const FooterLand = () => {
   const goToCreate = () => {
     navigate("/signup");
   };
+  const goToPrivacy = () => {
+    navigate("/privacy");
+  };
   const scrollOffset = -100;
   return (
     <div className="footer-land-container ">
@@ -101,7 +104,9 @@ const FooterLand = () => {
           >
             <div className="each-link">Contact support</div>
           </ScrollLink>
-          <div className="each-link">Privacy Policy</div>
+          <div className="each-link" onClick={goToPrivacy}>
+            Privacy Policy
+          </div>
         </div>
       </div>
     </div>

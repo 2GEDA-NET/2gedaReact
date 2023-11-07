@@ -1,7 +1,6 @@
 import { AiFillDelete } from "react-icons/ai";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import "./style.css";
-import { useState } from "react";
 const PostFormPhotoModal = ({
   handleClosePhotoModalClick,
   images,

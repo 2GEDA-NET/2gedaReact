@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/traverse": "^7.23.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -48,5 +49,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://shark-app-ia4iu.ondigitalocean.app"
+  "proxy": "https://shark-app-ia4iu.ondigitalocean.app",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
 }

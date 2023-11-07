@@ -1,5 +1,4 @@
 import Data from "../../utils/dataProfile.json";
-import { HiOutlinePhoto } from "react-icons/hi2";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 // import { MdEdit } from "react-icons/md";
 import { useState } from "react";

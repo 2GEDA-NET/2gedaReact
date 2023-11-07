@@ -1,4 +1,4 @@
-import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import "./third.css";
 import ActionButton from "../Commons/Button";
 

@@ -23,43 +23,43 @@ const Privacy = () => {
       <h2>TABLE OF CONTENTS</h2>
       <ul>
         <li>
-          <a href="">1. Personal data controller</a>
+          <div>1. Personal data controller</div>
         </li>
         <li>
-          <a href="">2. Personal data we collect</a>
+          <div>2. Personal data we collect</div>
         </li>
         <li>
-          <a href="">3. Data protection principles</a>
+          <div>3. Data protection principles</div>
         </li>
         <li>
-          <a href="">4. For what purpose do we process personal data</a>
+          <div>4. For what purpose do we process personal data</div>
         </li>
         <li>
-          <a href="">5. Under what legal bases we process your personal data</a>
+          <div>5. Under what legal bases we process your personal data</div>
         </li>
         <li>
-          <a href="">6. With whom we share your personal data</a>
+          <div>6. With whom we share your personal data</div>
         </li>
         <li>
-          <a href="">7. Available remedies or solutions</a>
+          <div>7. Available remedies or solutions</div>
         </li>
         <li>
-          <a href="">8. No linitation clause</a>
+          <div>8. No linitation clause</div>
         </li>
         <li>
-          <a href="">9. How you can excercise your privacy right</a>
+          <div>9. How you can excercise your privacy right</div>
         </li>
         <li>
-          <a href="">10. Age limitation</a>
+          <div>10. Age limitation</div>
         </li>
         <li>
-          <a href="">11. Changes to this privacy policy</a>
+          <div>11. Changes to this privacy policy</div>
         </li>
         <li>
-          <a href="">12. Data retention</a>
+          <div>12. Data retention</div>
         </li>
         <li>
-          <a href="">13. Contact us</a>
+          <div>13. Contact us</div>
         </li>
       </ul>
       <ol>

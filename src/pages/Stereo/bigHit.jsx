@@ -1,5 +1,5 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { GiMusicSpell } from "react-icons/gi";
+// import { GiMusicSpell } from "react-icons/gi";
 import QuickPickCol from "../../components/StereoComp/QuickPickCol";
 import { useEffect } from "react";
 import { useState } from "react";
