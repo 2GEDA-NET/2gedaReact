@@ -1,7 +1,9 @@
+import "./style.css";
+
 const Privacy = () => {
   return (
-    <div>
-      <h1>Privacy Policy</h1>
+    <div className="privacy-cont">
+      <h1 className="policy-txt">Privacy Policy</h1>
       <p>
         This Privacy Policy explains what personal data is collected when you
         use the 2geda any 2geda mobile application <b>(2geda)</b> and the
@@ -23,49 +25,51 @@ const Privacy = () => {
       <h2>TABLE OF CONTENTS</h2>
       <ul>
         <li>
-          <div>1. Personal data controller</div>
+          <a href="#controller">1. Personal data controller</a>
         </li>
         <li>
-          <div>2. Personal data we collect</div>
+          <a href="#collect">2. Personal data we collect</a>
         </li>
         <li>
-          <div>3. Data protection principles</div>
+          <a href="#principles">3. Data protection principles</a>
         </li>
         <li>
-          <div>4. For what purpose do we process personal data</div>
+          <a href="#purpose">4. For what purpose do we process personal data</a>
         </li>
         <li>
-          <div>5. Under what legal bases we process your personal data</div>
+          <a href="#legal">
+            5. Under what legal bases we process your personal data
+          </a>
         </li>
         <li>
-          <div>6. With whom we share your personal data</div>
+          <a href="#share">6. With whom we share your personal data</a>
         </li>
         <li>
-          <div>7. Available remedies or solutions</div>
+          <a href="#solutions">7. Available remedies or solutions</a>
         </li>
         <li>
-          <div>8. No linitation clause</div>
+          <a href="#clause">8. No linitation clause</a>
         </li>
         <li>
-          <div>9. How you can excercise your privacy right</div>
+          <a href="#right">9. How you can excercise your privacy right</a>
         </li>
         <li>
-          <div>10. Age limitation</div>
+          <a href="#limitation">10. Age limitation</a>
         </li>
         <li>
-          <div>11. Changes to this privacy policy</div>
+          <a href="#policy">11. Changes to this privacy policy</a>
         </li>
         <li>
-          <div>12. Data retention</div>
+          <a href="#retention">12. Data retention</a>
         </li>
         <li>
-          <div>13. Contact us</div>
+          <a href="#contact">13. Contact us</a>
         </li>
       </ul>
       <ol>
         <div id="1">
           <li>
-            <h3>1. Personal data controller</h3>
+            <h3 id="controller">1. Personal data controller</h3>
           </li>
           <p>
             AFRICA TECHNOLOGY CITY("us", "we", or "our") operates the 2geda
@@ -92,7 +96,7 @@ const Privacy = () => {
           </p>
         </div>
         <div>
-          <h3>2. PERSONAL DATA WE COLLECT</h3>
+          <h3 id="collect">2. PERSONAL DATA WE COLLECT</h3>
           <p>
             While using our Service, we may ask you to provide us with certain
             personally identifiable information that can be used to contact or
@@ -145,7 +149,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>3. DATA PROTECTION PRINCIPLES</h3>
+            <h3 id="principle">3. DATA PROTECTION PRINCIPLES</h3>
           </li>
           <p>
             In our data protection practices we strive to, in particular, to
@@ -174,7 +178,9 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>4. FOR WHAT PURPOSES WE PROCESS YOUR PERSONAL DATA</h3>
+            <h3 id="purposes">
+              4. FOR WHAT PURPOSES WE PROCESS YOUR PERSONAL DATA
+            </h3>
           </li>
           <p>We process your personal data:</p>
           <ul>
@@ -403,7 +409,9 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>5. UNDER WHAT LEGAL BASES WE PROCESS YOUR PERSONAL DATA</h3>
+            <h3 id="legal">
+              5. UNDER WHAT LEGAL BASES WE PROCESS YOUR PERSONAL DATA
+            </h3>
           </li>
           <p>
             We process your personal data, in particular, under the following
@@ -466,7 +474,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>6. WITH WHOM WE SHARE YOUR PERSONAL DATA</h3>
+            <h3 id="share">6. WITH WHOM WE SHARE YOUR PERSONAL DATA</h3>
           </li>
           <ul>
             <li>
@@ -516,7 +524,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>7. AVAILABLE REMEDIES</h3>
+            <h3 id="solutions">7. AVAILABLE REMEDIES</h3>
           </li>
           <p>
             If there is a data breach that may cause a risk for the rights and
@@ -536,7 +544,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>8. NO LIMITATION CLAUSE</h3>
+            <h3 id="clause">8. NO LIMITATION CLAUSE</h3>
           </li>
           <p>
             No limitation of liability shall avail us in case we act in breach
@@ -545,7 +553,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>9. HOW YOU CAN EXERCISE YOUR RIGHTS</h3>
+            <h3 id="right">9. HOW YOU CAN EXERCISE YOUR RIGHTS</h3>
           </li>
           <p>
             To be in control of your personal data, you have the following
@@ -583,7 +591,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>10. AGE LIMITATION</h3>
+            <h3 id="limitation">10. AGE LIMITATION</h3>
           </li>
           <p>
             We do not knowingly process personal data from persons under 18
@@ -594,7 +602,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>11. CHANGES TO THIS PRIVACY POLICY</h3>
+            <h3 id="policy">11. CHANGES TO THIS PRIVACY POLICY</h3>
           </li>
           <p>
             We may modify this Privacy Policy from time to time. If we decide to
@@ -607,7 +615,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>12. DATA RETENTION</h3>
+            <h3 id="retention">12. DATA RETENTION</h3>
           </li>
           <p>
             We will store your personal data for as long as it is reasonably
@@ -621,7 +629,7 @@ const Privacy = () => {
         </div>
         <div>
           <li>
-            <h3>13. CONTACT US</h3>
+            <h3 id="contact">13. CONTACT US</h3>
           </li>
           <p>
             You may contact us at any time for details regarding this Privacy
