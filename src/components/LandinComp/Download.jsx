@@ -43,8 +43,9 @@ const Download = () => {
           </button>
         </div>
       </div>
-      <div className="right-downlaod"></div>
-      <img src="images/dow.png" alt="" />
+      <div className="right-downlaod">
+        <img src="images/dow.png" alt="" />
+      </div>
     </div>
   );
 };
