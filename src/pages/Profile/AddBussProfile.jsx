@@ -1,47 +1,35 @@
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineArrowLeft, AiFillCloseCircle } from "react-icons/ai";
 import { MdEdit } from "react-icons/md";
 import {
   BsPersonFill,
   BsShieldFillCheck,
   BsFillCheckCircleFill,
+  BsEyeFill,
+  BsEyeSlashFill,
 } from "react-icons/bs";
+
 import { useState } from "react";
 import ActionButton from "../../components/Commons/Button";
 
-const AddProfile = () => {
+const AddBussProfile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedMainFile, setSelectedMainFile] = useState(null);
-  const [activeButton, setActiveButton] = useState(null);
-  const [customGender, setCustomGender] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [religion, setReligion] = useState("");
-  const [occupation, setOccupation] = useState("");
-  const [currentCity, setCurrentCity] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [BusinessName, setBusinessName] = useState("");
+  const [founded, setFounded] = useState("");
   const [bio, setBio] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
-  const handleOccupationChange = (event) => {
-    setOccupation(event.target.value);
-  };
-  const handleReligionChange = (event) => {
-    setReligion(event.target.value);
-  };
-  const handleCurrentCityChange = (event) => {
-    setCurrentCity(event.target.value);
+  const handleBusinessNameChange = (event) => {
+    setBusinessName(event.target.value);
   };
 
-  const handleDateOfBirthChange = (event) => {
-    setDateOfBirth(event.target.value);
+  const handleFoundedChange = (event) => {
+    setFounded(event.target.value);
   };
 
   const handleBioChange = (event) => {
@@ -55,30 +43,18 @@ const AddProfile = () => {
   const handleMainImageChange = (event) => {
     setSelectedMainFile(event.target.files[0]);
   };
-  const handleButtonClick = (buttonName) => {
-    setActiveButton(buttonName);
-  };
-  const handleCustomGenderChange = (event) => {
-    setCustomGender(event.target.value);
-    // setActiveButton(event.target.value); // Set the activeButton state to the user input
-  };
+
   const authToken = localStorage.getItem("authToken");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = {
       user: {
-        first_name: firstName,
-        last_name: lastName,
+        first_name: BusinessName,
       },
       selectedFile,
       selectedMainFile,
-      identity: activeButton,
-      work: occupation,
-      religion: religion,
-      currentCity,
-      date_of_birth: dateOfBirth,
-      custom_gender: customGender,
+      date_of_birth: founded,
       bio,
     };
     console.log(formData);
@@ -115,7 +91,7 @@ const AddProfile = () => {
                 //   onClick={handleEditProClose}
               />
               <div className="fels">
-                <div className="claim">Edit Profile</div>
+                <div className="claim">Edit Bussiness Profile</div>
               </div>
               <img src="images/lo2.png" alt="" />
             </div>
@@ -195,63 +171,15 @@ const AddProfile = () => {
                     <input
                       type="text"
                       className="claim-inp"
-                      placeholder="First name"
-                      value={firstName}
-                      onChange={handleFirstNameChange}
+                      placeholder="Business name"
+                      value={BusinessName}
+                      onChange={handleBusinessNameChange}
                     />
                   </div>
                   <div className="inp-label-box">
-                    <input
-                      type="text"
-                      className="claim-inp"
-                      placeholder="Last name"
-                      value={lastName}
-                      onChange={handleLastNameChange}
-                    />
-                  </div>
-                </div>
-                <div className="double-input">
-                  <div className="inp-label-box">
-                    <input
-                      type="text"
-                      className="claim-inp"
-                      placeholder="Occupation"
-                      value={occupation}
-                      onChange={handleOccupationChange}
-                    />
-                  </div>
-                  <div className="inp-label-box">
-                    <input
-                      type="text"
-                      className="claim-inp"
-                      placeholder="Current city"
-                      value={currentCity}
-                      onChange={handleCurrentCityChange}
-                    />
-                  </div>
-                </div>
-                <div className="double-input">
-                  <div className="inp-label-box">
-                    <label htmlFor="">Date of Birth</label>
-                    <input
-                      type="date"
-                      className="claim-inp"
-                      placeholder="Occupation"
-                      value={dateOfBirth}
-                      onChange={handleDateOfBirthChange}
-                    />
-                  </div>
-                  <div className="inp-label-box">
-                    <label htmlFor="">Religion</label>
-                    <select
-                      name=""
-                      id=""
-                      className="claim-inp"
-                      value={religion}
-                      onChange={handleReligionChange}
-                    >
+                    <select name="" id="" className="claim-inp">
                       <option value="" disabled>
-                        Select a religion
+                        Category
                       </option>
                       <option value="Muslim">Muslim</option>
                       <option value="Christian">Christian</option>
@@ -259,62 +187,71 @@ const AddProfile = () => {
                     </select>
                   </div>
                 </div>
-                <div className="inp-label-box ">
-                  <label htmlFor="">I identify as</label>
-                  <div className="select-gender-container flex">
-                    <div className="but-bx flex">
-                      <button
-                        className={`gen-sel-btn ${
-                          activeButton === "Male" ? "acttvv" : ""
-                        }`}
-                        type="button"
-                        onClick={() => handleButtonClick("Male")}
-                      >
-                        <div className="gender-selc">Male</div>
-                        {activeButton === "Male" && <BsFillCheckCircleFill />}
-                      </button>
-                      <button
-                        className={`gen-sel-btn ${
-                          activeButton === "Female" ? "acttvv" : ""
-                        }`}
-                        type="button"
-                        onClick={() => handleButtonClick("Female")}
-                      >
-                        <div className="gender-selc">Female</div>
-                        {activeButton === "Female" && <BsFillCheckCircleFill />}
-                      </button>
-                      <button
-                        className={`gen-sel-btn ad-wd ${
-                          activeButton === "Rather not say" ? "acttvv" : ""
-                        }`}
-                        type="button"
-                        onClick={() => handleButtonClick("Rather not say")}
-                      >
-                        <div className="gender-selc">Rather not say</div>
-                        {activeButton === "Rather not say" && (
-                          <BsFillCheckCircleFill />
-                        )}
-                      </button>
+
+                <div className="double-input aligh-end">
+                  <div className="inp-label-box">
+                    <label htmlFor="">Founded On</label>
+                    <input
+                      type="date"
+                      className="claim-inp"
+                      value={founded}
+                      onChange={handleFoundedChange}
+                    />
+                  </div>
+                  <div className="inp-label-box">
+                    <input
+                      type="text"
+                      className="claim-inp"
+                      placeholder="Address"
+                    />
+                  </div>
+                </div>
+                <div className="double-input aligh-end">
+                  <div className="pass-con inp-label-box cnt-inp">
+                    <label htmlFor="">Create username</label>
+                    <input
+                      type="text"
+                      className="claim-inp"
+                      placeholder="Username"
+                    />
+
+                    <div
+                      className="eye-box bx-ey"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {passwordVisible ? (
+                        <AiFillCloseCircle className="ck-icon ddo" />
+                      ) : (
+                        <BsFillCheckCircleFill className="ck-icon" />
+                      )}
                     </div>
-
-                    <div className="inp-label-box">
-                      <label htmlFor="">Custom gender? please specify</label>
-
-                      <input
-                        type="text"
-                        className="claim-inp"
-                        placeholder="Type something here"
-                        value={customGender}
-                        onChange={handleCustomGenderChange}
-                      />
+                    <div className="try-user">
+                      Try: User123, 2gedauser, Hoto412
+                    </div>
+                  </div>
+                  <div className="pass-con inp-label-box cnt-inp">
+                    <input
+                      type="password"
+                      className="claim-inp"
+                      placeholder="Password"
+                    />
+                    <div
+                      className="eye-box bx-ey"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {passwordVisible ? (
+                        <BsEyeSlashFill className="eye-icon" />
+                      ) : (
+                        <BsEyeFill className="eye-icon" />
+                      )}
                     </div>
                   </div>
                 </div>
-                <div className="double-input">
+                <div className="double-input ">
                   <div className="inp-label-box txt-nnx">
                     <textarea
                       type="text"
-                      className="txt-rea"
+                      className="txt-rea "
                       placeholder="Bio"
                       value={bio}
                       onChange={handleBioChange}
@@ -332,7 +269,7 @@ const AddProfile = () => {
               </div>
 
               <div className="act-bttn-cl">
-                <ActionButton label={"Save"} type={"submit"} />
+                <ActionButton label={"Create business"} type={"submit"} />
               </div>
             </div>
           </form>
@@ -342,4 +279,4 @@ const AddProfile = () => {
   );
 };
 
-export default AddProfile;
+export default AddBussProfile;

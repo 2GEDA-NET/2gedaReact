@@ -3,6 +3,7 @@ import { HiX } from "react-icons/hi";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   {
@@ -31,12 +32,16 @@ const NonAuthNavbar = ({ nono }) => {
   const handleToggleIcon = () => {
     setToggleIcon(!toggleIcon);
   };
+  const navigate = useNavigate();
+  const goToHome = () => {
+    navigate("/");
+  };
 
   return (
     <div className="non-nv-b">
       <div className="non-navbar-container">
         <div className="navbar">
-          <div className="logon">
+          <div className="logon" onClick={goToHome}>
             <img src="/images/lo2.png" alt="" />
           </div>
           <nav className="nav">

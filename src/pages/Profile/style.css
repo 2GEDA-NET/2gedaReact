@@ -189,6 +189,37 @@
   margin-bottom: 10px;
   gap: 10px;
 }
+.aligh-end {
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+.bx-ey {
+  top: 30%;
+  position: absolute;
+  right: 0;
+}
+.ck-icon {
+  font-size: 16px;
+  margin-right: 15px;
+  /* margin-top: 2px; */
+  color: #74b208;
+  top: 17px;
+  position: absolute;
+  right: 0;
+}
+.try-user {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 5px 0;
+  color: #515151;
+  position: absolute;
+  bottom: -25px;
+}
+
+.ddo {
+  color: #ff0002;
+}
 @media only screen and (max-width: 1000px) {
   .btn-stick-box-row {
     margin-bottom: 40px;

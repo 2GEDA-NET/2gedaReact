@@ -21,6 +21,7 @@ import NonAuthStero from "./pages/Stereo/NonAuthStero";
 import AddProfile from "./pages/Profile/AddProfile";
 import ProtectedRoute from "./ProtectedRoute";
 import Privacy from "./pages/privacy/Privacy";
+import AddBussProfile from "./pages/Profile/AddBussProfile";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -56,6 +57,7 @@ function App() {
         <Route path="/stereo" element={<Stereo />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/bussprofile" element={<BusinessProfile />} />
+        <Route path="/addbussprofile" element={<AddBussProfile />} />
         <Route path="/stereo/nonauth" element={<NonAuthStero />} />
       </Routes>
     </div>
