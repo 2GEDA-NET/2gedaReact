@@ -2,9 +2,18 @@ import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import GeneralSearch from "../components/Dashboard/GeneralSearch";
+import Notification from "../components/Dashboard/Notification";
 
 const Navbar = () => {
   const [isToggled, setIsToggled] = useState(false);
+  const [isNotiToggled, setIsNotiToggled] = useState(false);
+
+  const handleNotiToggledIcon = () => {
+    setIsNotiToggled(true);
+  };
+  const handleCloseNotiToggledIcon = () => {
+    setIsNotiToggled(false);
+  };
 
   const handleToggledIcon = () => {
     setIsToggled(true);
@@ -28,6 +37,13 @@ const Navbar = () => {
         {isToggled && (
           <GeneralSearch handleCloseToggledIcon={handleCloseToggledIcon} />
         )}
+        {isNotiToggled && (
+          <div className="notification-modal-full">
+            <Notification
+              handleCloseNotiToggledIcon={handleCloseNotiToggledIcon}
+            />
+          </div>
+        )}
 
         <div className="searc-container  nil" onClick={handleToggledIcon}>
           <div type="text" className="searc-inp" placeholder="">
@@ -35,7 +51,7 @@ const Navbar = () => {
           </div>
           <BiSearch className="sea-icon " />
         </div>
-        <div className="notif-cont">
+        <div className="notif-cont" onClick={handleNotiToggledIcon}>
           <div className="bell-count">99+</div>
           <BsBell className="bell" />
         </div>

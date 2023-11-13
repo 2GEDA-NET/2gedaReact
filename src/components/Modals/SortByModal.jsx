@@ -1,7 +1,19 @@
 import { AiOutlineRight } from "react-icons/ai";
 import ActionButton from "../Commons/Button";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+import { useState } from "react";
 
 const SortByModal = ({ handleFilterClose }) => {
+  const [ageRange, setAgeRange] = useState([18, 60]); // Initial age range
+
+  const handleSliderChange = (value) => {
+    setAgeRange(value);
+  };
+  const handleSortByAge = () => {
+    console.log("Sorting by age range:", ageRange);
+  };
+
   return (
     <div className="sort-modal-container">
       <div className="sort-by-reset flex">
@@ -23,15 +35,44 @@ const SortByModal = ({ handleFilterClose }) => {
         <div className="sort-by-reset flex">
           <div className="gend-txt">Age range</div>
           <div className="range-score">
-            18 <span>to</span> 60
+            {ageRange[0]} <span>to</span> {ageRange[1]}
           </div>
         </div>
         <div className="age-range-bx">
-          <div className="slider-cicrle-minmum"></div>
-          <div className="main-slider"></div>
-          <div className="slider-cicrle-maximum"></div>
+          <div className="main-slider">
+            <Slider
+              range
+              min={18}
+              max={60}
+              defaultValue={ageRange}
+              onChange={handleSliderChange}
+              trackStyle={[
+                { backgroundColor: "rgba(56, 53, 53, 0.20)", height: "5px" },
+              ]} // Track color
+              handleStyle={[
+                {
+                  borderColor: "#383535",
+                  backgroundColor: "#383535",
+                  marginLeft: "6px",
+                  width: "20px",
+                  height: "20px",
+                  marginTop: "-8px",
+                }, // Handle color
+                {
+                  borderColor: "#383535",
+                  backgroundColor: "#383535",
+                  marginLeft: "-6px",
+                  width: "20px",
+                  height: "20px",
+                  marginTop: "-8px",
+                },
+              ]}
+              railStyle={{ backgroundColor: "rgba(56, 53, 53, 0.0))" }} // Rail color
+            />
+          </div>
         </div>
       </div>
+      <div className="out">{ageRange[0]}</div>
       <hr className="line-ran"></hr>
 
       <div className="loca-row-cont">

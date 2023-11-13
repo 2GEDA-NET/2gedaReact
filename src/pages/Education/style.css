@@ -1,0 +1,202 @@
+.carosel-custom-container {
+  padding: 10px;
+}
+.img-caro-cust {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+}
+.img-caro-cust img {
+  width: 80%;
+  height: 350px;
+  border-radius: 15px;
+}
+.indica-edu {
+  width: 10px;
+  height: 10px;
+  background: rgba(79, 13, 163, 0.5);
+  border-radius: 50%;
+}
+.indic-edu-bx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 10px 0;
+}
+.indi-edu-act {
+  background: #4f0da3;
+  width: 16px;
+  border-radius: 20px;
+}
+.nain-edu-over {
+  font-size: 25px;
+  font-weight: 600;
+}
+.body-over-edu {
+  font-size: 20px;
+}
+.overlay-edu-bx {
+  position: absolute;
+  bottom: 2%;
+  left: 12%;
+  background: #2726273d;
+  /* background: #4e0da351; */
+  padding: 2px;
+  border-radius: 5px;
+  width: 75%;
+}
+.log-over-bx-edu {
+  position: absolute;
+  top: 0;
+  right: 10%;
+}
+.log-over-bx-edu img {
+  width: 100px;
+  height: 100px;
+}
+.title-exam {
+  font-size: 18px;
+  font-weight: 600;
+}
+.exam-bdy-txt {
+  font-size: 14px;
+}
+.edu-xam-card-container {
+  border-radius: 10px;
+  background: #f5f5f5;
+  padding: 5px 10px;
+  gap: 15px;
+  margin: 10px 0;
+}
+.edu-xam-card-container img {
+  width: 90px;
+  height: 80px;
+}
+.edu-main-bx {
+  flex-direction: column;
+  width: 350px;
+}
+.main-det-tct {
+  text-align: center;
+}
+.mainedu-card-row {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.main-containe-oter {
+  margin-top: 15px;
+}
+.order-bx img {
+  width: 60px;
+  height: 50px;
+}
+.order-bx {
+  padding: 5px;
+  gap: 10px;
+}
+.order-bdy-txt {
+  font-size: 12px;
+}
+@media only screen and (max-width: 1390px) {
+  .edu-main-bx {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .edu-main-bx {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1150px) {
+  .right-edu {
+    width: 50%;
+    padding: 5px;
+  }
+  .edu-bxbxb {
+    margin-right: 20px;
+  }
+  .edu-main-bbx {
+    width: 120%;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .edu-main-bbx {
+    width: 110%;
+  }
+  .edu-main-bx {
+    width: 48%;
+  }
+  .back-edu-ound {
+    background: #fff;
+  }
+}
+@media only screen and (max-width: 940px) {
+  .edu-main-bbx {
+    width: 100%;
+  }
+  .img-caro-cust img {
+    width: 90%;
+  }
+  .log-over-bx-edu img {
+    width: 70px;
+    height: 70px;
+  }
+  .log-over-bx-edu {
+    right: 6%;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .edu-main-bbx {
+    width: 100%;
+  }
+  .img-caro-cust img {
+    width: 100%;
+  }
+  .overlay-edu-bx {
+    left: 3%;
+    width: 95%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .edu-main-bx {
+    width: 100%;
+  }
+  .img-caro-cust img {
+    height: 300px;
+  }
+  .log-over-bx-edu img {
+    height: 70px;
+  }
+  .nain-edu-over {
+    font-size: 18px;
+  }
+  .body-over-edu {
+    font-size: 15px;
+  }
+  .title-exam {
+    font-size: 15px;
+  }
+  .exam-bdy-txt {
+    font-size: 11px;
+  }
+  .log-over-bx-edu img {
+    width: 50px;
+    height: 50px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .img-caro-cust img {
+    height: 250px;
+  }
+  .log-over-bx-edu img {
+    height: 70px;
+  }
+  .nain-edu-over {
+    font-size: 15px;
+  }
+  .body-over-edu {
+    font-size: 12px;
+  }
+}

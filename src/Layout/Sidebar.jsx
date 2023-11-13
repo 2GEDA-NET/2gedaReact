@@ -17,7 +17,7 @@ const Sidebar = ({ isCollapsed }) => {
       <div className="sidebar-box">
         <div className="sidebar-items">
           <NavLink
-            to="/"
+            to="/home"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -117,7 +117,7 @@ const Sidebar = ({ isCollapsed }) => {
             <div className="sidebar-text">Voting</div>
           </NavLink>
           <NavLink
-            to="/not"
+            to="/educate"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }

@@ -160,12 +160,63 @@
   background: #4f0da3;
   color: #fff;
 }
-.range-score {
-  font-size: 13px;
-  font-weight: 500;
+.age-range-container {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.range-score span {
-  color: rgba(0, 0, 0, 0.4);
+
+.sort-by-reset {
+  margin-bottom: 20px;
+}
+
+.gend-txt {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.range-score {
+  font-size: 16px;
+}
+
+.age-range-bx {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.slider-cicrle-minimum,
+.slider-cicrle-maximum {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.main-slider {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.sort-button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.sort-button:hover {
+  background-color: #2980b9;
 }
 .so-all-txt {
   font-size: 14px;
@@ -180,44 +231,16 @@
 }
 .apply-btn-cont {
   justify-content: center;
-  margin: 50px 0;
+  margin: 10px 0;
 }
 .line-ran {
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 10px 0;
 }
-.main-slider {
-  width: 100%;
-  height: 4px;
-  border-radius: 20px;
-  background: rgba(56, 53, 53, 0.6);
-  margin: 25px 0;
+.mg-dwn-sta {
+  margin-bottom: 8px;
 }
-.slider-cicrle-minmum {
-  width: 16px;
-  height: 16px;
-  background: #383535;
-  border-radius: 50%;
-  position: absolute;
-  top: -100%;
-  margin-top: -2px;
-  left: 10%;
-  cursor: pointer;
-}
-.age-range-bx {
-  position: relative;
-}
-.slider-cicrle-maximum {
-  width: 16px;
-  height: 16px;
-  background: #383535;
-  border-radius: 50%;
-  position: absolute;
-  top: -100%;
-  margin-top: -2px;
-  right: 10%;
-  cursor: pointer;
-}
+
 input[type="checkbox"] {
   border: 1px solid #4f0da3;
   --web-appearance: none;
@@ -301,11 +324,18 @@ input[type="checkbox"]:checked::after {
   .succ-ver-modal-container {
     width: 50%;
   }
+  .sort-modal-container {
+    width: 60%;
+    padding: 10px;
+  }
 }
 @media only screen and (max-width: 700px) {
   .succ-ver-modal-container {
     width: 80%;
     padding: 20px;
+  }
+  .sort-modal-container {
+    width: 80%;
   }
 }
 @media only screen and (max-width: 500px) {
@@ -339,6 +369,9 @@ input[type="checkbox"]:checked::after {
   }
   .succ-ver-modal-container {
     width: 90%;
+  }
+  .sort-modal-container {
+    width: 95%;
   }
 }
 @media only screen and (max-width: 321px) {

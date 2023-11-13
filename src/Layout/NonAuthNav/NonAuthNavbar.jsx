@@ -46,8 +46,8 @@ const NonAuthNavbar = ({ nono }) => {
           </div>
           <nav className="nav">
             <ul className={`nav-ul ${toggleIcon ? "active" : ""}`}>
-              {data.map((item, key) => (
-                <li className="nav-li">
+              {data.map((item, index) => (
+                <li className="nav-li" key={index}>
                   <NavLink
                     className={({ isActive }) =>
                       isActive ? "nk" : "navbar_links nk"

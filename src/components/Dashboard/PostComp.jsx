@@ -45,7 +45,7 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
         </div>
         <div className="dob-img flex" onClick={handleFeedOpen}>
           <div className="post-media">
-            <img src="images/pic1.png" alt="" />
+            <img src="images/pic3.png" alt="" />
           </div>
           <div className="post-media lay-post">
             <img src="images/post1.png" alt="" />

@@ -667,7 +667,66 @@
   width: 80%;
   text-align: center;
 }
-
+.img-prev-prodoct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-prev-prodoct img {
+  width: 50%;
+  border-radius: 10px;
+  height: 100%;
+}
+.product-detail-prev {
+  font-size: 20px;
+  font-weight: 600;
+}
+.price-product-txt {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4f0da3;
+}
+.bx-prev-detai {
+  text-align: center;
+}
+.promote-preveiw-product {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(217, 217, 217, 0.2);
+  padding: 40px 0;
+}
+.promote-bodt {
+  padding: 15px;
+}
+.prev-prom-plan {
+  font-size: 14px;
+  font-weight: 600;
+}
+.amt-prom-plan {
+  font-size: 12px;
+  font-weight: 500;
+}
+.change-prom-det {
+  color: #ff8a15;
+  font-size: 12px;
+  cursor: pointer;
+  font-size: 600;
+  text-decoration: underline;
+}
+.bx-prom-det-prev {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  width: 50%;
+}
+.incr-wid-prom {
+  width: 50% !important;
+}
+.mg-dwn {
+  margin: 15px 0;
+}
 @media only screen and (max-width: 1000px) {
   .delete-modal {
     width: 45%;
@@ -677,6 +736,30 @@
   }
   .verif-sucess-container {
     width: 50%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .bx-prom-det-prev {
+    width: 100%;
+  }
+  .incr-wid-prom {
+    width: 100% !important;
+  }
+  .mg-dwn {
+    flex-direction: column;
+  }
+  .prev-prom-plan {
+    font-size: 12px;
+  }
+  .amt-prom-plan {
+    font-size: 10px;
+  }
+  .change-prom-det {
+    font-size: 10px;
+  }
+  .promote-bodt {
+    padding: 5px;
   }
 }
 @media only screen and (max-width: 500px) {
@@ -760,6 +843,15 @@
   .busi-mod-header {
     padding: 5px;
   }
+  .img-prev-prodoct img {
+    width: 80%;
+  }
+  .product-detail-prev {
+    font-size: 15px;
+  }
+  .price-product-txt {
+    font-size: 13px;
+  }
 }
 @media only screen and (max-width: 400px) {
   .first-cover {
@@ -822,5 +914,14 @@
   }
   .cls-post {
     font-size: 15px;
+  }
+  .product-detail-prev {
+    font-size: 13px;
+  }
+  .price-product-txt {
+    font-size: 11px;
+  }
+  .img-prev-prodoct img {
+    width: 90%;
   }
 }

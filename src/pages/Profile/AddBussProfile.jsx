@@ -11,6 +11,7 @@ import {
 
 import { useState } from "react";
 import ActionButton from "../../components/Commons/Button";
+import Availability from "../../components/BusinessProfile/Availability";
 
 const AddBussProfile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -19,6 +20,11 @@ const AddBussProfile = () => {
   const [founded, setFounded] = useState("");
   const [bio, setBio] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isAlwaysAvailable, setIsAlwaysAvailable] = useState(false);
+
+  const handleAlwaysAvailableChange = () => {
+    setIsAlwaysAvailable(!isAlwaysAvailable);
+  };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -258,6 +264,19 @@ const AddBussProfile = () => {
                     />
                     <div className="maxxi">Max 50 words</div>
                   </div>
+                </div>
+                <div className="availability-box">
+                  <div className="fels">
+                    <div className="claim">Set Business Availability</div>
+                  </div>
+                  <div className="alway-avail flex">
+                    <div className="txt-alw">Always available</div>
+                    <input
+                      type="checkbox"
+                      onChange={handleAlwaysAvailableChange}
+                    />
+                  </div>
+                  {!isAlwaysAvailable && <Availability />}
                 </div>
                 <div className="auth-act flex">
                   <BsShieldFillCheck />

@@ -22,6 +22,7 @@ import AddProfile from "./pages/Profile/AddProfile";
 import ProtectedRoute from "./ProtectedRoute";
 import Privacy from "./pages/privacy/Privacy";
 import AddBussProfile from "./pages/Profile/AddBussProfile";
+import Education from "./pages/Education";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -47,6 +48,7 @@ function App() {
         <Route path="/personaldetail" element={<PersonalDetails />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/chat" element={<ProtectedRoute element={<Chat />} />} />
+        {/* <Route path="/chat" element={<Chat />} /> */}
         <Route path="/commerce" element={<Commerce />} />
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/business" element={<BusinessDirectory />} />
@@ -59,6 +61,7 @@ function App() {
         <Route path="/bussprofile" element={<BusinessProfile />} />
         <Route path="/addbussprofile" element={<AddBussProfile />} />
         <Route path="/stereo/nonauth" element={<NonAuthStero />} />
+        <Route path="/educate" element={<Education />} />
       </Routes>
     </div>
   );

@@ -16,10 +16,31 @@ import StatusContainer from "../../components/Dashboard/StatusContainer";
 import FeedDetail from "./FeedDetail";
 import { useState } from "react";
 import { useEffect } from "react";
+import SharedPostComp from "../../components/Dashboard/SharedPostComp";
+import ProfileStick from "../../components/Commons/ProfileStick";
+import ChatHeader from "../../components/ChatComp/ChatHeader";
+import MainChat from "../../components/ChatComp/MainChat";
 
 const Home = () => {
   const [isFeedOpen, setIsFeedOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("All Posts");
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [showMainChatMess, setShowMainChatMess] = useState(false);
+
+  const handleGotoMessagBox = () => {
+    setShowMainChatMess(true);
+  };
+  const handleCloseMessagBox = () => {
+    setShowMainChatMess(false);
+  };
+
+  const handleProfileClose = () => {
+    setIsProfileOpen(false);
+  };
+
+  const handleProfileClick = () => {
+    setIsProfileOpen(true);
+  };
 
   const handleFeedOpen = () => {
     setIsFeedOpen(true);
@@ -42,7 +63,20 @@ const Home = () => {
               <FeedDetail handleFeedClose={handleFeedClose} />
             </div>
           )}
-          {!isFeedOpen && (
+          {isProfileOpen && (
+            <div className="left-side-container">
+              <ProfileStick handleProfileClose={handleProfileClose} />
+            </div>
+          )}
+          {showMainChatMess && (
+            <div className="left-side-container">
+              <div className="main-chat-mess">
+                <ChatHeader handleCloseMessagBox={handleCloseMessagBox} />
+                <MainChat />
+              </div>
+            </div>
+          )}
+          {!isFeedOpen && !isProfileOpen && !showMainChatMess && (
             <div className="left-side-container">
               <FirstSide />
               <img src="/images/jumia.png" alt="" className="ads-img" />
@@ -65,6 +99,7 @@ const Home = () => {
               {activeTab === "All Posts" ? (
                 <>
                   <PostComp handleFeedOpen={handleFeedOpen} />
+                  <SharedPostComp />
 
                   <div className="music-das-row">
                     <MusicDash />
@@ -140,9 +175,9 @@ const Home = () => {
           </div>
           <div className="right-side-container">
             <SelectCategory />
-            <Follower />
+            <Follower handleProfileClick={handleProfileClick} />
             <div className="mess-bxx-conn">
-              <DashMessage />
+              <DashMessage handleGotoMessagBox={handleGotoMessagBox} />
             </div>
           </div>
         </div>

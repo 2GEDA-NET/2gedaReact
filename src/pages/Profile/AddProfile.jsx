@@ -8,6 +8,8 @@ import {
 } from "react-icons/bs";
 import { useState } from "react";
 import ActionButton from "../../components/Commons/Button";
+import { AuthCtx } from "../../Context/AuthContext";
+import { useContext } from "react";
 
 const AddProfile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -21,6 +23,8 @@ const AddProfile = () => {
   const [currentCity, setCurrentCity] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [bio, setBio] = useState("");
+  const { userAuth } = useContext(AuthCtx);
+  console.log(userAuth);
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
@@ -71,8 +75,8 @@ const AddProfile = () => {
         first_name: firstName,
         last_name: lastName,
       },
-      selectedFile,
-      selectedMainFile,
+      profile_image: selectedMainFile,
+      cover_image: selectedFile,
       identity: activeButton,
       work: occupation,
       religion: religion,

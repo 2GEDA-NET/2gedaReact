@@ -3,6 +3,7 @@ import StatusModal from "../Modals/StatusModal";
 import Status from "./Status";
 import { FaPlus } from "react-icons/fa6";
 import StickerStatusModal from "../Modals/StickerStatusModal";
+import CreateStatusModal from "../Modals/CreateStatusModal";
 
 const data = [
   {
@@ -19,7 +20,8 @@ const data = [
   {
     id: 2,
     name: "Faith",
-    profile_image: "https://example.com/your_profile_image_2.jpg",
+    profile_image:
+      "https://3.bp.blogspot.com/-km-24oMrcqo/Wv3Kj82uFtI/AAAAAAAAWBQ/Tw8RBvpyaBU3dtpIcyp1Opr4nKgzrufEACLcBGAs/s1600/STREET%2BPHOTOGRAPHY%2Bwith%2BPeter%2BMcKinnon.jpg",
     images: [
       "https://i0.wp.com/www.splento.com/blog/wp-content/uploads/2020/02/427117o_1cutvnri21qkbgv6keeaudspl18.jpg?w=970&ssl=1",
       "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
@@ -28,7 +30,7 @@ const data = [
   },
   {
     id: 3,
-    name: "WizCode",
+    name: "WizCode walewalat",
     profile_image:
       "https://writestylesonline.com/wp-content/uploads/2018/11/Three-Statistics-That-Will-Make-You-Rethink-Your-Professional-Profile-Picture-1024x1024.jpg",
     images: [
@@ -41,7 +43,40 @@ const data = [
     id: 4,
     name: "Silent",
     profile_image:
-      "https://i0.wp.com/www.splento.com/blog/wp-content/uploads/2020/02/427117o_1cutvnri21qkbgv6keeaudspl18.jpg?w=970&ssl=1",
+      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    images: [
+      "https://3.bp.blogspot.com/-km-24oMrcqo/Wv3Kj82uFtI/AAAAAAAAWBQ/Tw8RBvpyaBU3dtpIcyp1Opr4nKgzrufEACLcBGAs/s1600/STREET%2BPHOTOGRAPHY%2Bwith%2BPeter%2BMcKinnon.jpg",
+      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+      "",
+    ],
+  },
+  {
+    id: 4,
+    name: "Silent",
+    profile_image:
+      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    images: [
+      "https://3.bp.blogspot.com/-km-24oMrcqo/Wv3Kj82uFtI/AAAAAAAAWBQ/Tw8RBvpyaBU3dtpIcyp1Opr4nKgzrufEACLcBGAs/s1600/STREET%2BPHOTOGRAPHY%2Bwith%2BPeter%2BMcKinnon.jpg",
+      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+      "",
+    ],
+  },
+  {
+    id: 4,
+    name: "Silent",
+    profile_image:
+      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    images: [
+      "https://3.bp.blogspot.com/-km-24oMrcqo/Wv3Kj82uFtI/AAAAAAAAWBQ/Tw8RBvpyaBU3dtpIcyp1Opr4nKgzrufEACLcBGAs/s1600/STREET%2BPHOTOGRAPHY%2Bwith%2BPeter%2BMcKinnon.jpg",
+      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+      "",
+    ],
+  },
+  {
+    id: 4,
+    name: "Silent",
+    profile_image:
+      "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
     images: [
       "https://3.bp.blogspot.com/-km-24oMrcqo/Wv3Kj82uFtI/AAAAAAAAWBQ/Tw8RBvpyaBU3dtpIcyp1Opr4nKgzrufEACLcBGAs/s1600/STREET%2BPHOTOGRAPHY%2Bwith%2BPeter%2BMcKinnon.jpg",
       "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
@@ -72,11 +107,18 @@ const StatusContainer = () => {
     <>
       {isModalOpen && (
         <div className="modal-full-container">
-          <StatusModal
+          <CreateStatusModal
             handleCloseMainContainerClick={handleCloseMainContainerClick}
           />
         </div>
       )}
+      {/* {isModalOpen && (
+        <div className="modal-full-container">
+          <StatusModal
+            handleCloseMainContainerClick={handleCloseMainContainerClick}
+          />
+        </div>
+      )} */}
       {isStickerStatusModalOpen && (
         <div className="modal-full-container">
           <StickerStatusModal

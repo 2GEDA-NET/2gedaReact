@@ -1,10 +1,12 @@
 import { createContext, useState } from "react";
 
+const authToken = localStorage.getItem("authToken");
+
 export const AuthCtx = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [userAuth, setUserAuth] = useState({
-    token: "",
+    token: { authToken },
   });
 
   const value = { userAuth, setUserAuth };

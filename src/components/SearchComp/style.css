@@ -132,6 +132,9 @@
 .sift {
   padding: 0 30px;
 }
+.video .rh5v-Overlay_inner {
+  display: none;
+}
 @media only screen and (max-width: 500px) {
   .buss-nm {
     font-size: 12px;
