@@ -20,7 +20,7 @@ const VerifyForm = ({ setIsVerify, handleVerifyClick }) => {
   // console.log(authToken);
 
   const [inputRefs, setInputRefs] = useState([null, null, null, null, null]);
-  console.log(setInputRefs);
+  // console.log(setInputRefs);
   useEffect(() => {
     if (inputRefs[0]) {
       inputRefs[0].focus();
@@ -33,7 +33,7 @@ const VerifyForm = ({ setIsVerify, handleVerifyClick }) => {
     console.log(otp);
     axios
       .post(
-        "https://shark-app-ia4iu.ondigitalocean.app/verify-otp/",
+        "https://eab6-102-88-37-219.ngrok-free.app",
         {
           otp_code: otp,
         },
@@ -57,7 +57,7 @@ const VerifyForm = ({ setIsVerify, handleVerifyClick }) => {
   const handleResend = () => {
     axios
       .post(
-        "https://shark-app-ia4iu.ondigitalocean.app/resend-otp/",
+        "https://eab6-102-88-37-219.ngrok-free.app",
         {
           // Include any necessary data for the resend request
         },

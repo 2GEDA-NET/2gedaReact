@@ -50,7 +50,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://shark-app-ia4iu.ondigitalocean.app",
+  "proxy": "https://eab6-102-88-37-219.ngrok-free.app",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }

@@ -33,7 +33,7 @@ function ScrollToTop() {
 
   return null;
 }
-export const API_BASE_URL = "https://shark-app-ia4iu.ondigitalocean.app";
+export const API_BASE_URL = "https://eab6-102-88-37-219.ngrok-free.app.app";
 function App() {
   return (
     <div className="App">

@@ -10,6 +10,7 @@ import { useState } from "react";
 import ActionButton from "../../components/Commons/Button";
 import { AuthCtx } from "../../Context/AuthContext";
 import { useContext } from "react";
+import axios from "axios";
 
 const AddProfile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -67,42 +68,77 @@ const AddProfile = () => {
     // setActiveButton(event.target.value); // Set the activeButton state to the user input
   };
   const authToken = localStorage.getItem("authToken");
+  // console.log(selectedFile.name);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const formData = {
+  //     user: {
+  //       first_name: firstName,
+  //       last_name: lastName,
+  //     },
+  //     profile_image: selectedMainFile,
+  //     cover_image: selectedFile,
+  //     identity: activeButton,
+  //     work: occupation,
+  //     religion: religion,
+  //     currentCity,
+  //     date_of_birth: dateOfBirth,
+  //     custom_gender: customGender,
+  //     bio,
+  //   };
+  //   console.log(formData);
+  //   // Perform the update request to the backend here
+  //   try {
+  //     const response = await fetch(
+  //       "https://eab6-102-88-37-219.ngrok-free.app/user-profile/update/",
+  //       {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //           Authorization: `Token ${authToken}`,
+  //         },
+  //         body: JSON.stringify(formData),
+  //       }
+  //     );
+  //     console.log("after", formData);
+
+  //     const data = await response.json();
+  //     console.log("Success:", data);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = {
-      user: {
-        first_name: firstName,
-        last_name: lastName,
-      },
-      profile_image: selectedMainFile,
-      cover_image: selectedFile,
-      identity: activeButton,
-      work: occupation,
-      religion: religion,
-      currentCity,
-      date_of_birth: dateOfBirth,
-      custom_gender: customGender,
-      bio,
-    };
-    console.log(formData);
-    // Perform the update request to the backend here
+    const formData = new FormData();
+    formData.append("user[first_name]", firstName);
+    formData.append("user[last_name]", lastName);
+    formData.append("profile_image", selectedMainFile);
+    formData.append("cover_image", selectedFile);
+    formData.append("identity", activeButton);
+    formData.append("work", occupation);
+    formData.append("religion", religion);
+    formData.append("currentCity", currentCity);
+    formData.append("date_of_birth", dateOfBirth);
+    formData.append("custom_gender", customGender);
+    formData.append("bio", bio);
+
     try {
-      const response = await fetch(
-        "https://shark-app-ia4iu.ondigitalocean.app/user-profile/update/",
+      const response = await axios.put(
+        "https://eab6-102-88-37-219.ngrok-free.app/user-profile/update/",
+        formData,
         {
-          method: "PUT",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Token ${authToken}`,
+            "Content-Type": "multipart/form-data",
           },
-          body: JSON.stringify(formData),
         }
       );
-      console.log("after", formData);
 
-      const data = await response.json();
-      console.log("Success:", data);
+      console.log("Success:", response.data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -140,6 +176,7 @@ const AddProfile = () => {
                         onChange={handleImageChange}
                         style={{ display: "none" }}
                         id="image-input"
+                        name="cover_image"
                       />
                       <label htmlFor="image-input" className="dra-im domm">
                         <MdOutlineAddPhotoAlternate className="ddd" />
@@ -169,6 +206,7 @@ const AddProfile = () => {
                       onChange={handleMainImageChange}
                       style={{ display: "none" }}
                       id="image-main-input"
+                      name="profile_image"
                     />
                     <div className="main-pro-image new-vb">
                       <div className="main-img-bxb">

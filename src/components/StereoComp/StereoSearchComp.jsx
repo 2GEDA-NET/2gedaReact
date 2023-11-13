@@ -1,5 +1,6 @@
 import { MdLogout } from "react-icons/md";
 import { BiSearch } from "react-icons/bi";
+import { BsFileEarmarkMusic } from "react-icons/bs";
 
 const StereoSearchComp = ({
   label,
@@ -18,10 +19,13 @@ const StereoSearchComp = ({
           </div>
           <div className="head-line">{label}</div>
         </div>
-        <button className="log-out-bttn flex">
-          <MdLogout />
-          Logout
-        </button>
+        <div className="library-art-bx flex">
+          <button className="log-out-bttn flex">
+            <MdLogout />
+            Logout
+          </button>
+          <BsFileEarmarkMusic className="lib-mus" />
+        </div>
       </div>
       <div className={`search-product ticccc ${add} `}>
         <div className="sear-input-pro">

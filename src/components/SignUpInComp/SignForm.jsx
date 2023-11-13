@@ -49,10 +49,12 @@ const SignForm = () => {
       userData = { username, email, password };
     }
     console.log(userData);
-    fetch("https://shark-app-ia4iu.ondigitalocean.app/register/", {
+    fetch("https://eab6-102-88-37-219.ngrok-free.app/register/", {
       method: "POST",
+      // mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        // "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(userData),
     })

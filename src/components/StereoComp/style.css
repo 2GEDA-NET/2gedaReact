@@ -5,6 +5,10 @@
   font-size: 12px;
   color: #403f3f;
 }
+.lib-mus {
+  font-size: 20px;
+  cursor: pointer;
+}
 .play-bcx {
   border-radius: 50%;
   background: rgba(79, 13, 163, 0.25);
