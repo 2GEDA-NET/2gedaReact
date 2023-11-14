@@ -14,18 +14,21 @@ import MovieSlider from "../../components/Dashboard/Slider";
 import Data from "../../utils/datahome.json";
 import StatusContainer from "../../components/Dashboard/StatusContainer";
 import FeedDetail from "./FeedDetail";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import SharedPostComp from "../../components/Dashboard/SharedPostComp";
 import ProfileStick from "../../components/Commons/ProfileStick";
 import ChatHeader from "../../components/ChatComp/ChatHeader";
 import MainChat from "../../components/ChatComp/MainChat";
+import { AuthCtx } from "../../Context/AuthContext";
 
 const Home = () => {
   const [isFeedOpen, setIsFeedOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("All Posts");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showMainChatMess, setShowMainChatMess] = useState(false);
+  const { userAuth } = useContext(AuthCtx);
+  console.log(userAuth);
 
   const handleGotoMessagBox = () => {
     setShowMainChatMess(true);

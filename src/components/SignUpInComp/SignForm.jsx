@@ -6,8 +6,9 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useNavigate } from "react-router-dom";
 import { AuthCtx } from "../../Context/AuthContext";
+import { API_BASE_URL } from "../../ProtectedRoute";
 
-const SignForm = () => {
+const SignForm = ({ handleErrorClick }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isUsingPhone, setIsUsingPhone] = useState(false);
   const [phone, setPhone] = useState("");
@@ -15,9 +16,9 @@ const SignForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { userAuth, setUserAuth } = useContext(AuthCtx);
-  console.log(userAuth);
+  // console.log(userAuth);
 
-  console.log(phone);
+  // console.log(phone);
   const navigate = useNavigate();
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -40,6 +41,37 @@ const SignForm = () => {
   const handleUsePhoneClick = () => {
     setIsUsingPhone(!isUsingPhone);
   };
+  // const signupUser = (event) => {
+  //   event.preventDefault();
+  //   let userData;
+  //   if (email === "") {
+  //     userData = { username, password, phone_number: phone };
+  //   } else {
+  //     userData = { username, email, password };
+  //   }
+  //   console.log(userData);
+  //   fetch("https://king-prawn-app-venn6.ondigitalocean.app/register/", {
+  //     method: "POST",
+  //     // mode: "cors",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // "Access-Control-Allow-Origin": "*",
+  //     },
+  //     body: JSON.stringify(userData),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("Response data:", data);
+  //       console.log("Token:", data?.token);
+  //       localStorage.setItem("authToken", data?.token);
+  //       setUserAuth({ token: data?.token });
+  //       console.log("UserAuth:", userAuth);
+  //       if (data?.token) {
+  //         console.log("Navigating to /verify");
+  //         navigate("/verify");
+  //       }
+  //     });
+  // };
   const signupUser = (event) => {
     event.preventDefault();
     let userData;
@@ -48,29 +80,41 @@ const SignForm = () => {
     } else {
       userData = { username, email, password };
     }
-    console.log(userData);
-    fetch("https://eab6-102-88-37-219.ngrok-free.app/register/", {
+
+    fetch(`${API_BASE_URL}/register/`, {
       method: "POST",
-      // mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        // "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(userData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          // Handle error responses
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error);
+          });
+        }
+        return response.json();
+      })
       .then((data) => {
-        console.log("Response data:", data);
-        console.log("Token:", data?.token);
+        // console.log("Response data:", data);
+        // console.log("Token:", data?.token);
         localStorage.setItem("authToken", data?.token);
         setUserAuth({ token: data?.token });
-        console.log("UserAuth:", userAuth);
+        // console.log("UserAuth:", userAuth);
         if (data?.token) {
-          console.log("Navigating to /verify");
+          // console.log("Navigating to /verify");
           navigate("/verify");
         }
+      })
+      .catch((error) => {
+        // console.error("Error during signup:", error.message);
+        handleErrorClick(error.message);
+        // alert(error.message);
       });
   };
+
   return (
     <div className="sign-form">
       <div className="create-ead-txt">Create an Account</div>
@@ -101,6 +145,7 @@ const SignForm = () => {
               type={"text"}
               value={email}
               onChange={handleEmailChange}
+              required={"required"}
             />
             <div className="ins-bx-txt">
               We’ll verify the email provided to be sure it belongs to you
@@ -120,6 +165,7 @@ const SignForm = () => {
           name="username"
           value={username}
           onChange={handleUsernameChange}
+          required={"required"}
         />
         <div className="pass-con">
           <InputField
@@ -128,6 +174,7 @@ const SignForm = () => {
             name="password"
             value={password}
             onChange={handlePasswordChange}
+            required={"required"}
           />
           <div className="eye-box" onClick={togglePasswordVisibility}>
             {passwordVisible ? (

@@ -1,11 +1,31 @@
+import { useState } from "react";
 import NonAuthNavbar from "../../Layout/NonAuthNav/NonAuthNavbar";
 import SignForm from "../../components/SignUpInComp/SignForm";
 import WelcomeComp from "../../components/SignUpInComp/WelcomeComp";
+import ErrorModal from "./ErrorModal";
 import "./style.css";
 
 const Signup = () => {
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleErrorClick = (message) => {
+    setErrorMessage(message);
+    setIsError(true);
+  };
+  const handleErrorClose = () => {
+    setIsError(false);
+  };
   return (
     <>
+      {isError && (
+        <div className="modal-full-container mv-to-up">
+          <ErrorModal
+            message={errorMessage}
+            handleErrorClose={handleErrorClose}
+          />
+        </div>
+      )}
       <div className="top-mrg"></div>
 
       <div className="signup-container">
@@ -19,7 +39,7 @@ const Signup = () => {
             today.
           </div>
         </div> */}
-          <SignForm />
+          <SignForm handleErrorClick={handleErrorClick} />
         </div>
       </div>
     </>

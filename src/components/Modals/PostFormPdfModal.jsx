@@ -2,9 +2,7 @@ import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
 import { AiFillDelete } from "react-icons/ai";
 import "./style.css";
 import { useState } from "react";
-const PostFormPdfModal = () => {
-  const [pdfFile, setPdfFile] = useState(null);
-
+const PostFormPdfModal = ({ pdfFile, setPdfFile }) => {
   const handlePdfChange = (e) => {
     const selectedPdfFile = e.target.files[0];
     if (selectedPdfFile) {

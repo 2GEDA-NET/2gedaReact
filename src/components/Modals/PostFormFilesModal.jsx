@@ -10,9 +10,7 @@ import {
   BsFiletypeExe,
 } from "react-icons/bs";
 
-const PostFormFilesModal = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-
+const PostFormFilesModal = ({ selectedFile, setSelectedFile }) => {
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     if (selected) {

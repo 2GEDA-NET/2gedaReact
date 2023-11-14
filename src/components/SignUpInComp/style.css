@@ -209,6 +209,7 @@
   margin-top: 10px;
   font-weight: 500;
   cursor: pointer;
+  width: 200px;
 }
 @media only screen and (max-width: 1300px) {
   .up-wel {

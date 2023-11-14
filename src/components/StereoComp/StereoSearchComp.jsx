@@ -9,6 +9,7 @@ const StereoSearchComp = ({
   searchText,
   handleKeyPress,
   handleSearchResult,
+  handleLibraryOpen,
 }) => {
   return (
     <div className="buy-sell-comp-cont tic-sea">
@@ -24,7 +25,7 @@ const StereoSearchComp = ({
             <MdLogout />
             Logout
           </button>
-          <BsFileEarmarkMusic className="lib-mus" />
+          <BsFileEarmarkMusic className="lib-mus" onClick={handleLibraryOpen} />
         </div>
       </div>
       <div className={`search-product ticccc ${add} `}>

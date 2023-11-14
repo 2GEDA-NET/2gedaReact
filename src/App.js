@@ -23,6 +23,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Privacy from "./pages/privacy/Privacy";
 import AddBussProfile from "./pages/Profile/AddBussProfile";
 import Education from "./pages/Education";
+import Upload from "./pages/Upload";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -33,7 +34,6 @@ function ScrollToTop() {
 
   return null;
 }
-export const API_BASE_URL = "https://eab6-102-88-37-219.ngrok-free.app.app";
 function App() {
   return (
     <div className="App">
@@ -62,6 +62,7 @@ function App() {
         <Route path="/addbussprofile" element={<AddBussProfile />} />
         <Route path="/stereo/nonauth" element={<NonAuthStero />} />
         <Route path="/educate" element={<Education />} />
+        <Route path="/upload" element={<Upload />} />
       </Routes>
     </div>
   );

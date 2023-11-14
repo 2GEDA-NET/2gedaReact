@@ -3,9 +3,7 @@ import "./style.css";
 import { useState } from "react";
 import { SiMicrosoftexcel } from "react-icons/si";
 
-const PostFormExcelModal = () => {
-  const [excelFile, setExcelFile] = useState(null);
-
+const PostFormExcelModal = ({ excelFile, setExcelFile }) => {
   const handleExcelChange = (e) => {
     const selectedExcelFile = e.target.files[0];
     if (selectedExcelFile) {

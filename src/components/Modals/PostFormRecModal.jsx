@@ -4,8 +4,7 @@ import { useState } from "react";
 import { BsMicFill, BsSoundwave } from "react-icons/bs";
 import { IoMdMicOff } from "react-icons/io";
 import { useRef } from "react";
-const PostFormRecModal = () => {
-  const [audioBlob, setAudioBlob] = useState(null);
+const PostFormRecModal = ({ audioBlob, setAudioBlob }) => {
   const [isRecording, setIsRecording] = useState(false); // Added recording state
   const mediaRecorder = useRef(null);
 

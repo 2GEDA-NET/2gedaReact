@@ -141,6 +141,9 @@
   .stereo-bxbxb {
     background: #fff;
   }
+  .new-bg {
+    background: #fff;
+  }
 }
 @media only screen and (max-width: 1100px) {
   .ster-container-man {
@@ -207,6 +210,10 @@
   .more-welc-str {
     font-size: 14px;
   }
+  .library-full-container {
+    width: 110%;
+    margin-left: -20px;
+  }
 }
 
 .artist-bio-info {
@@ -242,6 +249,10 @@
     width: 100px;
     height: 100px;
     border-radius: 10px;
+  }
+  .library-full-container {
+    padding: 20px;
+    margin-top: -30px;
   }
 }
 @media only screen and (max-width: 410px) {

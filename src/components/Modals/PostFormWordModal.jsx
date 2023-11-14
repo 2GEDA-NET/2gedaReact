@@ -3,9 +3,7 @@ import "./style.css";
 import { useState } from "react";
 import { SiMicrosoftword } from "react-icons/si";
 
-const PostFormWordModal = () => {
-  const [wordFile, setWordFile] = useState(null);
-
+const PostFormWordModal = ({ wordFile, setWordFile }) => {
   const handleWordChange = (e) => {
     const selectedWordFile = e.target.files[0];
     if (selectedWordFile) {

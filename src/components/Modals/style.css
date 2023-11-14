@@ -161,6 +161,7 @@ video {
   margin: 5px 0;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.8);
+  text-align: center;
 }
 .or-dr {
   color: rgba(0, 0, 0, 0.8);
@@ -470,6 +471,9 @@ video {
   .postFormModal-container {
     width: 90%;
     padding: 10px;
+  }
+  .post-form-bx {
+    padding-bottom: 60px;
   }
 }
 @media only screen and (max-width: 50px) {

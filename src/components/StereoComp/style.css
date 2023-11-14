@@ -8,6 +8,10 @@
 .lib-mus {
   font-size: 20px;
   cursor: pointer;
+  display: none;
+}
+.library-art-bx {
+  gap: 10px;
 }
 .play-bcx {
   border-radius: 50%;
@@ -216,6 +220,21 @@
   background-color: #fff;
   border-radius: 0 0 10px 10px;
 }
+@media only screen and (max-width: 1150px) {
+  .lib-mus {
+    display: initial;
+  }
+  .artist-bx {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .artist-bx img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
 @media only screen and (max-width: 325px) {
   .images-details-song img {
     width: 60px;
@@ -232,5 +251,17 @@
   }
   .song-title-author {
     width: 100px;
+  }
+}
+@media only screen and (max-width: 281px) {
+  .artist-bx img {
+    width: 60px;
+    height: 60px;
+  }
+  .artist-bx {
+    width: 80px;
+  }
+  .top-row-container {
+    justify-content: space-between;
   }
 }

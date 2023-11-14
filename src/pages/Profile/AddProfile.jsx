@@ -125,10 +125,11 @@ const AddProfile = () => {
     formData.append("date_of_birth", dateOfBirth);
     formData.append("custom_gender", customGender);
     formData.append("bio", bio);
+    console.log("what i type:", formData);
 
     try {
       const response = await axios.put(
-        "https://eab6-102-88-37-219.ngrok-free.app/user-profile/update/",
+        "https://king-prawn-app-venn6.ondigitalocean.app/user-profile/update/",
         formData,
         {
           headers: {
@@ -137,7 +138,6 @@ const AddProfile = () => {
           },
         }
       );
-
       console.log("Success:", response.data);
     } catch (error) {
       console.error("Error:", error);
@@ -296,8 +296,9 @@ const AddProfile = () => {
                         Select a religion
                       </option>
                       <option value="Muslim">Muslim</option>
-                      <option value="Christian">Christian</option>
-                      <option value="Tra">Tra</option>
+                      <option value="Christianity">Christianity</option>
+                      <option value="Indigenous">Indigenous</option>
+                      <option value="Others">Others</option>
                     </select>
                   </div>
                 </div>

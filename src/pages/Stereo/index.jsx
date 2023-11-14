@@ -14,6 +14,7 @@ import QuickPickCol from "../../components/StereoComp/QuickPickCol";
 import ArtistProfile from "./ArtistProfile";
 import StereoSearchResult from "./StereoSearchResult";
 import GeneralSearchStereo from "../../components/StereoComp/GeneralSearchStereo";
+import LibraryFull from "./libraryFull";
 
 const Data = [
   {
@@ -60,6 +61,14 @@ const Stereo = () => {
   const [isStrSearchOpen, setIsStrSearchOpen] = useState(false);
   const [isArtistProOpen, setIsArtistProOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [isLibraryOpen, setIsLibraryOpen] = useState(false);
+
+  const handleLibraryOpen = () => {
+    setIsLibraryOpen(true);
+  };
+  const handleLibraryClose = () => {
+    setIsLibraryOpen(false);
+  };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && searchText.length > 1) {
@@ -113,7 +122,7 @@ const Stereo = () => {
   }, []);
   return (
     <>
-      <div className="home-container">
+      <div className="home-container new-bg">
         <MainLayout>
           <div className="main-containe bus-box-con stereo-bxbxb">
             <div className="left-side-container buss-all-container ster-container-man">
@@ -128,11 +137,15 @@ const Stereo = () => {
                     handleStrSearchClose={handleStrSearchClose}
                   />
                 )}
+                {isLibraryOpen && (
+                  <LibraryFull handleLibraryClose={handleLibraryClose} />
+                )}
 
                 {!isBigOpen &&
                   !isHitOpen &&
                   !isArtistProOpen &&
-                  !isStrSearchOpen && (
+                  !isStrSearchOpen &&
+                  !isLibraryOpen && (
                     <>
                       <div className="sear-stereo-bxb">
                         <StereoSearchComp
@@ -141,6 +154,7 @@ const Stereo = () => {
                           setSearchText={setSearchText}
                           handleKeyPress={handleKeyPress}
                           handleSearchResult={handleSearchResult}
+                          handleLibraryOpen={handleLibraryOpen}
                         />
                         {searchText.length !== 0 && <GeneralSearchStereo />}
                       </div>

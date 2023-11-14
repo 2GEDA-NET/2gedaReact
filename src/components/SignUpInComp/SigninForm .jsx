@@ -6,10 +6,10 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_BASE_URL } from "../../App";
 import { AuthCtx } from "../../Context/AuthContext";
+import { API_BASE_URL } from "../../ProtectedRoute";
 
-const SigninForm = () => {
+const SigninForm = ({ handleErrorClick, handleSuccClick }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isUsingPhone, setIsUsingPhone] = useState(false);
   const [isUsingUsername, setIsUsingUsername] = useState(false);
@@ -20,7 +20,6 @@ const SigninForm = () => {
   const { userAuth, setUserAuth } = useContext(AuthCtx);
 
   const navigate = useNavigate();
-  console.log(API_BASE_URL);
   const goToForgot = () => {
     navigate("/forgot");
   };
@@ -60,21 +59,19 @@ const SigninForm = () => {
     formData.append("username", username || phone_number || email);
     formData.append("password", password);
     try {
-      const response = await axios.post(
-        `https://eab6-102-88-37-219.ngrok-free.app/login/`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      console.log(phone_number);
+      const response = await axios.post(`${API_BASE_URL}/login/`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      // console.log(phone_number);
       localStorage.setItem("authToken", response.data?.token);
       setUserAuth({ token: response.data?.token });
-      console.log(response.data);
+      // console.log(response.data);
       console.log(userAuth);
+      handleSuccClick(response.data?.message);
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.error);
+        // console.log(error.response.data.error);
+        handleErrorClick(error.response.data.error);
       } else {
         console.log("An error occurred during the login process.");
       }
@@ -139,7 +136,7 @@ const SigninForm = () => {
           </div>
         </div>
         <div className="forg-pas-contan" onClick={goToForgot}>
-          Forgot password?
+          <span onClick={goToForgot}>Forgot password?</span>
         </div>
         <div className="use-phone" onClick={handleUsePhoneClick}>
           {isUsingPhone
