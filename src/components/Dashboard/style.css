@@ -691,7 +691,7 @@
 }
 @media only screen and (max-width: 1000px) {
   .ads-img {
-    margin: -15px 0 20px;
+    margin: 15px 0 20px;
   }
   .middle-side-container {
     display: none;
@@ -721,6 +721,9 @@
   }
   .shared-container {
     padding: 10px 40px;
+  }
+  .ads-img {
+    margin: -15px 0 20px;
   }
 }
 @media only screen and (max-width: 830px) {

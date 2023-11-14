@@ -109,7 +109,7 @@ const SignForm = ({ handleErrorClick }) => {
         }
       })
       .catch((error) => {
-        // console.error("Error during signup:", error.message);
+        console.error("Error during signup:", error.message);
         handleErrorClick(error.message);
         // alert(error.message);
       });
