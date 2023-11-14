@@ -105,7 +105,7 @@ const SignForm = ({ handleErrorClick }) => {
         // console.log("UserAuth:", userAuth);
         if (data?.token) {
           // console.log("Navigating to /verify");
-          navigate("/verify");
+          navigate("/home");
         }
       })
       .catch((error) => {
