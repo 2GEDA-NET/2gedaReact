@@ -3,9 +3,7 @@ import { AiFillDelete } from "react-icons/ai";
 import "./style.css";
 import { useState } from "react";
 
-const PostFormApkModal = () => {
-  const [apkFile, setApkFile] = useState(null);
-
+const PostFormApkModal = ({ apkFile, setApkFile }) => {
   const handleApkChange = (e) => {
     const selectedApkFile = e.target.files[0];
     if (selectedApkFile) {

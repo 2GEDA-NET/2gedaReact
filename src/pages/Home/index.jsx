@@ -82,7 +82,7 @@ const Home = () => {
           {!isFeedOpen && !isProfileOpen && !showMainChatMess && (
             <div className="left-side-container">
               <FirstSide />
-              <img src="/images/jumia.png" alt="" className="ads-img" />
+              <img src="/images/jumia.png" alt="" className="ads-img nw-dn" />
               <div className="status-row">
                 <StatusContainer />
               </div>

@@ -167,6 +167,7 @@ video {
   color: rgba(0, 0, 0, 0.8);
   font-size: 14px;
   word-wrap: break-word;
+  text-align: center;
 }
 .add-new-pic-or {
   font-size: 20px;

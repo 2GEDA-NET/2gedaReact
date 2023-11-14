@@ -48,8 +48,10 @@ const PostFormModal = ({
   const [excelFile, setExcelFile] = useState(null);
   const [powerpointFile, setPowerpointFile] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
+  const [apkFile, setApkFile] = useState(null);
+  const [exeFile, setExeFile] = useState(null);
 
-  console.log(pdfFile);
+  console.log(exeFile);
   // console.log(powerpointFile);
   // console.log(excelFile);
   // console.log(wordFile);
@@ -159,9 +161,15 @@ const PostFormModal = ({
                 setPowerpointFile={setPowerpointFile}
               />
             )}
-            {selectedIcon === "pdf" && <PostFormPdfModal pdfFile={pdfFile} />}
-            {selectedIcon === "apk" && <PostFormApkModal />}
-            {selectedIcon === "exe" && <PostFormExeModal />}
+            {selectedIcon === "pdf" && (
+              <PostFormPdfModal pdfFile={pdfFile} setPdfFile={setPdfFile} />
+            )}
+            {selectedIcon === "apk" && (
+              <PostFormApkModal apkFile={apkFile} setApkFile={setApkFile} />
+            )}
+            {selectedIcon === "exe" && (
+              <PostFormExeModal exeFile={exeFile} setExeFile={setExeFile} />
+            )}
             {selectedIcon === "location" && <PostFormLocationModal />}
             {selectedIcon === "allfiles" && (
               <PostFormFilesModal
