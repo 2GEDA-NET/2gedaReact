@@ -88,7 +88,7 @@ const SigninForm = ({ handleErrorClick, handleSuccClick }) => {
         {isUsingPhone && !isUsingUsername && (
           <div className="inp-phone">
             <PhoneInput
-              defaultCountry="NG"
+              defaultCountry="US"
               className="custom-phone-input"
               value={phone}
               style={{ height: "40px" }}

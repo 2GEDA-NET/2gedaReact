@@ -126,12 +126,12 @@ const SignForm = ({ handleErrorClick }) => {
         {isUsingPhone ? (
           <div className="inp-phone">
             <PhoneInput
-              defaultCountry="NG"
+              defaultCountry="US"
               className="custom-phone-input"
               name="phone"
               style={{ height: "40px" }}
               onChange={(phone) => setPhone(phone)}
-              placeholder="+234 80 2015 5501"
+              placeholder="+91 02015 5501"
               required
             />
             <div className="ins-bx-txt">

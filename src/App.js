@@ -24,6 +24,7 @@ import Privacy from "./pages/privacy/Privacy";
 import AddBussProfile from "./pages/Profile/AddBussProfile";
 import Education from "./pages/Education";
 import Upload from "./pages/Upload";
+import Reward from "./pages/Reward";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -63,6 +64,7 @@ function App() {
         <Route path="/stereo/nonauth" element={<NonAuthStero />} />
         <Route path="/educate" element={<Education />} />
         <Route path="/upload" element={<Upload />} />
+        <Route path="/reward" element={<Reward />} />
       </Routes>
     </div>
   );

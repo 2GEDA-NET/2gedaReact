@@ -87,6 +87,7 @@ const PostFormRecModal = ({ audioBlob, setAudioBlob }) => {
               </div>
             )} */}
             <button
+              type="button"
               onClick={isRecording ? stopRecording : startRecording}
               className={`rec-bbtn ${
                 isRecording ? "stop-record" : "start-record"

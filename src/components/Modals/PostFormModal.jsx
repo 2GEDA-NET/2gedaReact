@@ -26,6 +26,8 @@ import { useState } from "react";
 import HashtagModal from "./HashTagModal";
 import TagFriends from "./TagFriends";
 import data from "../../utils/tag.json";
+import { API_BASE_URL } from "../../ProtectedRoute";
+import axios from "axios";
 
 const PostFormModal = ({
   handleCloseMainContainerClick,
@@ -51,7 +53,7 @@ const PostFormModal = ({
   const [apkFile, setApkFile] = useState(null);
   const [exeFile, setExeFile] = useState(null);
 
-  console.log(exeFile);
+  console.log(addedTags);
   // console.log(powerpointFile);
   // console.log(excelFile);
   // console.log(wordFile);
@@ -62,6 +64,7 @@ const PostFormModal = ({
   // console.log(addedTags);
   // console.log(checkedFriends);
   // console.log(selectedFile);
+  const authToken = localStorage.getItem("authToken");
 
   const handleFriendCheck = (img) => {
     if (checkedFriends.includes(img)) {
@@ -86,6 +89,7 @@ const PostFormModal = ({
     setSuggestedHashtags(filteredHashtags);
   };
   const handleEnterPress = (event) => {
+    event.preventDefault();
     if (event.key === "Enter" && userInput.length > 0) {
       setAddedTags([...addedTags, userInput]);
       setUserInput("");
@@ -106,184 +110,246 @@ const PostFormModal = ({
   const handleCloseTagFrdClick = () => {
     setIsTagsFrd(false);
   };
+  const handlePostRequest = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+
+    images.forEach((image, index) => {
+      formData.append(`media`, image);
+    });
+
+    if (audioFile) {
+      formData.append(`media`, audioFile);
+    }
+    if (audioBlob) {
+      formData.append(`media`, audioBlob);
+    }
+    if (selectedFile) {
+      formData.append(`media`, selectedFile);
+    }
+    if (wordFile) {
+      formData.append(`media`, wordFile);
+    }
+    if (excelFile) {
+      formData.append(`media`, excelFile);
+    }
+    if (powerpointFile) {
+      formData.append(`media`, powerpointFile);
+    }
+    if (apkFile) {
+      formData.append(`media`, apkFile);
+    }
+    if (pdfFile) {
+      formData.append(`media`, pdfFile);
+    }
+    if (exeFile) {
+      formData.append(`media`, exeFile);
+    }
+
+    formData.append("content", textareaValue);
+    formData.append("hashtag", addedTags);
+
+    // Log the contents of the FormData object
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+
+    axios
+      .post(`${API_BASE_URL}/feed/create_post/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Token ${authToken}`,
+        },
+      })
+      .then((response) => {
+        console.log("Post created successfully:", response.data);
+        // Handle the response as needed
+      })
+      .catch((error) => {
+        console.error("Error creating post:", error);
+        // Handle errors
+      });
+  };
 
   return (
     <>
       <div className="postFormModal-container ">
         <div className="over-scr">
-          <div className="post-clos-box">
-            <div className="post-ead">Post on feed</div>
-            <AiOutlineClose
-              className="cls-post"
-              onClick={handleCloseMainContainerClick}
-            />
-          </div>
-          <textarea
-            name="post-text"
-            id="post-text-id"
-            placeholder="Write up to 1,000 words"
-            className="text-area"
-            value={textareaValue}
-            onChange={(event) => setTextareaValue(event.target.value)}
-          ></textarea>
+          <form action="" onSubmit={handlePostRequest}>
+            <div className="post-clos-box">
+              <div className="post-ead">Post on feed</div>
+              <AiOutlineClose
+                className="cls-post"
+                onClick={handleCloseMainContainerClick}
+              />
+            </div>
+            <textarea
+              name="post-text"
+              id="post-text-id"
+              placeholder="Write up to 1,000 words"
+              className="text-area"
+              value={textareaValue}
+              onChange={(event) => setTextareaValue(event.target.value)}
+            ></textarea>
 
-          <div className="viwdt">
-            {selectedIcon === "photo" && (
-              <PostFormPhotoModal images={images} setImages={setImages} />
-            )}
-            {selectedIcon === "music" && (
-              <PostFormMusicModal
-                audioFile={audioFile}
-                setAudioFile={setAudioFile}
-              />
-            )}
-            {selectedIcon === "rec" && (
-              <PostFormRecModal
-                audioBlob={audioBlob}
-                setAudioBlob={setAudioBlob}
-              />
-            )}
-            {selectedIcon === "word" && (
-              <PostFormWordModal
-                wordFile={wordFile}
-                setWordFile={setWordFile}
-              />
-            )}
-            {selectedIcon === "excel" && (
-              <PostFormExcelModal
-                excelFile={excelFile}
-                setExcelFile={setExcelFile}
-              />
-            )}
-            {selectedIcon === "power" && (
-              <PostFormPowerModal
-                powerpointFile={powerpointFile}
-                setPowerpointFile={setPowerpointFile}
-              />
-            )}
-            {selectedIcon === "pdf" && (
-              <PostFormPdfModal pdfFile={pdfFile} setPdfFile={setPdfFile} />
-            )}
-            {selectedIcon === "apk" && (
-              <PostFormApkModal apkFile={apkFile} setApkFile={setApkFile} />
-            )}
-            {selectedIcon === "exe" && (
-              <PostFormExeModal exeFile={exeFile} setExeFile={setExeFile} />
-            )}
-            {selectedIcon === "location" && <PostFormLocationModal />}
-            {selectedIcon === "allfiles" && (
-              <PostFormFilesModal
-                selectedFile={selectedFile}
-                setSelectedFile={setSelectedFile}
-              />
-            )}
-          </div>
-          <div className="hashtags-container">
-            <div className="add-tags-btn">Add hashtag</div>
-            {addedTags.map((tag, index) => (
-              <div className="add-tags-btn added-tag-cont" key={index}>
-                <div className="added-tag-tst">{tag}</div>
-                <AiOutlineClose
-                  className="cls-tag"
-                  onClick={() => handleRemoveTag(index)}
+            <div className="viwdt">
+              {selectedIcon === "photo" && (
+                <PostFormPhotoModal images={images} setImages={setImages} />
+              )}
+              {selectedIcon === "music" && (
+                <PostFormMusicModal
+                  audioFile={audioFile}
+                  setAudioFile={setAudioFile}
                 />
-              </div>
-            ))}
-            <div className="add-tags-btn added-tag-cont">
-              <div className="added-tag-tst">
-                <input
-                  type="text"
-                  className="let-inp"
-                  value={selectedSuggestion || userInput}
-                  onChange={handleInputChange}
-                  onKeyDown={handleEnterPress}
-                  placeholder="Type here"
+              )}
+              {selectedIcon === "rec" && (
+                <PostFormRecModal
+                  audioBlob={audioBlob}
+                  setAudioBlob={setAudioBlob}
                 />
-              </div>
-              <AiOutlineClose className="cls-tag" />
-              {userInput.length > 0 && (
-                <HashtagModal
-                  hashtags={suggestedHashtags}
-                  onHashtagClick={handleSuggestionClick}
+              )}
+              {selectedIcon === "word" && (
+                <PostFormWordModal
+                  wordFile={wordFile}
+                  setWordFile={setWordFile}
+                />
+              )}
+              {selectedIcon === "excel" && (
+                <PostFormExcelModal
+                  excelFile={excelFile}
+                  setExcelFile={setExcelFile}
+                />
+              )}
+              {selectedIcon === "power" && (
+                <PostFormPowerModal
+                  powerpointFile={powerpointFile}
+                  setPowerpointFile={setPowerpointFile}
+                />
+              )}
+              {selectedIcon === "pdf" && (
+                <PostFormPdfModal pdfFile={pdfFile} setPdfFile={setPdfFile} />
+              )}
+              {selectedIcon === "apk" && (
+                <PostFormApkModal apkFile={apkFile} setApkFile={setApkFile} />
+              )}
+              {selectedIcon === "exe" && (
+                <PostFormExeModal exeFile={exeFile} setExeFile={setExeFile} />
+              )}
+              {selectedIcon === "location" && <PostFormLocationModal />}
+              {selectedIcon === "allfiles" && (
+                <PostFormFilesModal
+                  selectedFile={selectedFile}
+                  setSelectedFile={setSelectedFile}
                 />
               )}
             </div>
-          </div>
-          {isTagsFrd && (
-            <div className="modal-full-container">
-              <TagFriends
-                handleCloseTagFrdClick={handleCloseTagFrdClick}
-                data={data}
-                onFriendCheck={handleFriendCheck}
-              />
+            <div className="hashtags-container">
+              <div className="add-tags-btn">Add hashtag</div>
+              {addedTags.map((tag, index) => (
+                <div className="add-tags-btn added-tag-cont" key={index}>
+                  <div className="added-tag-tst">{tag}</div>
+                  <AiOutlineClose
+                    className="cls-tag"
+                    onClick={() => handleRemoveTag(index)}
+                  />
+                </div>
+              ))}
+              <div className="add-tags-btn added-tag-cont">
+                <div className="added-tag-tst">
+                  <input
+                    type="text"
+                    className="let-inp"
+                    value={selectedSuggestion || userInput}
+                    onChange={handleInputChange}
+                    onKeyDown={handleEnterPress}
+                    placeholder="Type here"
+                  />
+                </div>
+                <AiOutlineClose className="cls-tag" />
+                {userInput.length > 0 && (
+                  <HashtagModal
+                    hashtags={suggestedHashtags}
+                    onHashtagClick={handleSuggestionClick}
+                  />
+                )}
+              </div>
             </div>
-          )}
-          <div className="hashtags-container" onClick={handleTagFrdClick}>
-            <div className="add-tags-frd">Tag Friends</div>
-          </div>
-          <div className="taged-frd-box">
-            {checkedFriends.map((img, index) => (
-              <div className="tag-frd-cont" key={index}>
-                <img src={img} alt="" />
-                <IoCloseSharp
-                  className="cls-tag-fr"
-                  onClick={() => handleRemoveTagFrd(index)}
+            {isTagsFrd && (
+              <div className="modal-full-container">
+                <TagFriends
+                  handleCloseTagFrdClick={handleCloseTagFrdClick}
+                  data={data}
+                  onFriendCheck={handleFriendCheck}
                 />
               </div>
-            ))}
-          </div>
-          <div className="down-post-feed post-form-bx">
-            <div className="icon-post-feed">
-              <BsCardImage
-                className="pic-vid"
-                onClick={() => handleIconClick("photo")}
-              />
-              {/* <FaVideo
+            )}
+            <div className="hashtags-container" onClick={handleTagFrdClick}>
+              <div className="add-tags-frd">Tag Friends</div>
+            </div>
+            <div className="taged-frd-box">
+              {checkedFriends.map((img, index) => (
+                <div className="tag-frd-cont" key={index}>
+                  <img src={img} alt="" />
+                  <IoCloseSharp
+                    className="cls-tag-fr"
+                    onClick={() => handleRemoveTagFrd(index)}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="down-post-feed post-form-bx">
+              <div className="icon-post-feed">
+                <BsCardImage
+                  className="pic-vid"
+                  onClick={() => handleIconClick("photo")}
+                />
+                {/* <FaVideo
               className="pic-vid"
               onClick={() => handleIconClick("photo")}
             /> */}
-              <IoLocation
-                className="loca"
-                onClick={() => handleIconClick("location")}
-              />
-              <FaMusic
-                className="music"
-                onClick={() => handleIconClick("music")}
-              />
-              <BsMic className="mic" onClick={() => handleIconClick("rec")} />
-              <FaFileAlt
-                className="fil"
-                onClick={() => handleIconClick("allfiles")}
-              />
-              <SiMicrosoftword
-                className="word"
-                onClick={() => handleIconClick("word")}
-              />
-              <SiMicrosoftexcel
-                className="excel"
-                onClick={() => handleIconClick("excel")}
-              />
-              <PiMicrosoftPowerpointLogo
-                className="prese"
-                onClick={() => handleIconClick("power")}
-              />
-              <BsFillFileEarmarkPdfFill
-                className="pdf"
-                onClick={() => handleIconClick("pdf")}
-              />
-              <BsAndroid2
-                className="apk"
-                onClick={() => handleIconClick("apk")}
-              />
-              <BsFiletypeExe
-                className="apk"
-                onClick={() => handleIconClick("exe")}
-              />
+                <IoLocation
+                  className="loca"
+                  onClick={() => handleIconClick("location")}
+                />
+                <FaMusic
+                  className="music"
+                  onClick={() => handleIconClick("music")}
+                />
+                <BsMic className="mic" onClick={() => handleIconClick("rec")} />
+                <FaFileAlt
+                  className="fil"
+                  onClick={() => handleIconClick("allfiles")}
+                />
+                <SiMicrosoftword
+                  className="word"
+                  onClick={() => handleIconClick("word")}
+                />
+                <SiMicrosoftexcel
+                  className="excel"
+                  onClick={() => handleIconClick("excel")}
+                />
+                <PiMicrosoftPowerpointLogo
+                  className="prese"
+                  onClick={() => handleIconClick("power")}
+                />
+                <BsFillFileEarmarkPdfFill
+                  className="pdf"
+                  onClick={() => handleIconClick("pdf")}
+                />
+                <BsAndroid2
+                  className="apk"
+                  onClick={() => handleIconClick("apk")}
+                />
+                <BsFiletypeExe
+                  className="apk"
+                  onClick={() => handleIconClick("exe")}
+                />
+              </div>
+              <button className="post-btn" type="submit">
+                Post
+              </button>
             </div>
-            <button className="post-btn" type="submit">
-              Post
-            </button>
-          </div>
+          </form>
         </div>
       </div>
     </>
