@@ -1,0 +1,91 @@
+/* AudioPlayer.css */
+.audio-player {
+  margin: 10px 0;
+}
+
+.volume-icon {
+  font-size: 18px;
+  color: #4f0da3;
+}
+
+.volume-slider {
+  width: 80px;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #ccc;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #4f0da3;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #4f0da3;
+  cursor: pointer;
+}
+
+/* Seek Slider Styles */
+.seek-slider {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #ccc;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.seek-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #4f0da3;
+  cursor: pointer;
+}
+
+.seek-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #4f0da3;
+  cursor: pointer;
+}
+
+.time-display {
+  font-size: 12px;
+}
+.play-dur-col {
+  justify-content: space-between;
+}
+.vol-bx-con {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.ply-bnt {
+  border: none;
+  background: none;
+  color: #000;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}

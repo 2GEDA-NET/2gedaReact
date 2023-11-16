@@ -40,7 +40,7 @@ const Profile = () => {
   const userData = useUserData();
   const navigate = useNavigate();
   // console.log(userData);
-  if (userData?.first_name === undefined || userData?.last_name === undefined) {
+  if (userData?.first_name === "" && userData?.last_name === "") {
     navigate("/addprofile");
   }
   const handleRequestClick = () => {

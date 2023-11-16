@@ -12,10 +12,12 @@ import "video.js/dist/video-js.css";
 import "@videojs/themes/dist/fantasy/index.css";
 import { useRef } from "react";
 import { useEffect } from "react";
+import AudioPlayer from "./audioPlayer";
 
 const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
   const [isPoostMenuDone, setIsPoostMenuDone] = useState(false);
   const videoRef = useRef(null);
+  const audioSource = "music/zino.mp3";
 
   useEffect(() => {
     const options = {
@@ -94,8 +96,8 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
         <div className="dob-img flex" onClick={handleFeedOpen}>
           <div className="post-media">
             {/* vjs-theme-fantasy */}
-            <video
-              className="da-video video-js vjs-theme-fantasy "
+            {/* <video
+              className="da-video video-js vjs-theme-fantas "
               data-setup="{}"
               controls
               autoPlay={true}
@@ -105,23 +107,14 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
               muted
             >
               <source src="video/vid.mp4" type="" />
-            </video>
+            </video> */}
           </div>
-          <div className="post-media">
-            <video
-              className="da-video video-js"
-              data-setup="{}"
-              controls
-              autoPlay={true}
-              loop
-              playsInline
-              muted
-              ref={videoRef}
-            >
-              <source src="video/vid.mp4" type="" />
-            </video>
-          </div>
-
+          {/* <div className="post-media lay-post">
+            <img src="images/post1.png" alt="" />
+            <div className="over-lay-post flex">
+              <span>+2</span>
+            </div>
+          </div> */}
           {/* <div className="post-media lay-post">
             <img src="images/post1.png" alt="" />
             <div className="over-lay-post flex">
@@ -132,6 +125,16 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
         {/* <video className="da-video ">
               <source src="video/vid.mp4" type="" />
             </video> */}
+
+        <div className="audi-post-box">
+          {" "}
+          <AudioPlayer
+            audioSrc={audioSource}
+            volume={0.7}
+            startTime={0}
+            duration={180}
+          />
+        </div>
         <div className="post-likes-co">
           <div className="likes-per-post">
             <div className="likes-bx">
