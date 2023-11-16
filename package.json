@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@videojs/themes": "^1.0.1",
     "axios": "^1.6.0",
     "bootstrap": "^5.3.2",
     "http-proxy-middleware": "^2.0.6",
@@ -52,6 +53,7 @@
   },
   "proxy": "https://eab6-102-88-37-219.ngrok-free.app",
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "video.js": "^8.6.1"
   }
 }

@@ -23,6 +23,8 @@ import AllStickers from "../../components/Commons/AllStickers";
 import AllSticking from "../../components/Commons/AllSticking";
 import EditProfile from "../../components/Modals/EditProfile";
 import VerificationAcc from "../../components/Modals/VerificationAcc";
+import useUserData from "../../services/GetApis";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("All posts");
@@ -35,7 +37,12 @@ const Profile = () => {
   const [isAllStickerOpen, setIsAllStickerOpen] = useState(false);
   const [isAllStickingOpen, setIsAllStickingOpen] = useState(false);
   const [isRequestOpen, setIsRequestOpen] = useState(false);
-
+  const userData = useUserData();
+  const navigate = useNavigate();
+  // console.log(userData);
+  if (userData?.first_name === undefined && userData?.last_name === undefined) {
+    navigate("/addprofile");
+  }
   const handleRequestClick = () => {
     setIsRequestOpen(true);
   };
@@ -196,7 +203,9 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className="deatil-profile">
-                      <div className="main-user-nm">Charlotte Caria Faith</div>
+                      <div className="main-user-nm">
+                        {userData?.first_name} {userData?.last_name}
+                      </div>
                       <div className="prof-user-txt">Product Designer</div>
                       <div className="prof-user-txt">Lagos, Nigeria</div>
                     </div>

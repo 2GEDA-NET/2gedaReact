@@ -96,7 +96,7 @@ const PostsCol = () => {
           )}
           {item.video && (
             <div className="vd-bx con-gn ">
-              <Video autoPlay={false} controls={false}>
+              <Video autoPlay={false}>
                 <source src={vid} type="video/mp4" />
               </Video>
               <div className="icon-pl">

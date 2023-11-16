@@ -8,6 +8,8 @@ import { FiShare2 } from "react-icons/fi";
 import Comment from "./Comment";
 import PostMenu from "../Modals/PostMenu";
 import { useState } from "react";
+import "video.js/dist/video-js.css";
+import "@videojs/themes/dist/fantasy/index.css";
 
 const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
   const [isPoostMenuDone, setIsPoostMenuDone] = useState(false);
@@ -45,15 +47,37 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
         </div>
         <div className="dob-img flex" onClick={handleFeedOpen}>
           <div className="post-media">
-            <img src="images/pic3.png" alt="" />
+            {/* vjs-theme-fantasy */}
+            <video
+              className="da-video video-js "
+              data-setup="{}"
+              controls
+              autoPlay
+            >
+              <source src="video/vid.mp4" type="" />
+            </video>
           </div>
-          <div className="post-media lay-post">
+          <div className="post-media">
+            <video
+              className="da-video video-js"
+              data-setup="{}"
+              controls
+              autoPlay
+            >
+              <source src="video/vid.mp4" type="" />
+            </video>
+          </div>
+
+          {/* <div className="post-media lay-post">
             <img src="images/post1.png" alt="" />
             <div className="over-lay-post flex">
               <span>+2</span>
             </div>
-          </div>
+          </div> */}
         </div>
+        {/* <video className="da-video ">
+              <source src="video/vid.mp4" type="" />
+            </video> */}
         <div className="post-likes-co">
           <div className="likes-per-post">
             <div className="likes-bx">
