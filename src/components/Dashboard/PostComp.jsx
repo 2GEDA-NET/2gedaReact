@@ -10,9 +10,55 @@ import PostMenu from "../Modals/PostMenu";
 import { useState } from "react";
 import "video.js/dist/video-js.css";
 import "@videojs/themes/dist/fantasy/index.css";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
   const [isPoostMenuDone, setIsPoostMenuDone] = useState(false);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5,
+    };
+
+    const handleIntersection = (entries) => {
+      entries.forEach((entry) => {
+        // Create a variable to hold the current value of videoRef.current
+        const currentVideoRef = videoRef.current;
+
+        if (entry.isIntersecting) {
+          // Video is in the viewport, play it
+          if (currentVideoRef) {
+            currentVideoRef.play();
+          }
+        } else {
+          // Video is out of the viewport, pause it
+          if (currentVideoRef) {
+            currentVideoRef.pause();
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+
+    // Observe the video element
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    // Cleanup the observer when the component unmounts
+    return () => {
+      // Use the same variable to hold the current value of videoRef.current
+      const currentVideoRef = videoRef.current;
+      if (currentVideoRef) {
+        observer.unobserve(currentVideoRef);
+      }
+    };
+  }, []);
 
   const handlePostMenuClickDone = (e) => {
     setIsPoostMenuDone(!isPoostMenuDone);
@@ -49,10 +95,14 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
           <div className="post-media">
             {/* vjs-theme-fantasy */}
             <video
-              className="da-video video-js "
+              className="da-video video-js vjs-theme-fantasy "
               data-setup="{}"
               controls
-              autoPlay
+              autoPlay={true}
+              ref={videoRef}
+              playsInline
+              loop
+              muted
             >
               <source src="video/vid.mp4" type="" />
             </video>
@@ -62,7 +112,11 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
               className="da-video video-js"
               data-setup="{}"
               controls
-              autoPlay
+              autoPlay={true}
+              loop
+              playsInline
+              muted
+              ref={videoRef}
             >
               <source src="video/vid.mp4" type="" />
             </video>
