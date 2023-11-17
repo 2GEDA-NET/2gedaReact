@@ -8,8 +8,6 @@ import {
 } from "react-icons/bs";
 import { useState } from "react";
 import ActionButton from "../../components/Commons/Button";
-import { AuthCtx } from "../../Context/AuthContext";
-import { useContext } from "react";
 import axios from "axios";
 import SuccessModalSuc from "../Signup/SuccessModalSuc";
 import ErrorModal from "../Signup/ErrorModal";
@@ -28,8 +26,7 @@ const AddProfile = () => {
   const [currentCity, setCurrentCity] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [bio, setBio] = useState("");
-  // const { userAuth } = useContext(AuthCtx);
-  // console.log(userAuth);
+
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSucc, setIsSucc] = useState(false);

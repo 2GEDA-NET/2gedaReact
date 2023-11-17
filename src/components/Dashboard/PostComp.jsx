@@ -13,6 +13,13 @@ import "@videojs/themes/dist/fantasy/index.css";
 import { useRef } from "react";
 import { useEffect } from "react";
 import AudioPlayer from "./audioPlayer";
+import {
+  BsFillFileEarmarkPdfFill,
+  BsAndroid2,
+  BsFiletypeExe,
+} from "react-icons/bs";
+import { SiMicrosoftword, SiMicrosoftexcel } from "react-icons/si";
+import { PiMicrosoftPowerpointLogo } from "react-icons/pi";
 
 const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
   const [isPoostMenuDone, setIsPoostMenuDone] = useState(false);
@@ -126,14 +133,38 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
               <source src="video/vid.mp4" type="" />
             </video> */}
 
-        <div className="audi-post-box">
+        {/* <div className="audi-post-box">
           {" "}
           <AudioPlayer
             audioSrc={audioSource}
             volume={0.7}
             startTime={0}
-            duration={180}
+            duration={34}
           />
+        </div> */}
+        {/* <div className="dra-im">
+          <BsFillFileEarmarkPdfFill className="icon-dw pdf" />
+          <div className="or-dr">pdfFile.name</div>
+        </div> */}
+        {/* <div className="dra-im">
+          <SiMicrosoftword className="icon-dw word" />
+          <div className="or-dr">{"wordFile.name"}</div>
+        </div> */}
+        {/* <div className="dra-im">
+          <PiMicrosoftPowerpointLogo className="icon-dw prese" />
+          <div className="or-dr">{"powerpointFile.name"}</div>
+        </div> */}
+        {/* <div className="dra-im">
+          <SiMicrosoftexcel className="icon-dw excel" />
+          <div className="or-dr">{"excelFile.name"}</div>
+        </div> */}
+        {/* <div className="dra-im">
+          <BsAndroid2 className="icon-dw apk" />
+          <div className="or-dr">{"apkFile.name"}</div>
+        </div> */}
+        <div className="dra-im">
+          <BsFiletypeExe className="icon-dw exe" />
+          <div className="or-dr">{"exeFile.name"}</div>
         </div>
         <div className="post-likes-co">
           <div className="likes-per-post">

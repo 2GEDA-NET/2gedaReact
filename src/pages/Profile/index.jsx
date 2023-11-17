@@ -39,7 +39,7 @@ const Profile = () => {
   const [isRequestOpen, setIsRequestOpen] = useState(false);
   const userData = useUserData();
   const navigate = useNavigate();
-  // console.log(userData);
+  console.log(userData);
   if (userData?.first_name === "" && userData?.last_name === "") {
     navigate("/addprofile");
   }
@@ -174,7 +174,7 @@ const Profile = () => {
                         handleModalMenuClose={handleModalMenuClose}
                         handleImelClick={handleImelClick}
                         handleManAdClick={handleManAdClick}
-                        handleEditProClick={handleEditProClick}
+                        // handleEditProClick={handleEditProClick}
                         handleRequestClick={handleRequestClick}
                       />
                     )}
