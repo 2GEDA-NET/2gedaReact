@@ -28,6 +28,7 @@ const Home = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showMainChatMess, setShowMainChatMess] = useState(false);
   const { userAuth } = useContext(AuthCtx);
+
   console.log(userAuth);
 
   const handleGotoMessagBox = () => {
@@ -103,7 +104,6 @@ const Home = () => {
                 <>
                   <PostComp handleFeedOpen={handleFeedOpen} />
                   <SharedPostComp />
-
                   <div className="music-das-row">
                     <MusicDash />
                     <MusicDash />
@@ -111,7 +111,7 @@ const Home = () => {
                     <MusicDash />
                     <MusicDash />
                   </div>
-                  <PostComp />
+                  {/* <PostComp /> */}
                   <div className="ticket-das-row">
                     <SmallTicketCard />
                     <SmallTicketCard />
@@ -121,7 +121,7 @@ const Home = () => {
                     <SmallTicketCard />
                     <SmallTicketCard />
                   </div>
-                  <PostComp />
+                  {/* <PostComp /> */}
                   <div className="ticket-das-row">
                     <ProductDash />
                     <ProductDash />
@@ -129,7 +129,7 @@ const Home = () => {
                     <ProductDash />
                     <ProductDash />
                   </div>
-                  <PostComp />
+                  {/* <PostComp /> */}
                   <div className="movie-slid-box">
                     <div className="post-ead">Trending movies</div>
                     <MovieSlider />
@@ -145,7 +145,6 @@ const Home = () => {
                     </div>
                   </div>
                   <img src="/images/jumia.png" alt="" className="ads-img" />
-
                   <div className="you-may-know">
                     <div className="post-ead">People you may know</div>
                     <div className="may-know-box stic-ind">

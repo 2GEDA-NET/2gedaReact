@@ -143,7 +143,7 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
             </div>
             <div className="dob-img flex" onClick={handleFeedOpen}>
               <div className="post-media ">
-                <img src="images/post1.png" alt="" />
+                <img src={post.media} alt="" />
               </div>
               <div className="post-media">
                 {/* vjs-theme-fantasy */}
