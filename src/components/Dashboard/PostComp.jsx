@@ -110,7 +110,7 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
     <>
       {" "}
       {postData.map((post) => (
-        <div className={`postcom ${redmar}`} key={post.id}>
+        <div className={`postcom ${redmar}`} key={post.post__id}>
           <div className="post-comp-container">
             <div className="profile-time">
               <div className="post-profile">
@@ -143,7 +143,7 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
             </div>
             <div className="dob-img flex" onClick={handleFeedOpen}>
               <div className="post-media ">
-                <img src="images/post1.png" alt="" />
+                <img src="post_files/Vector_2_Z8zKWFP.png" alt="" />
               </div>
               <div className="post-media">
                 {/* vjs-theme-fantasy */}

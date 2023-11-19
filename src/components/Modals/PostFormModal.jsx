@@ -28,6 +28,7 @@ import TagFriends from "./TagFriends";
 import data from "../../utils/tag.json";
 import { API_BASE_URL } from "../../ProtectedRoute";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PostFormModal = ({
   handleCloseMainContainerClick,
@@ -52,6 +53,7 @@ const PostFormModal = ({
   const [pdfFile, setPdfFile] = useState(null);
   const [apkFile, setApkFile] = useState(null);
   const [exeFile, setExeFile] = useState(null);
+  const navigate = useNavigate();
 
   console.log(addedTags);
   // console.log(powerpointFile);
@@ -163,6 +165,8 @@ const PostFormModal = ({
       })
       .then((response) => {
         console.log("Post created successfully:", response.data);
+        localStorage.setItem("postD", response.content);
+        navigate("/home");
         // Handle the response as needed
       })
       .catch((error) => {

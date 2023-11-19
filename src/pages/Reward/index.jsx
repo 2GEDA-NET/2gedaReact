@@ -8,6 +8,7 @@ import RewardCard from "../../components/RewardComp/RewardCard";
 import { CiLogin } from "react-icons/ci";
 import { BsPostcardFill } from "react-icons/bs";
 import { GoCopy } from "react-icons/go";
+import EarnHow from "../../components/RewardComp/EarnHow";
 const Data = [
   {
     comp: <CiLogin />,
@@ -165,7 +166,16 @@ const Reward = () => {
             </>
           </div>
 
-          <div className="right-side-container right-stereo"></div>
+          <div className="right-side-container right-stereo">
+            <div className="how-earn-container">
+              <div className="earn-ow-txt">How to earn</div>
+              <div className="earn-how-row">
+                <EarnHow />
+                <EarnHow />
+                <EarnHow />
+              </div>
+            </div>
+          </div>
         </div>
       </MainLayout>
     </div>

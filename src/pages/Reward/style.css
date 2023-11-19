@@ -165,3 +165,8 @@
 .cp-clik {
   cursor: pointer;
 }
+.how-earn-container {
+  border-radius: 10px;
+  background: #d0d5dd;
+  padding: 10px;
+}

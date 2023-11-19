@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./style.css";
 
 const RewardCard = ({ comp, title, bdy, pro, tot }) => {
   const [progress, setProgress] = useState(pro);
