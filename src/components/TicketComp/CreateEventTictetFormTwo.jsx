@@ -7,16 +7,18 @@ import { useEffect } from "react";
 const CreateEventTictetFormTwo = ({
   handleCreatTicketTwoCloseContainerClick,
   handleCreatTicketThreeContainerClick,
+  setTickets,
+  tickets,
+  selectedCategory,
+  setSelectedCategory,
 }) => {
   const [selectedTicketIndex, setSelectedTicketIndex] = useState(0);
-  const [tickets, setTickets] = useState([
-    {
-      name: "",
-      quantity: "",
-      price: "FREE TICKET",
-    },
-  ]);
 
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  console.log(tickets);
   const handlePaidClick = (index) => {
     setSelectedTicketIndex(index);
     const updatedTickets = tickets.map((ticket, i) => {
@@ -46,6 +48,19 @@ const CreateEventTictetFormTwo = ({
       updatedTickets.splice(index, 1);
       setTickets(updatedTickets);
     }
+  };
+
+  const handleInputChange = (index, field, value) => {
+    const updatedTickets = tickets.map((ticket, i) => {
+      if (i === index) {
+        return {
+          ...ticket,
+          [field]: value,
+        };
+      }
+      return ticket;
+    });
+    setTickets(updatedTickets);
   };
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -116,6 +131,10 @@ const CreateEventTictetFormTwo = ({
                   type="text"
                   className="create-evt-inp"
                   placeholder="Enter ticket name"
+                  value={ticket.name}
+                  onChange={(e) =>
+                    handleInputChange(index, "name", e.target.value)
+                  }
                 />
               </div>
               <div className="event-inp-overall-cont">
@@ -126,6 +145,10 @@ const CreateEventTictetFormTwo = ({
                   type="text"
                   className="create-evt-inp"
                   placeholder="Eg. 100"
+                  value={ticket.quantity}
+                  onChange={(e) =>
+                    handleInputChange(index, "quantity", e.target.value)
+                  }
                 />
               </div>
               {ticket.price !== "FREE TICKET" ? (
@@ -137,6 +160,10 @@ const CreateEventTictetFormTwo = ({
                     type="text"
                     className="create-evt-inp"
                     placeholder="Eg. #12,000"
+                    value={ticket.price}
+                    onChange={(e) =>
+                      handleInputChange(index, "price", e.target.value)
+                    }
                   />
                 </div>
               ) : (
@@ -175,11 +202,15 @@ const CreateEventTictetFormTwo = ({
             <label htmlFor="">Event category</label>
             <div className="claim-inp flex nobd">
               <MdOutlineCategory />
-              <select name="" id="" className="claim-inp noline">
+              <select
+                name=""
+                id=""
+                className="claim-inp noline"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+              >
                 <option value="">Select category</option>
-                <option value="Driver_licence">Driver Licence</option>
-                <option value="NIN">NIN</option>
-                <option value="Voters_card">Voter's Card</option>
+                <option value="Festival">Festival</option>
               </select>
             </div>
           </div>
@@ -189,7 +220,7 @@ const CreateEventTictetFormTwo = ({
           className="act-continue-btn"
           onClick={handleCreatTicketThreeContainerClick}
         >
-          <ActionButton label={"Continue"} type={"button"} />
+          <ActionButton label={"Continue"} type={"submit"} />
         </div>
         <div
           className="bac-formm"

@@ -143,7 +143,7 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
             </div>
             <div className="dob-img flex" onClick={handleFeedOpen}>
               <div className="post-media ">
-                <img src="post_files/Vector_2_Z8zKWFP.png" alt="" />
+                <img src={post.media} alt="" />
               </div>
               <div className="post-media">
                 {/* vjs-theme-fantasy */}
@@ -184,7 +184,7 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
             </div>
             <div className="dra-im">
               <BsFillFileEarmarkPdfFill className="icon-dw pdf" />
-              <div className="or-dr">pdfFile.name</div>
+              <div className="or-dr">{post.media}</div>
             </div>
             <div className="dra-im">
               <SiMicrosoftword className="icon-dw word" />

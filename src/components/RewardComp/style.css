@@ -24,3 +24,17 @@
   border-radius: 6px;
   margin: 10px 0;
 }
+.notsucc-rd {
+  background: #ff0000;
+}
+.succ-wd {
+  background: #207700;
+}
+.all-rrr {
+  align-items: flex-end;
+}
+.min-us {
+  font-size: 10px;
+  color: #000;
+  margin-right: 5px;
+}

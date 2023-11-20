@@ -139,6 +139,9 @@
   .success-request-container {
     width: 70%;
   }
+  .sell-manage-cont {
+    margin-top: 20px;
+  }
 }
 @media only screen and (max-width: 500px) {
   .avail-bal {

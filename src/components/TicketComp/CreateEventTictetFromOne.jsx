@@ -2,17 +2,60 @@ import { BsUpload, BsLaptop } from "react-icons/bs";
 import { IoLocation } from "react-icons/io5";
 import ActionButton from "../../components/Commons/Button";
 import { useState } from "react";
-const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
+
+const CreateEventTictetFromOne = ({
+  handleCreatTicketTwoContainerClick,
+  image,
+  setImage,
+  eventTitle,
+  setEventTitle,
+  eventDescription,
+  setEventDescription,
+  platformName,
+  setPlatformName,
+  platformUrl,
+  setPlatformUrl,
+  venueName,
+  setVenueName,
+  venueAddress,
+  setVenueAddress,
+}) => {
   const [isPlatforn, setIsPlatforn] = useState(false);
-  const [image, setImage] = useState("");
+  const [selImage, setSelImage] = useState("");
+
+  const handlePlatformNameChange = (e) => {
+    setPlatformName(e.target.value);
+  };
+
+  const handlePlatformUrlChange = (e) => {
+    setPlatformUrl(e.target.value);
+  };
+
+  const handleVenueNameChange = (e) => {
+    setVenueName(e.target.value);
+  };
+
+  const handleVenueAddressChange = (e) => {
+    setVenueAddress(e.target.value);
+  };
+
+  const handleInputChange = (e) => {
+    setEventTitle(e.target.value);
+  };
+  const handleDescriptionChange = (e) => {
+    setEventDescription(e.target.value);
+  };
 
   const handleImageChange = (event) => {
     // Handling the image change
     const file = event.target.files[0];
+    if (file) {
+      setImage(file);
+    }
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setImage(reader.result);
+      setSelImage(reader.result);
     };
 
     if (file) {
@@ -22,6 +65,7 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
   const handlePlatfornClick = () => {
     setIsPlatforn(!isPlatforn);
   };
+
   return (
     <>
       <div className="stepper-cont-bx">
@@ -47,6 +91,7 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
       </div>
       <div className="event-ead">Event info</div>
       <div className="event-txt">Tell us a bit about your event</div>
+
       <div className="main-event-container">
         <div className="event-inp-overall-cont">
           <label htmlFor="" className="adj">
@@ -56,6 +101,8 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
             type="text"
             className="create-evt-inp"
             placeholder="Enter your event title"
+            value={eventTitle}
+            onChange={handleInputChange}
           />
           <div className="ins-create">0/50 words</div>
         </div>
@@ -67,8 +114,10 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
             type="text"
             className="create-evt-inp area-evn"
             placeholder="Enter your event details. It may contain FAQs and what attendees should expect from the event"
+            value={eventDescription}
+            onChange={handleDescriptionChange}
           />
-          <div className="ins-create">0/500 wordss</div>
+          <div className="ins-create">0/500 words</div>
         </div>
         <div className="event-inp-overall-cont dotted">
           {!image && (
@@ -86,7 +135,7 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
           {image ? (
             <label htmlFor="pic-input">
               <div className="img-con-cv">
-                <img src={image} alt="uploaded" />
+                <img src={selImage} alt="uploaded" />
               </div>
             </label>
           ) : (
@@ -124,6 +173,8 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
                 type="text"
                 className="create-evt-inp"
                 placeholder="skype, google meet, webinar, etc."
+                value={platformName}
+                onChange={handlePlatformNameChange}
               />
             </div>
             <div className="event-inp-overall-cont">
@@ -134,6 +185,8 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
                 type="text"
                 className="create-evt-inp"
                 placeholder="https://www.example.com"
+                value={platformUrl}
+                onChange={handlePlatformUrlChange}
               />
             </div>
           </div>
@@ -147,6 +200,8 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
                 type="text"
                 className="create-evt-inp"
                 placeholder="Name of hotel, building or event centre"
+                value={venueName}
+                onChange={handleVenueNameChange}
               />
             </div>
             <div className="event-inp-overall-cont">
@@ -157,6 +212,8 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
                 type="text"
                 className="create-evt-inp"
                 placeholder="Give a clear address to help your attendees locate your event. "
+                value={venueAddress}
+                onChange={handleVenueAddressChange}
               />
             </div>
           </div>

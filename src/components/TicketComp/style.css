@@ -308,6 +308,8 @@
   cursor: pointer;
   text-align: right;
   margin-bottom: 10px;
+  width: 150px;
+  float: right;
 }
 .act-continue-btn {
   margin-top: 20px;

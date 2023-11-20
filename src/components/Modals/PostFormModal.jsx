@@ -40,7 +40,6 @@ const PostFormModal = ({
   const [addedTags, setAddedTags] = useState([]);
   const [isTagsFrd, setIsTagsFrd] = useState(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState("");
-  const hashtags = ["#programming", "#technology", "#art", "#travel"];
   const [checkedFriends, setCheckedFriends] = useState([]);
   const [images, setImages] = useState([]);
   const [audioFile, setAudioFile] = useState(null);
@@ -54,8 +53,9 @@ const PostFormModal = ({
   const [apkFile, setApkFile] = useState(null);
   const [exeFile, setExeFile] = useState(null);
   const navigate = useNavigate();
+  const hashtags = ["#programming", "#technology", "#art", "#travel"];
 
-  console.log(addedTags);
+  // console.log(addedTags);
   // console.log(powerpointFile);
   // console.log(excelFile);
   // console.log(wordFile);
@@ -90,13 +90,15 @@ const PostFormModal = ({
     );
     setSuggestedHashtags(filteredHashtags);
   };
+
   const handleEnterPress = (event) => {
-    event.preventDefault();
     if (event.key === "Enter" && userInput.length > 0) {
       setAddedTags([...addedTags, userInput]);
       setUserInput("");
+      event.preventDefault();
     }
   };
+
   // console.log(setSelectedSuggestion);
   const handleRemoveTag = (index) => {
     const updatedTags = [...addedTags];

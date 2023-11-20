@@ -110,12 +110,9 @@ const CreateEventTictetFormThree = ({
             </select>
           </div>
         </div>
-
-        <div
-          className="act-continue-btn"
-          onClick={handleCreatTicketSucessClick}
-        >
-          <ActionButton label={"Continue"} />
+        {/* <button type="submit">dj,lc,j</button> */}
+        <div className="act-continue-btn">
+          <ActionButton label={"Continue"} type={"submit"} />
         </div>
         <div
           className="bac-formm"

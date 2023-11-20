@@ -170,3 +170,31 @@
   background: #d0d5dd;
   padding: 10px;
 }
+@media only screen and (max-width: 1150px) {
+  .rith-reward {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .refer-input-bx {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .rf-frm {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .form-refer-bx {
+    width: 100%;
+  }
+  .refer-link-bx {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .refer-link-bx {
+    width: 100%;
+    font-size: 13px;
+  }
+}
