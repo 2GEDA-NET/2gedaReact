@@ -11,6 +11,7 @@ import { GoCopy } from "react-icons/go";
 import EarnHow from "../../components/RewardComp/EarnHow";
 import RewardAll from "./rewardAll";
 import RewardHistory from "./RewardHistory";
+import Payoutone from "./Payoutone";
 const Data = [
   {
     comp: <CiLogin />,
@@ -39,6 +40,7 @@ const Reward = () => {
   const [showBalance, setShowBalance] = useState(false);
   const [showAllRewards, setShowAllRewards] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [showPayOne, setShowPayOne] = useState(false);
   const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(false);
 
   const [url, setUrl] = useState("2geda.net/faithawokunle");
@@ -56,6 +58,12 @@ const Reward = () => {
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
+  };
+  const handleShowPayOne = () => {
+    setShowPayOne(true);
+  };
+  const handleShowPayOneClose = () => {
+    setShowPayOne(false);
   };
   const handleShowHistory = () => {
     setShowHistory(true);
@@ -90,8 +98,11 @@ const Reward = () => {
                   handleShowHistoryClose={handleShowHistoryClose}
                 />
               )}
+              {showPayOne && (
+                <Payoutone handleShowPayOneClose={handleShowPayOneClose} />
+              )}
 
-              {!showAllRewards && !showHistory && (
+              {!showAllRewards && !showHistory && !showPayOne && (
                 <>
                   <div className="back-title">
                     <div className="bc-ico">
@@ -123,7 +134,10 @@ const Reward = () => {
                         )}
                       </div>
                     </div>
-                    <div className="btn-request-rew flex">
+                    <div
+                      className="btn-request-rew flex"
+                      onClick={handleShowPayOne}
+                    >
                       <ActionButton label={"Request withdrawal"} bg={"bg-te"} />
                     </div>
 

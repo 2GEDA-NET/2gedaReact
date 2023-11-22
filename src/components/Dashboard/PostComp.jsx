@@ -78,7 +78,7 @@ const PostComp = ({ disnone, redmar, handleFeedOpen }) => {
   };
 
   const formatRelativeTime = (timestamp) => {
-    const postTime = new Date(`2023-01-01T${timestamp}`); // Assuming a specific date, adjust as needed
+    const postTime = new Date(`${timestamp}`); // Assuming a specific date, adjust as needed
     const currentTime = new Date();
 
     const timeDifference = Math.abs(currentTime - postTime);
