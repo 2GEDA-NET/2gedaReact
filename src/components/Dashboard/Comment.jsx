@@ -1,8 +1,8 @@
 import ComBtn from "../Commons/ComBtn";
 
-const Comment = () => {
+const Comment = ({ disnone }) => {
   return (
-    <div className="comment-container">
+    <div className={`comment-container ${disnone}`}>
       <div className="post-ead">Comment</div>
       <div className="inp-coment">
         <textarea

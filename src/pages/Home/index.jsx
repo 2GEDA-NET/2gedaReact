@@ -3,10 +3,8 @@ import DashMessage from "../../components/Dashboard/DasMess";
 import FirstSide from "../../components/Dashboard/FirstSide";
 import Follower from "../../components/Dashboard/Follower";
 import PostComp from "../../components/Dashboard/PostComp";
-import { FaPlus } from "react-icons/fa6";
 import SelectCategory from "../../components/Dashboard/SelectCategory";
 import "./style.css";
-import Status from "../../components/Dashboard/Status";
 import MusicDash from "../../components/Dashboard/MusicDas";
 import SmallTicketCard from "../../components/Dashboard/smallTicket";
 import ProductDash from "../../components/Dashboard/ProductDAs";
@@ -14,117 +12,174 @@ import MovieDashCard from "../../components/Dashboard/MovieDas";
 import Stick from "../../components/Dashboard/Stick";
 import MovieSlider from "../../components/Dashboard/Slider";
 import Data from "../../utils/datahome.json";
-import { NavLink } from "react-router-dom";
-import PostFormModal from "../../components/Modals/PostFormModal";
+import StatusContainer from "../../components/Dashboard/StatusContainer";
+import FeedDetail from "./FeedDetail";
+import { useContext, useState } from "react";
+import { useEffect } from "react";
+import SharedPostComp from "../../components/Dashboard/SharedPostComp";
+import ProfileStick from "../../components/Commons/ProfileStick";
+import ChatHeader from "../../components/ChatComp/ChatHeader";
+import MainChat from "../../components/ChatComp/MainChat";
+import { AuthCtx } from "../../Context/AuthContext";
 
-// import Slider from "react-slick";
-// // import "slick-carousel/slick/slick.css";
-// // import "slick-carousel/slick/slick-theme.css";
 const Home = () => {
+  const [isFeedOpen, setIsFeedOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("All Posts");
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [showMainChatMess, setShowMainChatMess] = useState(false);
+  const { userAuth } = useContext(AuthCtx);
+
+  console.log(userAuth);
+
+  const handleGotoMessagBox = () => {
+    setShowMainChatMess(true);
+  };
+  const handleCloseMessagBox = () => {
+    setShowMainChatMess(false);
+  };
+
+  const handleProfileClose = () => {
+    setIsProfileOpen(false);
+  };
+
+  const handleProfileClick = () => {
+    setIsProfileOpen(true);
+  };
+
+  const handleFeedOpen = () => {
+    setIsFeedOpen(true);
+  };
+  const handleFeedClose = () => {
+    setIsFeedOpen(false);
+  };
+  const handleTabClick = (text) => {
+    setActiveTab(text);
+  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="home-container">
       <MainLayout>
         <div className="main-containe">
-          <div className="left-side-container">
-            <PostFormModal />
-            <FirstSide />
-            <img src="images/jumia.png" alt="" className="ads-img" />
-            <div className="status-row">
-              <div className="life-satus">
-                <div className="em-im">
-                  <FaPlus />
+          {isFeedOpen && (
+            <div className="left-side-container feed-box">
+              <FeedDetail handleFeedClose={handleFeedClose} />
+            </div>
+          )}
+          {isProfileOpen && (
+            <div className="left-side-container">
+              <ProfileStick handleProfileClose={handleProfileClose} />
+            </div>
+          )}
+          {showMainChatMess && (
+            <div className="left-side-container">
+              <div className="main-chat-mess">
+                <ChatHeader handleCloseMessagBox={handleCloseMessagBox} />
+                <MainChat />
+              </div>
+            </div>
+          )}
+          {!isFeedOpen && !isProfileOpen && !showMainChatMess && (
+            <div className="left-side-container">
+              <FirstSide />
+              <img src="/images/jumia.png" alt="" className="ads-img nw-dn" />
+              <div className="status-row">
+                <StatusContainer />
+              </div>
+              <div className="select-what-display">
+                {Data.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`tab-item ${
+                      item.text === activeTab ? "sel-act" : "anot-wid"
+                    }`}
+                    onClick={() => handleTabClick(item.text)}
+                  >
+                    <div className="dis-sel-name">{item.text}</div>
+                  </div>
+                ))}
+              </div>
+              {activeTab === "All Posts" ? (
+                <>
+                  <PostComp handleFeedOpen={handleFeedOpen} />
+                  <SharedPostComp />
+                  <div className="music-das-row">
+                    <MusicDash />
+                    <MusicDash />
+                    <MusicDash />
+                    <MusicDash />
+                    <MusicDash />
+                  </div>
+                  {/* <PostComp /> */}
+                  <div className="ticket-das-row">
+                    <SmallTicketCard />
+                    <SmallTicketCard />
+                    <SmallTicketCard />
+                    <SmallTicketCard />
+                    <SmallTicketCard />
+                    <SmallTicketCard />
+                    <SmallTicketCard />
+                  </div>
+                  {/* <PostComp /> */}
+                  <div className="ticket-das-row">
+                    <ProductDash />
+                    <ProductDash />
+                    <ProductDash />
+                    <ProductDash />
+                    <ProductDash />
+                  </div>
+                  {/* <PostComp /> */}
+                  <div className="movie-slid-box">
+                    <div className="post-ead">Trending movies</div>
+                    <MovieSlider />
+                  </div>
+                  <div className="mov-bxx">
+                    <div className="post-ead">Trending movies</div>
+                    <div className="movie-das-row">
+                      <MovieDashCard />
+                      <MovieDashCard />
+                      <MovieDashCard />
+                      <MovieDashCard />
+                      <MovieDashCard />
+                    </div>
+                  </div>
+                  <img src="/images/jumia.png" alt="" className="ads-img" />
+                  <div className="you-may-know">
+                    <div className="post-ead">People you may know</div>
+                    <div className="may-know-box stic-ind">
+                      <Stick />
+                      <Stick />
+                      <Stick />
+                      <Stick />
+                    </div>
+                  </div>
+                </>
+              ) : null}
+              {activeTab === "Images" ? (
+                <PostComp handleFeedOpen={handleFeedOpen} />
+              ) : null}
+              {activeTab === "Products" ? (
+                <div className="ticket-das-row">
+                  <ProductDash />
+                  <ProductDash />
+                  <ProductDash />
+                  <ProductDash />
+                  <ProductDash />
                 </div>
-                <div className="status-text">Your lifestyle</div>
-              </div>
-              <Status />
-              <Status />
-              <Status />
-              <Status />
-              <Status />
-              <Status />
-              <Status />
-              <Status />
-              <Status />
-              <Status />
-              <Status />
-              <Status />
+              ) : null}
             </div>
-            <div className="select-what-display">
-              {Data.map((item, index) => (
-                <NavLink
-                  key={index}
-                  to={item.to}
-                  className={({ isActive }) =>
-                    isActive ? " sel-act" : "anot-wid"
-                  }
-                >
-                  <div className="dis-sel-name">{item.text}</div>
-                </NavLink>
-              ))}
-            </div>
-            <PostComp />
-
-            <div className="music-das-row">
-              <MusicDash />
-              <MusicDash />
-              <MusicDash />
-              <MusicDash />
-              <MusicDash />
-            </div>
-            <PostComp />
-            <div className="ticket-das-row">
-              <SmallTicketCard />
-              <SmallTicketCard />
-              <SmallTicketCard />
-              <SmallTicketCard />
-              <SmallTicketCard />
-              <SmallTicketCard />
-              <SmallTicketCard />
-            </div>
-            <PostComp />
-            <div className="ticket-das-row">
-              <ProductDash />
-              <ProductDash />
-              <ProductDash />
-              <ProductDash />
-              <ProductDash />
-            </div>
-            <PostComp />
-            <div className="movie-slid-box">
-              <div className="post-ead">Trending movies</div>
-              <MovieSlider />
-            </div>
-            <div className="mov-bxx">
-              <div className="post-ead">Trending movies</div>
-              <div className="movie-das-row">
-                <MovieDashCard />
-                <MovieDashCard />
-                <MovieDashCard />
-                <MovieDashCard />
-                <MovieDashCard />
-              </div>
-            </div>
-            <div className="you-may-know">
-              <div className="post-ead">People you may know</div>
-              <div className="may-know-box">
-                <Stick />
-                <Stick />
-                <Stick />
-                <Stick />
-                <Stick />
-              </div>
-            </div>
-          </div>
+          )}
           <div className="middle-side-container">
-            <img src="images/ads1.png" alt="" />
-            <img src="images/ads2.png" alt="" />
-            <img src="images/ads3.png" alt="" />
+            <img src="/images/ads1.png" alt="" />
+            <img src="/images/ads2.png" alt="" />
+            <img src="/images/ads3.png" alt="" />
           </div>
           <div className="right-side-container">
             <SelectCategory />
-            <Follower />
+            <Follower handleProfileClick={handleProfileClick} />
             <div className="mess-bxx-conn">
-              <DashMessage />
+              <DashMessage handleGotoMessagBox={handleGotoMessagBox} />
             </div>
           </div>
         </div>

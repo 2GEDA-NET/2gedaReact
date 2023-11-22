@@ -9,26 +9,24 @@ import { MdOutlineHowToVote } from "react-icons/md";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 
-
-const Sidebar = ({isCollapsed}) => {
+const Sidebar = ({ isCollapsed }) => {
   return (
-    <div className={isCollapsed ? "sidebar-container  nil" : "sidebar-container"}>
+    <div
+      className={isCollapsed ? "sidebar-container  nil" : "sidebar-container"}
+    >
       <div className="sidebar-box">
         <div className="sidebar-items">
           <NavLink
-            to="/"
-            exact
+            to="/home"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
           >
             <BiSolidHome className="side-icon " />
             <div className="sidebar-text">Home</div>
-            
           </NavLink>
           <NavLink
-            to="/not"
-            exact
+            to="/connect"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -37,8 +35,7 @@ const Sidebar = ({isCollapsed}) => {
             <div className="sidebar-text">Connect</div>
           </NavLink>
           <NavLink
-            to="/bu"
-            exact
+            to="/commerce"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -47,8 +44,7 @@ const Sidebar = ({isCollapsed}) => {
             <div className="sidebar-text">Commerce</div>
           </NavLink>
           <NavLink
-            to="/not"
-            exact
+            to="/business"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -56,10 +52,9 @@ const Sidebar = ({isCollapsed}) => {
             <PiBookDuotone className="side-icon " />
             <div className="sidebar-text">Business Directory</div>
           </NavLink>
-          
+
           <NavLink
-            to="/mess"
-            exact
+            to="/chat"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -68,8 +63,7 @@ const Sidebar = ({isCollapsed}) => {
             <div className="sidebar-text">Chat</div>
           </NavLink>
           <NavLink
-            to="/people"
-            exact
+            to="/profile"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -78,8 +72,7 @@ const Sidebar = ({isCollapsed}) => {
             <div className="sidebar-text">Profile</div>
           </NavLink>
           <NavLink
-            to="/not"
-            exact
+            to="/ticket"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -89,7 +82,6 @@ const Sidebar = ({isCollapsed}) => {
           </NavLink>
           <NavLink
             to="/not"
-            exact
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -98,8 +90,7 @@ const Sidebar = ({isCollapsed}) => {
             <div className="sidebar-text">Live</div>
           </NavLink>
           <NavLink
-            to="/not"
-            exact
+            to="/stereo"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -109,7 +100,6 @@ const Sidebar = ({isCollapsed}) => {
           </NavLink>
           <NavLink
             to="/not"
-            exact
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -119,7 +109,6 @@ const Sidebar = ({isCollapsed}) => {
           </NavLink>
           <NavLink
             to="/not"
-            exact
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -128,8 +117,7 @@ const Sidebar = ({isCollapsed}) => {
             <div className="sidebar-text">Voting</div>
           </NavLink>
           <NavLink
-            to="/not"
-            exact
+            to="/educate"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }

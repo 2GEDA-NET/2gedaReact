@@ -1,3 +1,36 @@
+.home-container {
+  position: relative;
+  background: #f5f5f5;
+}
+.App {
+  /* position: relative; */
+}
+.modal-full-container {
+  position: fixed;
+  top: 0%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  z-index: 111111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notification-modal-full {
+  position: fixed;
+  top: 0%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  z-index: 111111111;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .left-side-container {
   width: 52%;
 }
@@ -9,12 +42,13 @@
   gap: 20px;
   width: 100%;
   margin-top: 10em;
+  position: relative;
 }
 .status-row {
   display: flex;
   width: 100%;
   gap: 10px;
-  overflow: scroll;
+  overflow-y: scroll;
   scrollbar-width: none;
 }
 .status-row::-webkit-scrollbar {
@@ -22,7 +56,13 @@
 }
 .life-satus {
   color: #4f0da3;
-  width: 100%;
+  /* width: 100%; */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
 }
 .em-im {
   width: 60px;
@@ -123,6 +163,7 @@
   background: #fff;
   margin: 15px 0;
   padding: 10px;
+  width: 100%;
 }
 @media only screen and (max-width: 1250px) {
   .dis-sel-name {
@@ -131,7 +172,7 @@
 }
 @media only screen and (max-width: 1150px) {
   .left-side-container {
-    width: 65%;
+    width: 68%;
   }
 }
 @media only screen and (max-width: 1000px) {
@@ -167,8 +208,16 @@
     width: 55px;
     height: 55px;
   }
-  .status-text {
+  /* .status-text {
     width: 58px;
+  } */
+  .life-satus {
+    color: #4f0da3;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 @media only screen and (max-width: 430px) {

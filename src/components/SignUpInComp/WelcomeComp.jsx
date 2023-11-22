@@ -44,6 +44,8 @@ const WelcomeComp = () => {
   return (
     <div className="welcome-comp-box">
       <img src="images/hero3.jpg" alt="" />
+      <div className=" up-wel">Welcome to 2geda</div>
+
       <div className="ad-main-con">
         <div className="ad-main">
           <div className="slide-wel-box">
@@ -55,7 +57,7 @@ const WelcomeComp = () => {
             </div>
           </div>
           <div className="welc-navi-box">
-            <div className="ad-more-tst">Welcome to 2geda</div>
+            <div className="ad-more-tst bvb">Welcome to 2geda</div>
 
             <div className="navig-cont">
               <div

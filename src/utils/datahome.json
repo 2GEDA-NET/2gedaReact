@@ -12,10 +12,6 @@
         "text": "Videos"
   },
   {
-        "to": "/pro",
-        "text": "Products"
-  },
-  {
         "to": "/voice",
         "text": "Voice note"
   },

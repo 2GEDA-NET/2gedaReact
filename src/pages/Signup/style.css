@@ -1,11 +1,29 @@
 .signup-container {
+  overflow-x: hidden;
 }
 .welc-form-containr {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin: 40px;
+  width: 100%;
+}
+/* .rit-txt-box {
+  width: 50%;
+}
+.rddx {
+  font-size: 20px;
+} */
+.err-bg {
+  background: #f40808 !important;
 }
 @media only screen and (max-width: 940px) {
   .welc-form-containr {
     flex-direction: column;
   }
 }
+/* @media only screen and (max-height: 900) and (max-width: 300px) {
+  .welc-form-containr {
+    flex-direction: column;
+  }
+} */

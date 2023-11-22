@@ -1,0 +1,19 @@
+.privacy-cont {
+  padding: 20px;
+}
+.privacy-cont p {
+  font-size: 14px;
+}
+.privacy-cont li {
+  font-size: 14px;
+}
+.privacy-cont a {
+  text-decoration: none;
+}
+.policy-txt {
+  text-align: center;
+  margin: 15px 0;
+}
+.privacy-cont h3 {
+  margin: 10px 0;
+}

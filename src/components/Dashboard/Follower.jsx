@@ -1,4 +1,4 @@
-const Follower = () => {
+const Follower = ({ handleProfileClick }) => {
   return (
     <div className="follower-container">
       <div className="follow-see">
@@ -6,49 +6,49 @@ const Follower = () => {
         <div className="follow-txt al-see">See all</div>
       </div>
       <div className="followers-cont">
-        <div className="foll-one">
+        <div className="foll-one" onClick={handleProfileClick}>
           <img
             src="https://image.cnbcfm.com/api/v1/image/107228941-1682027700192-_DSC5658.jpg?v=1682427601&w=1920&h=1080"
             alt=""
           />
         </div>
-        <div className="foll-one">
+        <div className="foll-one" onClick={handleProfileClick}>
           <img
             src="https://image.cnbcfm.com/api/v1/image/107228941-1682027700192-_DSC5658.jpg?v=1682427601&w=1920&h=1080"
             alt=""
           />
         </div>
-        <div className="foll-one">
+        <div className="foll-one" onClick={handleProfileClick}>
           <img
             src="https://image.cnbcfm.com/api/v1/image/107228941-1682027700192-_DSC5658.jpg?v=1682427601&w=1920&h=1080"
             alt=""
           />
         </div>
-        <div className="foll-one">
+        <div className="foll-one" onClick={handleProfileClick}>
           <img
             src="https://image.cnbcfm.com/api/v1/image/107228941-1682027700192-_DSC5658.jpg?v=1682427601&w=1920&h=1080"
             alt=""
           />
         </div>
-        <div className="foll-one">
+        <div className="foll-one" onClick={handleProfileClick}>
           <img
             src="https://image.cnbcfm.com/api/v1/image/107228941-1682027700192-_DSC5658.jpg?v=1682427601&w=1920&h=1080"
             alt=""
           />
         </div>
-        <div className="foll-one">
+        <div className="foll-one" onClick={handleProfileClick}>
           <img
             src="https://image.cnbcfm.com/api/v1/image/107228941-1682027700192-_DSC5658.jpg?v=1682427601&w=1920&h=1080"
             alt=""
           />
         </div>
-        <div className="foll-one">
+        <div className="foll-one" onClick={handleProfileClick}>
           <img
             src="https://image.cnbcfm.com/api/v1/image/107228941-1682027700192-_DSC5658.jpg?v=1682427601&w=1920&h=1080"
             alt=""
           />
         </div>
-        <div className="foll-one">
+        <div className="foll-one" onClick={handleProfileClick}>
           <img
             src="https://image.cnbcfm.com/api/v1/image/107228941-1682027700192-_DSC5658.jpg?v=1682427601&w=1920&h=1080"
             alt=""

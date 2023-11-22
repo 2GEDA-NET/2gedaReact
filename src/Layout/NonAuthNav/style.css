@@ -1,3 +1,9 @@
+.non-nv-b {
+  position: fixed;
+  top: 0;
+  z-index: 1333;
+  width: 100%;
+}
 .non-navbar-container {
   display: flex;
   justify-content: space-between;
@@ -50,6 +56,7 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+  /* display: none; */
 }
 .log-btn {
   background: #4f0da3;
@@ -63,6 +70,7 @@
 }
 .logon img {
   width: 80px;
+  cursor: pointer;
 }
 .nav-icon {
   display: none;
@@ -80,20 +88,26 @@
 .nonn {
   display: none;
 }
+.nk {
+  display: none;
+}
 @media only screen and (max-width: 940px) {
   .navbar-container {
     padding: 20px;
   }
   .nav-icon {
-    display: initial;
+    display: none;
     color: #4f0da3;
+  }
+  .nono {
+    display: none;
   }
   .nav-ul {
     flex-direction: column;
     width: 50%;
     position: absolute;
     top: 90%;
-    right: 110%;
+    right: 125%;
     opacity: 1;
     transition: all 0.5s ease;
     /* justify-content: center; */
@@ -112,7 +126,7 @@
 
   .active {
     background: #fff;
-    left: 50%;
+    left: 125%;
     opacity: 1;
     z-index: 99999;
     height: 84vh;
@@ -145,6 +159,9 @@
   .nonn {
     display: flex;
   }
+  /* .nav-icon {
+    display: initial;
+  } */
 }
 @media only screen and (max-width: 430px) {
   .nav-ul {
@@ -152,5 +169,19 @@
   }
   .active {
     height: 75vh;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .nav-ul {
+    padding: 10px;
+    gap: 10px;
+    font-size: 15px;
+    height: 100vh;
+  }
+  .nonn {
+    gap: 5px;
+  }
+  .log-tbt {
+    font-size: 15px;
   }
 }
