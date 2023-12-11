@@ -6,10 +6,11 @@ import {
   BsShieldFillCheck,
   BsFillCheckCircleFill,
 } from "react-icons/bs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ActionButton from "../../components/Commons/Button";
+import { url } from "../../utils";
 
-const AddProfile = () => {
+const AddProfile = ({ onClose, onSave, userData }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedMainFile, setSelectedMainFile] = useState(null);
   const [activeButton, setActiveButton] = useState(null);
@@ -22,83 +23,61 @@ const AddProfile = () => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [bio, setBio] = useState("");
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
+  useEffect(() => {
+    setFirstName(userData.username);
+  }, [userData]);
 
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
+  const handleFirstNameChange = (event) => setFirstName(event.target.value);
+  const handleLastNameChange = (event) => setLastName(event.target.value);
+  const handleOccupationChange = (event) => setOccupation(event.target.value);
+  const handleReligionChange = (event) => setReligion(event.target.value);
+  const handleCurrentCityChange = (event) => setCurrentCity(event.target.value);
+  const handleDateOfBirthChange = (event) => setDateOfBirth(event.target.value);
+  const handleBioChange = (event) => setBio(event.target.value);
 
-  const handleOccupationChange = (event) => {
-    setOccupation(event.target.value);
-  };
-  const handleReligionChange = (event) => {
-    setReligion(event.target.value);
-  };
-  const handleCurrentCityChange = (event) => {
-    setCurrentCity(event.target.value);
-  };
-
-  const handleDateOfBirthChange = (event) => {
-    setDateOfBirth(event.target.value);
-  };
-
-  const handleBioChange = (event) => {
-    setBio(event.target.value);
-  };
-
-  const handleImageChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
-
-  const handleMainImageChange = (event) => {
+  const handleImageChange = (event) => setSelectedFile(event.target.files[0]);
+  const handleMainImageChange = (event) =>
     setSelectedMainFile(event.target.files[0]);
-  };
-  const handleButtonClick = (buttonName) => {
-    setActiveButton(buttonName);
-  };
-  const handleCustomGenderChange = (event) => {
+
+  const handleButtonClick = (buttonName) => setActiveButton(buttonName);
+
+  const handleCustomGenderChange = (event) =>
     setCustomGender(event.target.value);
-    // setActiveButton(event.target.value); // Set the activeButton state to the user input
-  };
+
   const authToken = localStorage.getItem("authToken");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = {
-      user: {
-        first_name: firstName,
-        last_name: lastName,
-      },
-      selectedFile,
-      selectedMainFile,
-      identity: activeButton,
-      work: occupation,
-      religion: religion,
-      currentCity,
-      date_of_birth: dateOfBirth,
-      custom_gender: customGender,
-      bio,
-    };
-    console.log(formData);
-    // Perform the update request to the backend here
+    const formData = new FormData();
+    formData.append("work", occupation);
+    formData.append("date_of_birth", dateOfBirth);
+    formData.append("gender", activeButton);
+    formData.append("custom_gender", customGender);
+    formData.append("religion", religion);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("cover_image", selectedFile);
+    formData.append("profile_image", selectedMainFile);
+
     try {
-      const response = await fetch(
-        "https://shark-app-ia4iu.ondigitalocean.app/user-profile/update/",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${authToken}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-      console.log("after", formData);
+      const authToken = localStorage.getItem("authToken");
+      const response = await fetch(`${url}/user-profile/update/`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Token ${authToken}`,
+        },
+        body: formData,
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
       const data = await response.json();
-      console.log("Success:", data);
+      onSave(data);
+      onClose(); 
     } catch (error) {
       console.error("Error:", error);
     }
@@ -110,10 +89,7 @@ const AddProfile = () => {
         <div className="over-scr">
           <div className="busi-mod-header">
             <div className="busi-bxs">
-              <AiOutlineArrowLeft
-                className="cls-post"
-                //   onClick={handleEditProClose}
-              />
+              <AiOutlineArrowLeft />
               <div className="fels">
                 <div className="claim"></div>
               </div>

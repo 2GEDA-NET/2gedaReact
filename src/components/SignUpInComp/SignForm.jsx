@@ -1,14 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ActionButton from "../Commons/Button";
 import InputField from "../Commons/InputField";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { NavLink } from "react-router-dom";
-// import AuthContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { Slide, ToastContainer, toast } from "react-toastify";
+import { url } from "../../utils";
 
 const SignForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -37,33 +35,86 @@ const SignForm = () => {
   const handleUsePhoneClick = () => {
     setIsUsingPhone(!isUsingPhone);
   };
-  const signupUser = (event) => {
+
+  localStorage.setItem("username", username);
+
+  const signupUser = async (event) => {
     event.preventDefault();
     let userData;
-    if (email === "") {
-      userData = { username, password, phone_number: phone };
+
+    if (isUsingPhone) {
+      // User is using phone
+      userData = {
+        username: username,
+        phone_number: phone,
+        password: password,
+      };
     } else {
-      userData = { username, email, password };
+      // User is using email
+      userData = {
+        username: username,
+        email: email,
+        password: password,
+      };
     }
-    console.log(userData);
-    fetch("https://shark-app-ia4iu.ondigitalocean.app/register/", {
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(userData);
+
+    var requestOptions = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.token);
-        localStorage.setItem("authToken", data?.token);
-        navigate("/verify");
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.error("Error:", error);
-      });
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    const response = await fetch(`${url}/register/`, requestOptions);
+    const responseBody = await response.json();
+    console.log(responseBody);
+
+    if (!response.ok) {
+      console.log("response status :", response.status);
+    } else {
+
+      const token = responseBody.token;
+      localStorage.setItem("authToken", token);
+      console.log("authToken", token);
+
+
+      navigate("/Profile")
+      console.log(responseBody);
+      
+    }
+    // // .then((response) => {
+    // //   if (response.ok && response.status === 200) {
+    // //     // If the response is OK, proceed with parsing JSON
+    // //     return response.json();
+    // //   } else {
+    // //     throw new Error("Authentication failed");
+    // //   }
+    // // })
+    // // .then((result) => {
+    // //   // Check if the token is available in the result
+    // //   const token = result.token;
+
+    // //   if (token) {
+    // //     // Save the token to local storage
+    // //     localStorage.setItem("authToken", token);
+    // //     console.log("authToken", token);
+
+    // //     // Redirect to the profile page
+    // //     navigate("/profile");
+    // //   } else {
+    // //     throw new Error("Token not found in the API response");
+    // //   }
+    // })
+    // .catch((error) => {
+    //   console.log("error", error);
+    // });
   };
+
   return (
     <div className="sign-form">
       <div className="create-ead-txt">Create an Account</div>
@@ -133,14 +184,11 @@ const SignForm = () => {
         </div>
         <div className="btn-continu">
           <ActionButton label={"Continue"} bg={"ma-d"} type={"submit"} />
+          {/* <button type="submit">Submit</button> */}
         </div>
         <div className="alr-ave">
-          Already have an account?{" "}
-          <span>
-            {/* <NavLink className="goto-link" to="/signin"> */}
-            Sign in
-            {/* </NavLink> */}
-          </span>
+          Already have an account?
+          <span>Sign in</span>
         </div>
       </form>
     </div>

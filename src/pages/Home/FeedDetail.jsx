@@ -25,7 +25,7 @@ const FeedDetail = ({ handleFeedClose }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
-  const [isRecording, setIsRecording] = useState(false); // Added recording state
+  const [isRecording, setIsRecording] = useState(false);
   const mediaRecorder = useRef(null);
 
   const startRecording = async () => {
