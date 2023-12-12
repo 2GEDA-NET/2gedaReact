@@ -1,3 +1,4 @@
+import React, { useState, useRef } from "react";
 import {
   BsCardImage,
   BsMic,
@@ -22,10 +23,11 @@ import PostFormApkModal from "./PostFormApkModal";
 import PostFormExeModal from "./PostFormExeModal";
 import PostFormLocationModal from "./PostFormLocModal";
 import PostFormFilesModal from "./PostFormFilesModal";
-import { useState } from "react";
 import HashtagModal from "./HashTagModal";
 import TagFriends from "./TagFriends";
 import data from "../../utils/tag.json";
+import { url } from "../../utils";
+
 
 const PostFormModal = ({
   handleCloseMainContainerClick,
@@ -41,9 +43,7 @@ const PostFormModal = ({
   const [checkedFriends, setCheckedFriends] = useState([]);
   const [images, setImages] = useState([]);
   const [audioFile, setAudioFile] = useState(null);
-
-  console.log(audioFile);
-  console.log(images);
+  const fileInput = useRef(null);
 
   const handleFriendCheck = (img) => {
     if (checkedFriends.includes(img)) {
@@ -52,13 +52,12 @@ const PostFormModal = ({
       setCheckedFriends([...checkedFriends, img]);
     }
   };
+
   const handleRemoveTagFrd = (index) => {
     const updatedFriends = [...checkedFriends];
     updatedFriends.splice(index, 1);
     setCheckedFriends(updatedFriends);
   };
-
-  console.log(checkedFriends);
 
   const handleInputChange = (event) => {
     const inputText = event.target.value;
@@ -69,26 +68,80 @@ const PostFormModal = ({
     );
     setSuggestedHashtags(filteredHashtags);
   };
+
   const handleEnterPress = (event) => {
     if (event.key === "Enter" && userInput.length > 0) {
       setAddedTags([...addedTags, userInput]);
       setUserInput("");
     }
   };
-  // console.log(setSelectedSuggestion);
+
   const handleRemoveTag = (index) => {
     const updatedTags = [...addedTags];
     updatedTags.splice(index, 1);
     setAddedTags(updatedTags);
   };
+
   const handleSuggestionClick = (suggestion) => {
     setAddedTags([...addedTags, suggestion]);
   };
+
   const handleTagFrdClick = () => {
     setIsTagsFrd(true);
   };
+
   const handleCloseTagFrdClick = () => {
     setIsTagsFrd(false);
+  };
+
+  const handlePost = async () => {
+    if (fileInput.current && fileInput.current.files.length > 0) {
+      const formdata = new FormData();
+      formdata.append("media", fileInput.current.files[0], "[PROXY]");
+      formdata.append("content", "Hello world");
+      formdata.append("url", "https://example.com");
+      formdata.append("hashtags", "@Waw");
+      formdata.append("is_business_post", "True");
+      formdata.append("tagged_users", '["bigkid"]');
+
+      try {
+        const token = localStorage.getItem("authToken");
+
+        if (token) {
+          const myHeaders = new Headers();
+          myHeaders.append("Authorization", `Token ${token}`);
+          myHeaders.append(
+            "Cookie",
+            "csrftoken=0tQF8jDzX38l95IB6wx5xqAxebxqHdM2; sessionid=si1y25m97ctl3faemkc2aby35ejiti6x"
+          );
+
+          const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: formdata,
+            redirect: "follow",
+          };
+
+          const response = await fetch(
+            `${url}/feed/create_post/`,
+            requestOptions
+          );
+          const result = await response.json();
+
+          if (result.success) {
+            // history.push("/home");
+          } else {
+            console.error("Post creation failed:", result.error);
+          }
+        } else {
+          console.error("No token found in localStorage");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      console.error("No file selected");
+    }
   };
 
   return (
@@ -188,10 +241,10 @@ const PostFormModal = ({
               className="pic-vid"
               onClick={() => handleIconClick("photo")}
             />
-            {/* <FaVideo
+            <FaVideo
               className="pic-vid"
               onClick={() => handleIconClick("photo")}
-            /> */}
+            />
             <IoLocation
               className="loca"
               onClick={() => handleIconClick("location")}
@@ -230,7 +283,7 @@ const PostFormModal = ({
               onClick={() => handleIconClick("exe")}
             />
           </div>
-          <button className="post-btn" type="submit">
+          <button className="post-btn" type="submit" onClick={handlePost}>
             Post
           </button>
         </div>
