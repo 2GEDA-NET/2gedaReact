@@ -28,7 +28,6 @@ import TagFriends from "./TagFriends";
 import data from "../../utils/tag.json";
 import { url } from "../../utils";
 
-
 const PostFormModal = ({
   handleCloseMainContainerClick,
   selectedIcon,
@@ -95,52 +94,49 @@ const PostFormModal = ({
   };
 
   const handlePost = async () => {
-    if (fileInput.current && fileInput.current.files.length > 0) {
-      const formdata = new FormData();
-      formdata.append("media", fileInput.current.files[0], "[PROXY]");
-      formdata.append("content", "Hello world");
-      formdata.append("url", "https://example.com");
-      formdata.append("hashtags", "@Waw");
-      formdata.append("is_business_post", "True");
-      formdata.append("tagged_users", '["bigkid"]');
+    console.log("hello");
+    const formdata = new FormData();
+    for (let i = 0; i < images.length; i++) {
+      formdata.append("media", images[i]);
+      console.log(images[i]);
+    }
 
-      try {
-        const token = localStorage.getItem("authToken");
+    // formdata.append("media", fileInput.current.files[0], "[PROXY]");
+    formdata.append("content", "Hello world");
+    formdata.append("url", "https://example.com");
+    formdata.append("hashtags", "@Waw");
+    formdata.append("is_business_post", "True");
+    formdata.append("tagged_users", '["bigkid"]');
 
-        if (token) {
-          const myHeaders = new Headers();
-          myHeaders.append("Authorization", `Token ${token}`);
-          myHeaders.append(
-            "Cookie",
-            "csrftoken=0tQF8jDzX38l95IB6wx5xqAxebxqHdM2; sessionid=si1y25m97ctl3faemkc2aby35ejiti6x"
-          );
+    try {
+      const token = localStorage.getItem("authToken");
 
-          const requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: formdata,
-            redirect: "follow",
-          };
+      if (token) {
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Token ${token}`);
+        myHeaders.append(
+          "Cookie",
+          "csrftoken=0tQF8jDzX38l95IB6wx5xqAxebxqHdM2; sessionid=si1y25m97ctl3faemkc2aby35ejiti6x"
+        );
 
-          const response = await fetch(
-            `${url}/feed/create_post/`,
-            requestOptions
-          );
-          const result = await response.json();
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: formdata,
+          redirect: "follow",
+        };
 
-          if (result.success) {
-            // history.push("/home");
-          } else {
-            console.error("Post creation failed:", result.error);
-          }
-        } else {
-          console.error("No token found in localStorage");
-        }
-      } catch (error) {
-        console.error("Error:", error);
+        const response = await fetch(
+          `${url}/feed/create_post/`,
+          requestOptions
+        );
+        console.log(response);
+        const result = await response.json();
+      } else {
+        console.error("No token found in localStorage");
       }
-    } else {
-      console.error("No file selected");
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
