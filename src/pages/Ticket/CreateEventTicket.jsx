@@ -4,11 +4,15 @@ import CreateEventTictetFromOne from "../../components/TicketComp/CreateEventTic
 import CreateEventTictetFormTwo from "../../components/TicketComp/CreateEventTictetFormTwo";
 import CreateEventTictetFormThree from "../../components/TicketComp/CreateEventTictetFormThree";
 import SuccessTicketCreate from "./SuccessTicketCreate";
+import React from "react";
+import EventOneContextProvider from "../../Context/EventContext/EventContextProvider";
+import EventTwoContextProvider from "../../Context/EventContext/EventContextProviderTwo";
 
 const CreateEventTicket = ({ handleCreatTicketCloseContainerClick }) => {
   const [isCreatTicketThreeOpen, setIsCreatTicketThreeOpen] = useState(false);
   const [isCreatTicketTwoOpen, setIsCreatTicketTwoOpen] = useState(false);
   const [isCreatTicketSucessOpen, setIsCreatTicketSucessOpen] = useState(false);
+
   const handleCreatTicketSucessClick = (e) => {
     e.preventDefault();
     setIsCreatTicketSucessOpen(true);
@@ -48,21 +52,25 @@ const CreateEventTicket = ({ handleCreatTicketCloseContainerClick }) => {
       )}
       <form action="">
         {!isCreatTicketTwoOpen && !isCreatTicketThreeOpen && (
-          <CreateEventTictetFromOne
-            handleCreatTicketTwoContainerClick={
-              handleCreatTicketTwoContainerClick
-            }
-          />
+          <EventOneContextProvider>
+            <CreateEventTictetFromOne
+              handleCreatTicketTwoContainerClick={
+                handleCreatTicketTwoContainerClick
+              }
+            />
+          </EventOneContextProvider>
         )}
         {!isCreatTicketThreeOpen && isCreatTicketTwoOpen && (
-          <CreateEventTictetFormTwo
-            handleCreatTicketTwoCloseContainerClick={
-              handleCreatTicketTwoCloseContainerClick
-            }
-            handleCreatTicketThreeContainerClick={
-              handleCreatTicketThreeContainerClick
-            }
-          />
+          <EventTwoContextProvider>
+            <CreateEventTictetFormTwo
+              handleCreatTicketTwoCloseContainerClick={
+                handleCreatTicketTwoCloseContainerClick
+              }
+              handleCreatTicketThreeContainerClick={
+                handleCreatTicketThreeContainerClick
+              }
+            />
+          </EventTwoContextProvider>
         )}
         {!isCreatTicketSucessOpen && isCreatTicketThreeOpen && (
           <CreateEventTictetFormThree

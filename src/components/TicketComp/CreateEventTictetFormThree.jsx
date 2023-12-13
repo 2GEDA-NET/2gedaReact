@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import ActionButton from "../../components/Commons/Button";
 import { useState } from "react";
+import EventContextOne from "../../Context/EventContext/EventContext";
 
 const CreateEventTictetFormThree = ({
   handleCreatTicketThreeCloseContainerClick,
@@ -9,12 +10,55 @@ const CreateEventTictetFormThree = ({
   const [isToggled, setToggled] = useState(false);
   const [isPublicToggled, setPublicToggled] = useState(true);
 
+  const url = "https://king-prawn-app-venn6.ondigitalocean.app/ticket/events/";
+
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    eventImage,
+    setEventImage,
+    venue,
+    setVenue,
+    venueAddress,
+    setVenueAddress,
+  } = useContext(EventContextOne);
+
+  const finalSubmit = async () => {
+    const data = {
+      title: title,
+      dec: description,
+      platform: venueAddress,
+      events_category_name: "",
+      ticket_category: "",
+      ticket_price: 100,
+      ticket_quantity: 2,
+      location: "Oluyole Estate",
+      is_paid: true,
+    };
+
+    const response = fetch(url, {
+      body: JSON.stringify(data),
+      headers: {
+        "Authorization": "Token 65b55bb46605a175c3d5f16be2bcb83e7015305c",
+        "Content-Type": "application/json"
+      },
+
+    })
+    const responseBody = response.json()
+    if (!response.ok){
+        console.log
+    }
+  };
+
   const handlePublicToggle = () => {
     setPublicToggled(!isPublicToggled);
   };
   const handleToggle = () => {
     setToggled(!isToggled);
   };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -115,7 +159,15 @@ const CreateEventTictetFormThree = ({
           className="act-continue-btn"
           onClick={handleCreatTicketSucessClick}
         >
-          <ActionButton label={"Continue"} />
+          <div className="act-btn-cont">
+            <button
+              type="submit"
+              onClick={finalSubmit}
+              className={`action-btn `}
+            >
+              Continue
+            </button>
+          </div>
         </div>
         <div
           className="bac-formm"

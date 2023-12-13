@@ -1,10 +1,30 @@
 import { BsUpload, BsLaptop } from "react-icons/bs";
 import { IoLocation } from "react-icons/io5";
 import ActionButton from "../../components/Commons/Button";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import EventContextOne from "../../Context/EventContext/EventContext";
+
 const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
   const [isPlatforn, setIsPlatforn] = useState(false);
   const [image, setImage] = useState("");
+  const [platformArea, setPlatformArea] = useState("");
+  const [venueArea, setVenueArea] = useState("");
+  const [venueNameArea, setVenueNameArea] = useState("");
+  const [descriptionArea, setDescriptionArea] = useState("");
+  const [titlArea, setTitleArea] = useState("");
+
+  const { setTitle, title, description, setDescription,eventImage, setEventImage,
+    venue, setVenue, venueAddress, setVenueAddress } = useContext(EventContextOne);
+
+  const handleContinue = (e) =>{
+      setTitle(titlArea);
+      setDescription(descriptionArea);
+      setVenueAddress(venueArea);
+      setVenue(venueNameArea);
+      setEventImage(image);
+      console.log("done")
+      
+  }
 
   const handleImageChange = (event) => {
     // Handling the image change
@@ -67,6 +87,7 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
             type="text"
             className="create-evt-inp area-evn"
             placeholder="Enter your event details. It may contain FAQs and what attendees should expect from the event"
+            onChange={(e) => e.target.value}
           />
           <div className="ins-create">0/500 wordss</div>
         </div>
@@ -124,6 +145,7 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
                 type="text"
                 className="create-evt-inp"
                 placeholder="skype, google meet, webinar, etc."
+                onChange={(e) => setPlatformArea(e.target.value)}
               />
             </div>
             <div className="event-inp-overall-cont">
@@ -134,6 +156,7 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
                 type="text"
                 className="create-evt-inp"
                 placeholder="https://www.example.com"
+                onChange={(e) => setPlatformArea(e.target.value)}
               />
             </div>
           </div>
@@ -147,6 +170,7 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
                 type="text"
                 className="create-evt-inp"
                 placeholder="Name of hotel, building or event centre"
+                onChange={(e) => setVenueNameArea(e.target.value)}
               />
             </div>
             <div className="event-inp-overall-cont">
@@ -157,13 +181,17 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
                 type="text"
                 className="create-evt-inp"
                 placeholder="Give a clear address to help your attendees locate your event. "
+                onChange={(e) => setVenueNameArea(e.target.value)}
               />
             </div>
           </div>
         )}
         <div
           className="act-continue-btn"
-          onClick={handleCreatTicketTwoContainerClick}
+          onClick={() => {
+            handleCreatTicketTwoContainerClick();
+            handleContinue();
+          }}
         >
           <ActionButton label={"Continue"} type={"button"} />
         </div>

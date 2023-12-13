@@ -2,8 +2,13 @@ import ActionButton from "../../components/Commons/Button";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
+import EventContextTwo from "../../Context/EventContext/EventContextTwo";
+
+
+
+
 const CreateEventTictetFormTwo = ({
   handleCreatTicketTwoCloseContainerClick,
   handleCreatTicketThreeContainerClick,
@@ -16,6 +21,16 @@ const CreateEventTictetFormTwo = ({
       price: "FREE TICKET",
     },
   ]);
+  const [ticketArea, setTicketArea] = useState(null)
+  const [quantityArea, setQuantityArea] = useState(null)
+  const [priceArea, setPriceArea] = useState(null)
+  
+
+  const {ticket, quantity, price, setTicket, setQuantity, setPrice} = useContext(EventContextTwo)
+
+  const handleContinue = () =>{
+    
+  }
 
   const handlePaidClick = (index) => {
     setSelectedTicketIndex(index);
@@ -116,6 +131,7 @@ const CreateEventTictetFormTwo = ({
                   type="text"
                   className="create-evt-inp"
                   placeholder="Enter ticket name"
+                  onChange={(e) => setTicket(e.target.value)}
                 />
               </div>
               <div className="event-inp-overall-cont">
@@ -126,6 +142,7 @@ const CreateEventTictetFormTwo = ({
                   type="text"
                   className="create-evt-inp"
                   placeholder="Eg. 100"
+                  onChange={(e) => setQuantity(e.target.value)}
                 />
               </div>
               {ticket.price !== "FREE TICKET" ? (
@@ -137,6 +154,7 @@ const CreateEventTictetFormTwo = ({
                     type="text"
                     className="create-evt-inp"
                     placeholder="Eg. #12,000"
+                    onChange={(e) => setPrice(e.target.value)}
                   />
                 </div>
               ) : (
