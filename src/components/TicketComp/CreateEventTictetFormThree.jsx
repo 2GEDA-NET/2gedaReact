@@ -1,7 +1,5 @@
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import ActionButton from "../../components/Commons/Button";
-import { useState } from "react";
-import EventContextOne from "../../Context/EventContext/EventContext";
 
 const CreateEventTictetFormThree = ({
   handleCreatTicketThreeCloseContainerClick,
@@ -9,64 +7,38 @@ const CreateEventTictetFormThree = ({
 }) => {
   const [isToggled, setToggled] = useState(false);
   const [isPublicToggled, setPublicToggled] = useState(true);
-
-  const url = "https://king-prawn-app-venn6.ondigitalocean.app/ticket/events/";
-
-  const {
-    title,
-    setTitle,
-    description,
-    setDescription,
-    eventImage,
-    setEventImage,
-    venue,
-    setVenue,
-    venueAddress,
-    setVenueAddress,
-  } = useContext(EventContextOne);
-
-  const finalSubmit = async () => {
-    const data = {
-      title: title,
-      dec: description,
-      platform: venueAddress,
-      events_category_name: "",
-      ticket_category: "",
-      ticket_price: 100,
-      ticket_quantity: 2,
-      location: "Oluyole Estate",
-      is_paid: true,
-    };
-
-    const response = fetch(url, {
-      body: JSON.stringify(data),
-      headers: {
-        "Authorization": "Token 65b55bb46605a175c3d5f16be2bcb83e7015305c",
-        "Content-Type": "application/json"
-      },
-
-    })
-    const responseBody = response.json()
-    if (!response.ok){
-        console.log("hello")
-    }
-  };
+  const [feesOption, setFeesOption] = useState("");
+  const [feesOptionError, setFeesOptionError] = useState("");
 
   const handlePublicToggle = () => {
     setPublicToggled(!isPublicToggled);
   };
+
   const handleToggle = () => {
     setToggled(!isToggled);
+  };
+
+  const handleFeesOptionChange = (e) => {
+    setFeesOption(e.target.value);
+    setFeesOptionError("");
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleContinueClick = () => {
+    if (!feesOption) {
+      setFeesOptionError("Please select an option for fees settings");
+    } else {
+      handleCreatTicketSucessClick();
+    }
+  };
+
   return (
     <>
       <div className="stepper-cont-bx">
         <div className="lin-btw"></div>
-
         <div className="pos-cir">
           <div className="cir-stepper-container flex">
             <div className="each-step-bx flex">
@@ -77,10 +49,9 @@ const CreateEventTictetFormThree = ({
               <div className="ci-eac "></div>
               <div className="step-txtx ">Create ticket</div>
             </div>
-
             <div className="each-step-bx flex">
               <div className="ci-eac "></div>
-              <div className="step-txtx ">Additonal info</div>
+              <div className="step-txtx ">Additional info</div>
             </div>
           </div>
         </div>
@@ -88,10 +59,6 @@ const CreateEventTictetFormThree = ({
       <div className="event-ead">Additional information</div>
       <div className="event-txt">Tell us a bit more about your event</div>
       <div className="main-event-container">
-        {/* <div className={`${isToggled ? "on" : "off"}`}>
-          {isToggled ? "on" : "off"}
-        </div> */}
-
         <div className="add-info-cont flex">
           <div className="add-inf-txtx">
             <div className="main-add-info">Show remaining tickets</div>
@@ -136,6 +103,7 @@ const CreateEventTictetFormThree = ({
             </label>
           </div>
         </div>
+
         <div className={`${isToggled ? "on" : "off"}`}>
           {isPublicToggled ? "on" : "off"}
         </div>
@@ -147,27 +115,27 @@ const CreateEventTictetFormThree = ({
         </div>
         <div className="double-input">
           <div className="inp-label-box">
-            <select name="" id="" className="claim-inp ">
+            <select
+              name="feesOption"
+              id="feesOption"
+              className="claim-inp"
+              value={feesOption}
+              onChange={handleFeesOptionChange}
+            >
               <option value="">Select an option</option>
-              <option value="Driver_licence">Remove from ticket sales</option>
-              <option value="NIN">Add to ticket price</option>
+              <option value="remove">Remove from ticket sales</option>
+              <option value="add">Add to ticket price</option>
             </select>
           </div>
+          {feesOptionError && (
+            <div className="error-message" style={{ color: "red" }}>
+              {feesOptionError}
+            </div>
+          )}
         </div>
 
-        <div
-          className="act-continue-btn"
-          onClick={handleCreatTicketSucessClick}
-        >
-          <div className="act-btn-cont">
-            <button
-              type="submit"
-              onClick={finalSubmit}
-              className={`action-btn `}
-            >
-              Continue
-            </button>
-          </div>
+        <div className="act-continue-btn" onClick={handleCreatTicketSucessClick}>
+          <ActionButton label={"Continue"} />
         </div>
         <div
           className="bac-formm"

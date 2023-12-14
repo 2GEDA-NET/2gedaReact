@@ -38,6 +38,7 @@ function App() {
       <ScrollToTop />
       {/* <AuthProvider> */}
       <Routes>
+        {/* <Route index path="/" element={<Home />} /> */}
         <Route index path="/" element={<Home />} />
         <Route index path="/signup" element={<Signup />} />
         <Route index path="/signin" element={<Signin />} />
