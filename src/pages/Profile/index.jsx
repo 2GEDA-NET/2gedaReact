@@ -4,8 +4,7 @@ import Follower from "../../components/Dashboard/Follower";
 import Data from "../../utils/dataProfile.json";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdEdit } from "react-icons/md";
-import "./style.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import PostsCol from "../../components/ProfilleComp/postsCol";
 import PostsColPhoto from "../../components/ProfilleComp/postsColPhoto";
 import PostsColVideo from "../../components/ProfilleComp/postsColVideo";
@@ -23,6 +22,8 @@ import AllStickers from "../../components/Commons/AllStickers";
 import AllSticking from "../../components/Commons/AllSticking";
 import EditProfile from "../../components/Modals/EditProfile";
 import VerificationAcc from "../../components/Modals/VerificationAcc";
+import ReactAvatar from "react-avatar";
+import { url } from "../../utils";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("All posts");
@@ -35,10 +36,57 @@ const Profile = () => {
   const [isAllStickerOpen, setIsAllStickerOpen] = useState(false);
   const [isAllStickingOpen, setIsAllStickingOpen] = useState(false);
   const [isRequestOpen, setIsRequestOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [UserToken, setUserToken] = useState("");
+  const [newProfileImage, setNewProfileImage] = useState(null);
+  const [newCoverImage, setNewCoverImage] = useState(null);
+  const username = localStorage.getItem("username");
+  const profileImageInputRef = useRef(null);
+  const coverImageInputRef = useRef(null);
+
+  const requestOptions = {
+    method: "GET",
+    headers: new Headers({
+      Authorization: `${UserToken}`,
+    }),
+    redirect: "follow",
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`${url}/users-list/`, requestOptions);
+        const result = await response.json();
+        setUserData(result);
+
+        const storedProfileImage = localStorage.getItem("profileImage");
+        const storedCoverImage = localStorage.getItem("coverImage");
+
+        if (storedProfileImage) {
+          setUserData((prevUserData) => ({
+            ...prevUserData,
+            profileImage: storedProfileImage,
+          }));
+        }
+
+        if (storedCoverImage) {
+          setUserData((prevUserData) => ({
+            ...prevUserData,
+            coverImage: storedCoverImage,
+          }));
+        }
+      } catch (error) {
+        console.log("Error fetching user data", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleRequestClick = () => {
     setIsRequestOpen(true);
   };
+
   const handleRequestClose = () => {
     setIsRequestOpen(false);
   };
@@ -46,12 +94,15 @@ const Profile = () => {
   const handleEditProClick = () => {
     setIsEditProOpen(true);
   };
+
   const handleEditProClose = () => {
     setIsEditProOpen(false);
   };
+
   const handleAllStickingClick = () => {
     setIsAllStickingOpen(true);
   };
+
   const handleAllStickingClose = () => {
     setIsAllStickingOpen(false);
   };
@@ -59,6 +110,7 @@ const Profile = () => {
   const handleAllStickerClick = () => {
     setIsAllStickerOpen(true);
   };
+
   const handleAllStickerClose = () => {
     setIsAllStickerOpen(false);
   };
@@ -67,6 +119,7 @@ const Profile = () => {
     setIsManAdOpen(true);
     setIsModalMenuOpen(false);
   };
+
   const handleManAdClose = () => {
     setIsManAdOpen(false);
   };
@@ -74,6 +127,7 @@ const Profile = () => {
   const handleImelCreateClick = () => {
     setIsImelCreateOpen(true);
   };
+
   const handleImelCreateClose = () => {
     setIsImelCreateOpen(false);
   };
@@ -81,6 +135,7 @@ const Profile = () => {
   const handleImelListClick = () => {
     setIsImelListOpen(true);
   };
+
   const handleImelListClose = () => {
     setIsImelListOpen(false);
   };
@@ -89,6 +144,7 @@ const Profile = () => {
     setIsModalMenuOpen(false);
     setIsImelOpen(true);
   };
+
   const handleImelClose = () => {
     setIsImelOpen(false);
   };
@@ -96,22 +152,45 @@ const Profile = () => {
   const handleModalMenuClick = () => {
     setIsModalMenuOpen(true);
   };
+
   const handleModalMenuClose = () => {
     setIsModalMenuOpen(false);
   };
+
   const handleTabClick = (text) => {
     setActiveTab(text);
   };
+
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    setNewProfileImage(file);
+
+    const updatedUserData = {
+      ...userData,
+      profileImage: URL.createObjectURL(file),
+    };
+
+    localStorage.setItem("userData", JSON.stringify(updatedUserData));
+    localStorage.setItem("profileImage", URL.createObjectURL(file));
+
+    setUserData(updatedUserData);
+  };
+
+  const handleCoverImageChange = (e) => {
+    const file = e.target.files[0];
+    setNewCoverImage(file);
+
+    const updatedUserData = {
+      ...userData,
+      coverImage: URL.createObjectURL(file),
+    };
+
+    localStorage.setItem("userData", JSON.stringify(updatedUserData));
+    localStorage.setItem("coverImage", URL.createObjectURL(file));
+  };
+
   return (
     <>
-      {/* <div className="modal-full-container">
-        <ChangePassWord />
-      </div> */}
-      {isRequestOpen && (
-        <div className="modal-full-container">
-          <VerificationAcc handleRequestClose={handleRequestClose} />
-        </div>
-      )}
       {isImelOpen && (
         <div className="modal-full-container">
           <PhoneImel
@@ -131,7 +210,11 @@ const Profile = () => {
       )}
       {isEditProOpen && (
         <div className="modal-full-container">
-          <EditProfile handleEditProClose={handleEditProClose} />
+          <EditProfile
+            handleEditProClose={handleEditProClose}
+            newProfileImage={newProfileImage}
+            newCoverImage={newCoverImage}
+          />
         </div>
       )}
       {isImelCreateOpen && (
@@ -174,32 +257,76 @@ const Profile = () => {
                   </div>
                   <div className="profile-main-container">
                     <div className="profile-all-image-box">
-                      <div className="cover-profile-image">
+                      <div
+                        className="cover-profile-image"
+                        style={{ background: "purple" }}
+                      >
                         <img
-                          src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                          src={
+                            userData?.coverImage ||
+                            "https://images.unsplash.com/photo-1682687982029-edb9aecf5f89?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
+                          }
                           alt=""
                         />
                         <div className="ed-img new-ed  flex">
                           <MdEdit />
                         </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleCoverImageChange}
+                          style={{ display: "none" }}
+                          ref={coverImageInputRef}
+                        />
+                        <div
+                          className="ed-img flex"
+                          onClick={() => coverImageInputRef.current.click()}
+                        >
+                          <MdEdit />
+                        </div>
                       </div>
                       <div className="main-pro-image">
                         <div className="main-img-bxb">
-                          <img
-                            src="https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg"
-                            alt=""
+                          <ReactAvatar
+                            name={username ? username.charAt(0) : "User"}
+                            round={true}
+                            size="100"
+                            color="purple"
+                            src={userData?.profileImage}
+                            style={{ border: "2px solid white" }}
                           />
                           <div className="ed-img flex">
+                            <MdEdit />
+                          </div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleProfileImageChange}
+                            style={{ display: "none" }}
+                            ref={profileImageInputRef}
+                          />
+                          <div
+                            className="ed-img flex"
+                            onClick={() => profileImageInputRef.current.click()}
+                          >
                             <MdEdit />
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="deatil-profile">
-                      <div className="main-user-nm">Charlotte Caria Faith</div>
-                      <div className="prof-user-txt">Product Designer</div>
-                      <div className="prof-user-txt">Lagos, Nigeria</div>
+                      {userData && (
+                        <>
+                          <div className="main-user-nm">
+                            {userData.username}
+                          </div>
+                          <div className="prof-user-txt heading-tertiary">{username}</div>
+                          <div className="prof-user-txt">Product Designer</div>
+                          <div className="prof-user-txt">Lagos, Nigeria</div>
+                        </>
+                      )}
                     </div>
+
                     <div className="btn-stick-box-row flex">
                       <div
                         className="stick-counter flex"
@@ -228,7 +355,6 @@ const Profile = () => {
                           }`}
                           onClick={() => handleTabClick(item.text)}
                         >
-                          {/* <div className="cont-tb-txt"> */}
                           <div className="dis-sel-name refd">{item.text}</div>
                           <div
                             className={`cot-bxt ${
@@ -237,11 +363,10 @@ const Profile = () => {
                           >
                             2.5K
                           </div>
-                          {/* </div> */}
                         </div>
                       ))}
                     </div>
-                    <div className="posts-row-cont flex">
+                    <div className="posts-row-cont ">
                       {activeTab === "All posts" ? <PostsCol /> : null}
                       {activeTab === "Images" ? <PostsColPhoto /> : null}
                       {activeTab === "Videos" ? <PostsColVideo /> : null}

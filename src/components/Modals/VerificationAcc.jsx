@@ -1,4 +1,8 @@
-import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
+import {
+  AiOutlineArrowLeft,
+  AiOutlineClose,
+  AiOutlineCamera,
+} from "react-icons/ai";
 import ActionButton from "../Commons/Button";
 import VerificationSucess from "./VerificationSucess";
 import { useState } from "react";
@@ -9,6 +13,7 @@ const VerificationAcc = ({ handleRequestClose }) => {
   const handleRequestSucessClick = () => {
     setIsRequestSucessOpen(true);
   };
+
   const handleRequestSucessClose = () => {
     handleRequestClose();
     setIsRequestSucessOpen(false);
@@ -25,10 +30,9 @@ const VerificationAcc = ({ handleRequestClose }) => {
       )}
       <div className="postFormModal-container status-modal-container">
         <div className="over-scr">
-          {" "}
           <div className="busi-mod-header">
             <div className="busi-bxs">
-              <AiOutlineArrowLeft
+              <AiOutlineClose
                 className="cls-post"
                 onClick={handleRequestClose}
               />

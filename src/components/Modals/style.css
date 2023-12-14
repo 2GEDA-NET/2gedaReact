@@ -26,6 +26,10 @@
   flex-wrap: wrap;
   cursor: pointer;
 }
+
+.text-area{
+  font-size: 1.8rem;
+}
 .add-tags-btn {
   max-width: 140px;
   background: #ff8a15;

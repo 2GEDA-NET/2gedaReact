@@ -7,6 +7,7 @@ import "react-phone-number-input/style.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../App";
+import { url } from "../../utils";
 
 const SigninForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -17,10 +18,11 @@ const SigninForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  console.log(API_BASE_URL);
+
   const goToForgot = () => {
     navigate("/forgot");
   };
+
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -32,6 +34,7 @@ const SigninForm = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -45,22 +48,44 @@ const SigninForm = () => {
     setIsUsingUsername(!isUsingUsername);
     setIsUsingPhone(false);
   };
-  const phone_number = phone;
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    let formData = new FormData();
-    formData.append("username", username || phone_number || email);
-    formData.append("password", password);
-    try {
-      const response = await axios.post(`${API_BASE_URL}/login/`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      console.log(phone_number);
-      localStorage.setItem("authToken", response.data?.token);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Cookie",
+      "__cf_bm=oS1dmDeDMkQpDAPnlYg28Ix3zAE6SZbWA.1_IWkWXJw-1701779685-0-AfxEpp6d9SR7CMo1RCgu8/uDjkq3F/XguwuQK8Z13CXc1XP9eFdnCnLnzNRBySwPokOEN0xgG4Q0pfx7xyVLv74=; csrftoken=0tQF8jDzX38l95IB6wx5xqAxebxqHdM2; sessionid=si1y25m97ctl3faemkc2aby35ejiti6x"
+    );
 
-      console.log(response.data); // assuming the response is JSON
+    let formData = {
+      username: username || phone || email,
+      password: password,
+    };
+
+    var raw = JSON.stringify(formData);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    try {
+      const response = await fetch(`${url}/login/`, requestOptions);
+      const result = await response.json();
+
+      if (result.message === "login successful") {
+        navigate("/");
+      } else {
+        console.log("login failed");
+      }
+      console.log(result.token);
+
+      localStorage.setItem("authTOken", result.token);
+      navigate("/");
       // Handle successful login, e.g., store the token in local storage
     } catch (error) {
       if (error.response) {
@@ -70,6 +95,7 @@ const SigninForm = () => {
       }
     }
   };
+
   return (
     <div className="sign-form">
       <div className="create-ead-txt">Login</div>

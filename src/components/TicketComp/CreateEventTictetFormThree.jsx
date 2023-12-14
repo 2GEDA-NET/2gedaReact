@@ -48,7 +48,7 @@ const CreateEventTictetFormThree = ({
     })
     const responseBody = response.json()
     if (!response.ok){
-        console.log
+        console.log("hello")
     }
   };
 

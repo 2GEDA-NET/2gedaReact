@@ -1,346 +1,274 @@
-import { MdOutlineAddPhotoAlternate } from "react-icons/md";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import MainLayout from "../../Layout/MainLayout";
+import DashMessage from "../../components/Dashboard/DasMess";
+import Follower from "../../components/Dashboard/Follower";
+import Data from "../../utils/dataProfile.json";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdEdit } from "react-icons/md";
-import {
-  BsPersonFill,
-  BsShieldFillCheck,
-  BsFillCheckCircleFill,
-} from "react-icons/bs";
+import "./style.css";
 import { useState } from "react";
-import ActionButton from "../../components/Commons/Button";
+import PostsCol from "../../components/ProfilleComp/postsCol";
+import PostsColPhoto from "../../components/ProfilleComp/postsColPhoto";
+import PostsColVideo from "../../components/ProfilleComp/postsColVideo";
+import PostsColFile from "../../components/ProfilleComp/postsColFile";
+import PostsColLoc from "../../components/ProfilleComp/postsColLoc";
+import PostsColMusic from "../../components/ProfilleComp/postsColMusic";
+import PostsColVoice from "../../components/ProfilleComp/postsColVoice";
+import SelectCategory from "../../components/Dashboard/SelectCategory";
+import ProfileModalMenu from "../../components/Modals/ProfileModal";
+import PhoneImel from "../../components/Modals/PhoneImel";
+import PhoneImelList from "../../components/Modals/PhoneImelList";
+import PhoneImelCreate from "../../components/Modals/PhoneImelCreate";
+import ManageAdvert from "../../components/Modals/ManageAdvert";
+import AllStickers from "../../components/Commons/AllStickers";
+import AllSticking from "../../components/Commons/AllSticking";
+import EditProfile from "../../components/Modals/EditProfile";
+import VerificationAcc from "../../components/Modals/VerificationAcc";
 
-const AddProfile = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedMainFile, setSelectedMainFile] = useState(null);
-  const [activeButton, setActiveButton] = useState(null);
-  const [customGender, setCustomGender] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [religion, setReligion] = useState("");
-  const [occupation, setOccupation] = useState("");
-  const [currentCity, setCurrentCity] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [bio, setBio] = useState("");
+const Profile = () => {
+  const [activeTab, setActiveTab] = useState("All posts");
+  const [isModalMenuOpen, setIsModalMenuOpen] = useState(false);
+  const [isImelOpen, setIsImelOpen] = useState(false);
+  const [isImelListOpen, setIsImelListOpen] = useState(false);
+  const [isImelCreateOpen, setIsImelCreateOpen] = useState(false);
+  const [isManAdOpen, setIsManAdOpen] = useState(false);
+  const [isEditProOpen, setIsEditProOpen] = useState(false);
+  const [isAllStickerOpen, setIsAllStickerOpen] = useState(false);
+  const [isAllStickingOpen, setIsAllStickingOpen] = useState(false);
+  const [isRequestOpen, setIsRequestOpen] = useState(false);
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
+  const handleRequestClick = () => {
+    setIsRequestOpen(true);
   };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleOccupationChange = (event) => {
-    setOccupation(event.target.value);
-  };
-  const handleReligionChange = (event) => {
-    setReligion(event.target.value);
-  };
-  const handleCurrentCityChange = (event) => {
-    setCurrentCity(event.target.value);
-  };
-
-  const handleDateOfBirthChange = (event) => {
-    setDateOfBirth(event.target.value);
-  };
-
-  const handleBioChange = (event) => {
-    setBio(event.target.value);
+  const handleRequestClose = () => {
+    setIsRequestOpen(false);
   };
 
-  const handleImageChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+  const handleEditProClick = () => {
+    setIsEditProOpen(true);
+  };
+  const handleEditProClose = () => {
+    setIsEditProOpen(false);
+  };
+  const handleAllStickingClick = () => {
+    setIsAllStickingOpen(true);
+  };
+  const handleAllStickingClose = () => {
+    setIsAllStickingOpen(false);
   };
 
-  const handleMainImageChange = (event) => {
-    setSelectedMainFile(event.target.files[0]);
+  const handleAllStickerClick = () => {
+    setIsAllStickerOpen(true);
   };
-  const handleButtonClick = (buttonName) => {
-    setActiveButton(buttonName);
-  };
-  const handleCustomGenderChange = (event) => {
-    setCustomGender(event.target.value);
-    // setActiveButton(event.target.value); // Set the activeButton state to the user input
-  };
-  const authToken = localStorage.getItem("authToken");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = {
-      user: {
-        first_name: firstName,
-        last_name: lastName,
-      },
-      selectedFile,
-      selectedMainFile,
-      identity: activeButton,
-      work: occupation,
-      religion: religion,
-      currentCity,
-      date_of_birth: dateOfBirth,
-      custom_gender: customGender,
-      bio,
-    };
-    console.log(formData);
-    // Perform the update request to the backend here
-    try {
-      const response = await fetch(
-        "https://shark-app-ia4iu.ondigitalocean.app/user-profile/update/",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${authToken}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-      console.log("after", formData);
-
-      const data = await response.json();
-      console.log("Success:", data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
+  const handleAllStickerClose = () => {
+    setIsAllStickerOpen(false);
   };
 
+  const handleManAdClick = () => {
+    setIsManAdOpen(true);
+    setIsModalMenuOpen(false);
+  };
+  const handleManAdClose = () => {
+    setIsManAdOpen(false);
+  };
+
+  const handleImelCreateClick = () => {
+    setIsImelCreateOpen(true);
+  };
+  const handleImelCreateClose = () => {
+    setIsImelCreateOpen(false);
+  };
+
+  const handleImelListClick = () => {
+    setIsImelListOpen(true);
+  };
+  const handleImelListClose = () => {
+    setIsImelListOpen(false);
+  };
+
+  const handleImelClick = () => {
+    setIsModalMenuOpen(false);
+    setIsImelOpen(true);
+  };
+  const handleImelClose = () => {
+    setIsImelOpen(false);
+  };
+
+  const handleModalMenuClick = () => {
+    setIsModalMenuOpen(true);
+  };
+  const handleModalMenuClose = () => {
+    setIsModalMenuOpen(false);
+  };
+  const handleTabClick = (text) => {
+    setActiveTab(text);
+  };
   return (
-    <div className="add-profil-container">
-      <div className="postFormModal-container status-modal-container">
-        <div className="over-scr">
-          <div className="busi-mod-header">
-            <div className="busi-bxs">
-              <AiOutlineArrowLeft
-                className="cls-post"
-                //   onClick={handleEditProClose}
-              />
-              <div className="fels">
-                <div className="claim"></div>
-              </div>
-              <img src="images/lo2.png" alt="" />
-            </div>
-          </div>
-          <form action="" onSubmit={handleSubmit}>
-            <div className="edit-pro-container">
-              <div className="profile-all-image-box">
-                <div className="post-img-cont-bo">
-                  {selectedFile ? (
-                    <div className="cover-profile-image">
-                      <img src={URL.createObjectURL(selectedFile)} alt="" />
-                    </div>
-                  ) : (
-                    <>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        style={{ display: "none" }}
-                        id="image-input"
+    <>
+      {/* <div className="modal-full-container">
+        <ChangePassWord />
+      </div> */}
+      {isRequestOpen && (
+        <div className="modal-full-container">
+          <VerificationAcc handleRequestClose={handleRequestClose} />
+        </div>
+      )}
+      {isImelOpen && (
+        <div className="modal-full-container">
+          <PhoneImel
+            handleImelClose={handleImelClose}
+            handleImelListClick={handleImelListClick}
+            handleImelCreateClick={handleImelCreateClick}
+          />
+        </div>
+      )}
+      {isImelListOpen && (
+        <div className="modal-full-container">
+          <PhoneImelList
+            handleImelListClose={handleImelListClose}
+            handleImelCreateClick={handleImelCreateClick}
+          />
+        </div>
+      )}
+      {isEditProOpen && (
+        <div className="modal-full-container">
+          <EditProfile handleEditProClose={handleEditProClose} />
+        </div>
+      )}
+      {isImelCreateOpen && (
+        <div className="modal-full-container">
+          <PhoneImelCreate handleImelCreateClose={handleImelCreateClose} />
+        </div>
+      )}
+      {isManAdOpen && (
+        <div className="modal-full-container">
+          <ManageAdvert handleManAdClose={handleManAdClose} />
+        </div>
+      )}
+      <div className="home-container">
+        <MainLayout>
+          <div className="main-containe bus-box-con">
+            <div className="left-side-container buss-all-container">
+              {isAllStickerOpen && (
+                <AllStickers handleAllStickerClose={handleAllStickerClose} />
+              )}
+              {isAllStickingOpen && (
+                <AllSticking handleAllStickingClose={handleAllStickingClose} />
+              )}
+              {!isAllStickerOpen && !isAllStickingOpen && (
+                <>
+                  <div className="profile-dot-bx flex">
+                    <div className="head-line bus-dir">Profile</div>
+                    <BiDotsVerticalRounded
+                      className="dot"
+                      onClick={handleModalMenuClick}
+                    />
+                    {isModalMenuOpen && (
+                      <ProfileModalMenu
+                        handleModalMenuClose={handleModalMenuClose}
+                        handleImelClick={handleImelClick}
+                        handleManAdClick={handleManAdClick}
+                        handleEditProClick={handleEditProClick}
+                        handleRequestClick={handleRequestClick}
                       />
-                      <label htmlFor="image-input" className="dra-im domm">
-                        <MdOutlineAddPhotoAlternate className="ddd" />
-                        <div className="add-vid dad">Add Photos</div>
-                        <div className="ed-img flex">
+                    )}
+                  </div>
+                  <div className="profile-main-container">
+                    <div className="profile-all-image-box">
+                      <div className="cover-profile-image">
+                        <img
+                          src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg"
+                          alt=""
+                        />
+                        <div className="ed-img new-ed  flex">
                           <MdEdit />
                         </div>
-                      </label>
-                    </>
-                  )}
-                </div>
-
-                {selectedMainFile ? (
-                  <div className="main-pro-image ">
-                    <div className="main-img-bxb">
-                      <img src={URL.createObjectURL(selectedMainFile)} alt="" />
-                      <div className="ed-img flex">
-                        <MdEdit />
                       </div>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleMainImageChange}
-                      style={{ display: "none" }}
-                      id="image-main-input"
-                    />
-                    <div className="main-pro-image new-vb">
-                      <div className="main-img-bxb">
-                        <div className="pure-profile-con">
-                          <div className="main-edit-bx">
-                            <BsPersonFill />
-                          </div>
-                        </div>
-                        <label htmlFor="image-main-input">
+                      <div className="main-pro-image">
+                        <div className="main-img-bxb">
+                          <img
+                            src="https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg"
+                            alt=""
+                          />
                           <div className="ed-img flex">
                             <MdEdit />
                           </div>
-                        </label>
+                        </div>
                       </div>
                     </div>
-                  </>
-                )}
-              </div>
-              <div className="deatil-profile">
-                <div className="prof-user-txt cennc">
-                  Add profile picture (you can select up to 5)
-                </div>
-              </div>
-
-              <div className="input-containe-claim">
-                <div className="double-input">
-                  <div className="inp-label-box">
-                    <input
-                      type="text"
-                      className="claim-inp"
-                      placeholder="First name"
-                      value={firstName}
-                      onChange={handleFirstNameChange}
-                    />
-                  </div>
-                  <div className="inp-label-box">
-                    <input
-                      type="text"
-                      className="claim-inp"
-                      placeholder="Last name"
-                      value={lastName}
-                      onChange={handleLastNameChange}
-                    />
-                  </div>
-                </div>
-                <div className="double-input">
-                  <div className="inp-label-box">
-                    <input
-                      type="text"
-                      className="claim-inp"
-                      placeholder="Occupation"
-                      value={occupation}
-                      onChange={handleOccupationChange}
-                    />
-                  </div>
-                  <div className="inp-label-box">
-                    <input
-                      type="text"
-                      className="claim-inp"
-                      placeholder="Current city"
-                      value={currentCity}
-                      onChange={handleCurrentCityChange}
-                    />
-                  </div>
-                </div>
-                <div className="double-input">
-                  <div className="inp-label-box">
-                    <label htmlFor="">Date of Birth</label>
-                    <input
-                      type="date"
-                      className="claim-inp"
-                      placeholder="Occupation"
-                      value={dateOfBirth}
-                      onChange={handleDateOfBirthChange}
-                    />
-                  </div>
-                  <div className="inp-label-box">
-                    <label htmlFor="">Religion</label>
-                    <select
-                      name=""
-                      id=""
-                      className="claim-inp"
-                      value={religion}
-                      onChange={handleReligionChange}
-                    >
-                      <option value="" disabled>
-                        Select a religion
-                      </option>
-                      <option value="Muslim">Muslim</option>
-                      <option value="Christian">Christian</option>
-                      <option value="Tra">Tra</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="inp-label-box ">
-                  <label htmlFor="">I identify as</label>
-                  <div className="select-gender-container flex">
-                    <div className="but-bx flex">
-                      <button
-                        className={`gen-sel-btn ${
-                          activeButton === "Male" ? "acttvv" : ""
-                        }`}
-                        type="button"
-                        onClick={() => handleButtonClick("Male")}
-                      >
-                        <div className="gender-selc">Male</div>
-                        {activeButton === "Male" && <BsFillCheckCircleFill />}
-                      </button>
-                      <button
-                        className={`gen-sel-btn ${
-                          activeButton === "Female" ? "acttvv" : ""
-                        }`}
-                        type="button"
-                        onClick={() => handleButtonClick("Female")}
-                      >
-                        <div className="gender-selc">Female</div>
-                        {activeButton === "Female" && <BsFillCheckCircleFill />}
-                      </button>
-                      <button
-                        className={`gen-sel-btn ad-wd ${
-                          activeButton === "Rather not say" ? "acttvv" : ""
-                        }`}
-                        type="button"
-                        onClick={() => handleButtonClick("Rather not say")}
-                      >
-                        <div className="gender-selc">Rather not say</div>
-                        {activeButton === "Rather not say" && (
-                          <BsFillCheckCircleFill />
-                        )}
-                      </button>
+                    <div className="deatil-profile">
+                      <div className="main-user-nm">Charlotte Caria Faith</div>
+                      <div className="prof-user-txt">Product Designer</div>
+                      <div className="prof-user-txt">Lagos, Nigeria</div>
                     </div>
-
-                    <div className="inp-label-box">
-                      <label htmlFor="">Custom gender? please specify</label>
-
-                      <input
-                        type="text"
-                        className="claim-inp"
-                        placeholder="Type something here"
-                        value={customGender}
-                        onChange={handleCustomGenderChange}
-                      />
+                    <div className="btn-stick-box-row flex">
+                      <div
+                        className="stick-counter flex"
+                        onClick={handleAllStickerClick}
+                      >
+                        <div className="stick-con-tot">Stickers</div>
+                        <div className="counter-stick">18m</div>
+                      </div>
+                      <div
+                        className="stick-counter flex"
+                        onClick={handleAllStickingClick}
+                      >
+                        <div className="stick-con-tot">Sticking</div>
+                        <div className="counter-stick">23k</div>
+                      </div>
+                    </div>
+                    <img src="images/jumia.png" alt="" className="ads-img" />
+                    <div className="select-what-display w-dis">
+                      {Data.map((item, index) => (
+                        <div
+                          key={index}
+                          className={`tab-item gen-bx ${
+                            item.text === activeTab
+                              ? "sel-act pro-lis-act"
+                              : "anot-wid add-bor pro-no-act"
+                          }`}
+                          onClick={() => handleTabClick(item.text)}
+                        >
+                          {/* <div className="cont-tb-txt"> */}
+                          <div className="dis-sel-name refd">{item.text}</div>
+                          <div
+                            className={`cot-bxt ${
+                              item.text === activeTab ? "" : "cot-bxt-act"
+                            }`}
+                          >
+                            2.5K
+                          </div>
+                          {/* </div> */}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="posts-row-cont flex">
+                      {activeTab === "All posts" ? <PostsCol /> : null}
+                      {activeTab === "Images" ? <PostsColPhoto /> : null}
+                      {activeTab === "Videos" ? <PostsColVideo /> : null}
+                      {activeTab === "Files" ? <PostsColFile /> : null}
+                      {activeTab === "Location" ? <PostsColLoc /> : null}
+                      {activeTab === "Music" ? <PostsColMusic /> : null}
+                      {activeTab === "Voice note" ? <PostsColVoice /> : null}
                     </div>
                   </div>
-                </div>
-                <div>{activeButton}</div>
-                <div className="double-input">
-                  <div className="inp-label-box txt-nnx">
-                    <textarea
-                      type="text"
-                      className="txt-rea"
-                      placeholder="Bio"
-                      value={bio}
-                      onChange={handleBioChange}
-                    />
-                    <div className="maxxi">Max 50 words</div>
-                  </div>
-                </div>
-                <div className="auth-act flex">
-                  <BsShieldFillCheck />
-                  <div className="au-act-txt">
-                    Your data is protected under the Standard International User
-                    Act
-                  </div>
-                </div>
-              </div>
-
-              <div className="act-bttn-cl">
-                <ActionButton label={"Save"} type={"submit"} />
+                </>
+              )}
+            </div>
+            <div className="middle-side-container">
+              <img src="images/ads1.png" alt="" />
+            </div>
+            <div className="right-side-container">
+              <SelectCategory />
+              <Follower />
+              <div className="mess-bxx-conn">
+                <DashMessage />
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+        </MainLayout>
       </div>
-    </div>
+    </>
   );
 };
 
-export default AddProfile;
+export default Profile;

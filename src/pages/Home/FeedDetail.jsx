@@ -18,14 +18,17 @@ import VideoInputField from "../../components/Modals/VideoInputField";
 import FileInputField from "../../components/Modals/FileInputField";
 import { useEffect } from "react";
 
-const FeedDetail = ({ handleFeedClose }) => {
+const FeedDetail = ({ handleFeedClose,
+  
+
+}) => {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [showRecInput, setShowRecInput] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
-  const [isRecording, setIsRecording] = useState(false); // Added recording state
+  const [isRecording, setIsRecording] = useState(false);
   const mediaRecorder = useRef(null);
 
   const startRecording = async () => {
