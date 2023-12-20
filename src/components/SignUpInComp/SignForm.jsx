@@ -83,7 +83,7 @@ const SignForm = () => {
       console.log("authTOken", token);
 
 
-      navigate("/Addprofile");
+      navigate("/EditProfile");
       console.log(responseBody);
     }
     // // .then((response) => {

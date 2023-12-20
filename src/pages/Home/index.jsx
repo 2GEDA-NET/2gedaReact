@@ -80,7 +80,7 @@ const Home = () => {
     <div className="home-container">
       <MainLayout>
         <div className="main-containe">
-          <div className="left-side-container feed-box">
+          <div>
             {isFeedOpen && <FeedDetail handleFeedClose={handleFeedClose} />}
           </div>
           {!isFeedOpen && (
