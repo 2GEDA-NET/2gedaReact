@@ -110,7 +110,8 @@ const Home = () => {
                       <PostComp
                         handleFeedOpen={handleFeedOpen}
                         key={index}
-                        creator={item.user}
+                        postID = {item.id}
+                         creator={item.user}
                         comment={item.comment_text}
                         media={item.each_media}
                         hashtag={item.hashtags}

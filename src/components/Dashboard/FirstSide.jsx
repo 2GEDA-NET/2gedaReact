@@ -18,6 +18,7 @@ const FirstSide = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState(null);
   const fileInput = useRef(null);
+  const [userInput, setUserInput] = useState("");
 
   const handleIconClick = (icon) => {
     setSelectedIcon(icon);
@@ -42,6 +43,12 @@ const FirstSide = () => {
       "Cookie",
       "csrftoken=0tQF8jDzX38l95IB6wx5xqAxebxqHdM2; sessionid=si1y25m97ctl3faemkc2aby35ejiti6x"
     );
+
+      const formData = {
+        content: "",
+      } 
+
+
 
     const formdata = new FormData();
     formdata.append("media", fileInput.current.files[0], "[PROXY]");

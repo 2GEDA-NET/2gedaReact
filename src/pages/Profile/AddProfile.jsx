@@ -102,6 +102,10 @@ const Profile = () => {
   const handleTabClick = (text) => {
     setActiveTab(text);
   };
+
+
+
+
   return (
     <>
       {/* <div className="modal-full-container">

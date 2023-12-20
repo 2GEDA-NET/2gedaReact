@@ -27,6 +27,7 @@ import HashtagModal from "./HashTagModal";
 import TagFriends from "./TagFriends";
 import data from "../../utils/tag.json";
 import { url } from "../../utils";
+import axios from "axios";
 
 const PostFormModal = ({
   handleCloseMainContainerClick,
@@ -41,7 +42,15 @@ const PostFormModal = ({
   const hashtags = ["#programming", "#technology", "#art", "#travel"];
   const [checkedFriends, setCheckedFriends] = useState([]);
   const [images, setImages] = useState([]);
-  const [audioFile, setAudioFile] = useState(null);
+  const [audioFile, setAudioFile] = useState([]);
+  const [pdf, setPDF] = useState([]);
+  const [word, setWord] = useState([]);
+  const [powerpoint, setPowerpoint] = useState([]);
+  const [excel, setExcel] = useState([]);
+  const [apk, setApk] = useState([]);
+  const [exe, setExe] = useState([]);
+  const [music, setMusic] = useState([]);
+  const [contentText, setContentText] = useState(null);
   const fileInput = useRef(null);
 
   const handleFriendCheck = (img) => {
@@ -94,47 +103,91 @@ const PostFormModal = ({
   };
 
   const handlePost = async () => {
-    console.log("hello");
-    const formdata = new FormData();
-    for (let i = 0; i < images.length; i++) {
-      formdata.append("media", images[i]);
-      console.log(images[i]);
-    }
-
     // formdata.append("media", fileInput.current.files[0], "[PROXY]");
-    formdata.append("content", "Hello world");
-    formdata.append("url", "https://example.com");
-    formdata.append("hashtags", "@Waw");
-    formdata.append("is_business_post", "True");
-    formdata.append("tagged_users", '["bigkid"]');
 
     try {
-      const token = localStorage.getItem("authToken");
+      const token = localStorage.getItem("authTOken");
 
-      if (token) {
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", `Token ${token}`);
-        myHeaders.append(
-          "Cookie",
-          "csrftoken=0tQF8jDzX38l95IB6wx5xqAxebxqHdM2; sessionid=si1y25m97ctl3faemkc2aby35ejiti6x"
-        );
+      // console.log(contentText);
+      // console.log(images[0]);
 
-        const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: formdata,
-          redirect: "follow",
-        };
+      // const formdata = new FormData();
+      // formdata.append("content", contentText);
+      // formdata.append("hashtags", "Waw");
+      // formdata.append("is_business_post", true);
+      // formdata.append("tagged_users", "bigkid");
 
-        const response = await fetch(
-          `${url}/feed/create_post/`,
-          requestOptions
-        );
-        console.log(response);
-        const result = await response.json();
-      } else {
-        console.error("No token found in localStorage");
+      // formData.append(
+      //   "json",
+      //   new Blob([JSON.stringify(formNewdata)], { type: "application/json" })
+      // );
+      console.log(images[0]);
+
+      const FormData = require("form-data");
+
+      let data = new FormData();
+
+      if (selectedIcon === "word") {
+        console.log(word);
+        data.append("media", word[0]);
+      } else if (selectedIcon === "photo") {
+        data.append("media", images[0]);
+      } else if (selectedIcon === "pdf") {
+        data.append("media", pdf[0]);
+      } else if (selectedIcon === "powerpoint") {
+        data.append("media", powerpoint[0]);
+      } else if (selectedIcon === "apk") {
+        console.log(apk[0]);
+        data.append("media", apk[0]);
+      } else if (selectedIcon === "exe") {
+        data.append("media", exe[0]);
+      } else if (selectedIcon === "excel") {
+        data.append("media", excel[0]);
+      } else if (selectedIcon === "rec") {
+        data.append("media", audioFile[0]);
+      } else if (selectedIcon === "music") {
+        data.append("media", music[0]);
       }
+
+      data.append("media", images[0]);
+      data.append("content", "Hello world");
+      data.append("url", "https://example.com");
+      data.append("hashtags", "@Waw");
+      data.append("is_business_post", "True");
+      data.append("tagged_users", '["bigkid"]');
+      data.append("media", images[0]);
+      data.append("hashtags", "@Werey");
+
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: `http://127.0.0.1:8000/feed/create_post/`,
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+        data: data,
+      };
+
+      axios
+        .request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log("Response data:", JSON.stringify(error.response.data));
+            console.log("Status code:", error.response.status);
+            console.log("Headers:", JSON.stringify(error.response.headers));
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.log("No response received from the server");
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error message:", error.message);
+          }
+        });
     } catch (error) {
       console.error("Error:", error);
     }
@@ -155,6 +208,7 @@ const PostFormModal = ({
           id=""
           placeholder="Write up to 1,000 words"
           className="text-area"
+          onChange={(event) => setContentText(event.target.value)}
         ></textarea>
 
         <div className="viwdt">
@@ -162,18 +216,32 @@ const PostFormModal = ({
             <PostFormPhotoModal images={images} setImages={setImages} />
           )}
           {selectedIcon === "music" && (
-            <PostFormMusicModal
-              audioFile={audioFile}
-              setAudioFile={setAudioFile}
+            <PostFormMusicModal music={music} setMusic={setMusic} />
+          )}
+          {selectedIcon === "rec" && (
+            <PostFormRecModal setAudioFile={setAudioFile} />
+          )}
+          {selectedIcon === "word" && (
+            <PostFormWordModal setword={setWord} word={word} />
+          )}
+          {selectedIcon === "excel" && (
+            <PostFormExcelModal setExcel={setExcel} excel={excel} />
+          )}
+          {selectedIcon === "power" && (
+            <PostFormPowerModal
+              setPowerpoint={setPowerpoint}
+              powerpoint={powerpoint}
             />
           )}
-          {selectedIcon === "rec" && <PostFormRecModal />}
-          {selectedIcon === "word" && <PostFormWordModal />}
-          {selectedIcon === "excel" && <PostFormExcelModal />}
-          {selectedIcon === "power" && <PostFormPowerModal />}
-          {selectedIcon === "pdf" && <PostFormPdfModal />}
-          {selectedIcon === "apk" && <PostFormApkModal />}
-          {selectedIcon === "exe" && <PostFormExeModal />}
+          {selectedIcon === "pdf" && (
+            <PostFormPdfModal pdf={pdf} setPDF={setPDF} />
+          )}
+          {selectedIcon === "apk" && (
+            <PostFormApkModal apk={apk} setApk={setApk} />
+          )}
+          {selectedIcon === "exe" && (
+            <PostFormExeModal setExe={setExe} exe={exe} />
+          )}
           {selectedIcon === "location" && <PostFormLocationModal />}
           {selectedIcon === "allfiles" && <PostFormFilesModal />}
         </div>

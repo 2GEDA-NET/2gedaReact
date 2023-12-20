@@ -3,7 +3,7 @@ import "./style.css";
 import { useState } from "react";
 import { SiMicrosoftword } from "react-icons/si";
 
-const PostFormWordModal = () => {
+const PostFormWordModal = ({ word, setword }) => {
   const [wordFile, setWordFile] = useState(null);
 
   const handleWordChange = (e) => {
@@ -12,6 +12,7 @@ const PostFormWordModal = () => {
       const fileName = selectedWordFile.name.toLowerCase();
       if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
         setWordFile(selectedWordFile);
+        setword([selectedWordFile, word]);
       } else {
         // Handle invalid file type
         setWordFile(null);

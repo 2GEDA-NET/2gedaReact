@@ -4,10 +4,23 @@ import ActionButton from "../Commons/Button";
 import { MdEdit } from "react-icons/md";
 import { BsPersonFill } from "react-icons/bs";
 import { useState } from "react";
+import { url } from "../../utils";
+import axios from "axios";
 
 const EditProfile = ({ handleEditProClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedMainFile, setSelectedMainFile] = useState(null);
+  const [isLoading, setIsloading] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [dob, setDOB] = useState("");
+  const [gender, setGender] = useState(null);
+  const [religion, setReligion] = useState(null);
+  const [responseData, setResponseData] = useState(null);
+  const [profileImage, setProfileImage] = useState([]);
+  const [work, setWork] = useState(null);
+  const [city, setCity] = useState(null);
+  const [bio, setBio] = useState(null);
 
   const handleImageChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -16,6 +29,70 @@ const EditProfile = ({ handleEditProClose }) => {
   const handleMainImageChange = (event) => {
     setSelectedMainFile(event.target.files[0]);
   };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toISOString().split("T")[0];
+    return formattedDate;
+  };
+
+  function updateProfile() {
+    const token = localStorage.getItem("authToken");
+    console.log(`Token ${token}`);
+
+    const makeRequest = async () => {
+      const formData = {
+        post_id: "hi",
+        first_name: "like",
+        last_name: "",
+      };
+
+      try {
+        const FormData = require("form-data");
+        let data = new FormData();
+
+        console.log(selectedFile);
+        console.log(dob);
+
+        data.append("work", work);
+        data.append("date_of_birth", dob);
+        data.append("gender", gender);
+        data.append("custom_gender", "male");
+        data.append("religion", religion);
+        data.append("first_name", firstName);
+        data.append("last_name", lastName);
+        data.append("cover_image", selectedMainFile);
+        data.append("city", city);
+        data.append("media", selectedFile);
+
+        let config = {
+          method: "put",
+          maxBodyLength: Infinity,
+          url: "http://127.0.0.1:8000/profile/update/",
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+          data: data,
+        };
+
+        axios
+          .request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+        // Handle errors as needed
+      } finally {
+        // setIsLoading(true); // Move this line if needed based on your requirement
+        console.log("Finally block executed");
+      }
+    };
+    makeRequest();
+  }
 
   return (
     <div className="postFormModal-container status-modal-container">
@@ -105,6 +182,7 @@ const EditProfile = ({ handleEditProClose }) => {
                   type="text"
                   className="claim-inp"
                   placeholder="First name"
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
               <div className="inp-label-box">
@@ -112,6 +190,7 @@ const EditProfile = ({ handleEditProClose }) => {
                   type="text"
                   className="claim-inp"
                   placeholder="Last name"
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
             </div>
@@ -121,6 +200,7 @@ const EditProfile = ({ handleEditProClose }) => {
                   type="text"
                   className="claim-inp"
                   placeholder="Occupation"
+                  onChange={(e) => setWork(e.target.value)}
                 />
               </div>
               <div className="inp-label-box">
@@ -128,6 +208,7 @@ const EditProfile = ({ handleEditProClose }) => {
                   type="text"
                   className="claim-inp"
                   placeholder="Current city"
+                  onChange={(e) => setCity(e.target.value)}
                 />
               </div>
             </div>
@@ -138,11 +219,17 @@ const EditProfile = ({ handleEditProClose }) => {
                   type="date"
                   className="claim-inp"
                   placeholder="Occupation"
+                  onChange={(e) => setDOB(formatDate(e.target.value))}
                 />
               </div>
               <div className="inp-label-box">
                 <label htmlFor="">Gender</label>
-                <select name="" id="" className="claim-inp">
+                <select
+                  onChange={(e) => setGender(e.target.value)}
+                  name=""
+                  id=""
+                  className="claim-inp"
+                >
                   <option value="" disabled>
                     Select a gender
                   </option>
@@ -153,14 +240,29 @@ const EditProfile = ({ handleEditProClose }) => {
             </div>
             <div className="double-input">
               <div className="inp-label-box txt-nnx">
-                <textarea type="text" className="txt-rea" placeholder="Bio" />
+                <textarea
+                  onChange={(e) => {
+                    setBio(e.target.value);
+                  }}
+                  type="text"
+                  className="txt-rea"
+                  placeholder="Bio"
+                />
                 <div className="maxxi">Max 50 words</div>
               </div>
             </div>
           </div>
 
           <div className="act-bttn-cl">
-            <ActionButton label={"Save"} />
+            <div className="act-btn-cont">
+              <button
+                type="submit"
+                onClick={updateProfile}
+                className={`action-btn`}
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </div>

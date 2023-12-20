@@ -3,7 +3,7 @@ import { AiFillDelete } from "react-icons/ai";
 import "./style.css";
 import { useState } from "react";
 
-const PostFormExeModal = () => {
+const PostFormExeModal = ({setExe, exe}) => {
   const [exeFile, setExeFile] = useState(null);
 
   const handleExeChange = (e) => {
@@ -12,6 +12,7 @@ const PostFormExeModal = () => {
       const fileName = selectedExeFile.name.toLowerCase();
       if (fileName.endsWith(".exe")) {
         setExeFile(selectedExeFile);
+        setExe(selectedExeFile)
       } else {
         // Handle invalid file type
         setExeFile(null);
@@ -27,6 +28,7 @@ const PostFormExeModal = () => {
   const handleDeleteItem = () => {
     // Clear the selected .exe file
     setExeFile(null);
+    setExe(null)
   };
   return (
     <>

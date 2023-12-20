@@ -3,7 +3,7 @@ import { AiFillDelete } from "react-icons/ai";
 import "./style.css";
 import { useState } from "react";
 
-const PostFormPowerModal = () => {
+const PostFormPowerModal = ({setPowerpoint, powerpoint}) => {
   const [powerpointFile, setPowerpointFile] = useState(null);
 
   const handlePowerpointChange = (e) => {
@@ -12,6 +12,7 @@ const PostFormPowerModal = () => {
       const fileName = selectedPowerpointFile.name.toLowerCase();
       if (fileName.endsWith(".ppt") || fileName.endsWith(".pptx")) {
         setPowerpointFile(selectedPowerpointFile);
+        setPowerpoint([selectedPowerpointFile])
       } else {
         // Handle invalid file type
         setPowerpointFile(null);

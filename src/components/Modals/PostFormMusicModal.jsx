@@ -2,16 +2,17 @@ import { AiFillDelete } from "react-icons/ai";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import "./style.css";
 import { useState } from "react";
-const PostFormMusicModal = ({ setAudioFile, audioFile }) => {
-  // const [audioFile, setAudioFile] = useState(null);
+const PostFormMusicModal = ({ setMusic, music }) => {
+  const [audioFile, setAudioFile] = useState(null);
 
   const handleAudioChange = (e) => {
     const selectedAudioFile = e.target.files[0];
     if (selectedAudioFile && selectedAudioFile.type.startsWith("audio/")) {
-      setAudioFile(selectedAudioFile);
+      setAudioFile([selectedAudioFile]);
+      setMusic([selectedAudioFile]);
     } else {
       // Handle invalid file type or no file selected
-      setAudioFile(null);
+      setMusic(null);
     }
   };
 
@@ -34,7 +35,11 @@ const PostFormMusicModal = ({ setAudioFile, audioFile }) => {
           <div className="audio-item">
             <audio controls>
               <source
-                src={URL.createObjectURL(audioFile)}
+                src={URL.createObjectURL(
+                  new Blob(audioFile, { type: "audio/wav" })
+                )}
+                // src={URL.createObjectURL(audioFile)}
+                // src=""
                 type={audioFile.type}
               />
               Your browser does not support the audio tag.

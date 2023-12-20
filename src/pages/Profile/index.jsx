@@ -189,6 +189,10 @@ const Profile = () => {
     localStorage.setItem("coverImage", URL.createObjectURL(file));
   };
 
+  
+
+
+
   return (
     <>
       {isImelOpen && (

@@ -77,15 +77,13 @@ const SignForm = () => {
     if (!response.ok) {
       console.log("response status :", response.status);
     } else {
-
       const token = responseBody.token;
       localStorage.setItem("authToken", token);
       console.log("authToken", token);
-
-
-      navigate("/Profile")
-      console.log(responseBody);
       
+
+      navigate("/Addprofile");
+      console.log(responseBody);
     }
     // // .then((response) => {
     // //   if (response.ok && response.status === 200) {

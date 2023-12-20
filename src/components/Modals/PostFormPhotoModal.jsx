@@ -57,7 +57,7 @@ const PostFormPhotoModal = ({
                   />
                 </div>
               );
-            } else if (file.type.startsWith("video/")) {
+            } else if (file.type.startsWith("video/"))  {
               return (
                 <div className="im-vi-bxb">
                   <div

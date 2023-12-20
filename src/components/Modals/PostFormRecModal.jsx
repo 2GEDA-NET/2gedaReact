@@ -6,7 +6,7 @@ import { FaCircle } from "react-icons/fa";
 import { BsMicFill, BsSoundwave } from "react-icons/bs";
 import { IoMdMicOff } from "react-icons/io";
 import { useRef } from "react";
-const PostFormRecModal = () => {
+const PostFormRecModal = ({ setAudioFile }) => {
   const [audioBlob, setAudioBlob] = useState(null);
   const [isRecording, setIsRecording] = useState(false); // Added recording state
   const mediaRecorder = useRef(null);
@@ -30,6 +30,7 @@ const PostFormRecModal = () => {
         const blob = new Blob(chunks, { type: "audio/wav" });
         setAudioBlob(blob);
         setIsRecording(false); // Update recording status when recording stops
+        setAudioFile([blob]);
       };
 
       mediaRecorder.current.start();
@@ -48,6 +49,7 @@ const PostFormRecModal = () => {
 
   const handleDeleteItem = () => {
     setAudioBlob(null);
+    setAudioFile(null);
   };
   return (
     <>
