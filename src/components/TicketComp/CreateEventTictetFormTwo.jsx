@@ -1,13 +1,7 @@
 import ActionButton from "../../components/Commons/Button";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
-
-import { useContext, useState } from "react";
-import { useEffect } from "react";
-import EventContextTwo from "../../Context/EventContext/EventContextTwo";
-
-
-
+import { useState, useEffect } from "react";
 
 const CreateEventTictetFormTwo = ({
   handleCreatTicketTwoCloseContainerClick,
@@ -15,22 +9,10 @@ const CreateEventTictetFormTwo = ({
 }) => {
   const [selectedTicketIndex, setSelectedTicketIndex] = useState(0);
   const [tickets, setTickets] = useState([
-    {
-      name: "",
-      quantity: "",
-      price: "FREE TICKET",
-    },
+    { name: "", quantity: "", price: "FREE TICKET" },
   ]);
-  const [ticketArea, setTicketArea] = useState(null)
-  const [quantityArea, setQuantityArea] = useState(null)
-  const [priceArea, setPriceArea] = useState(null)
-  
-
-  const {ticket, quantity, price, setTicket, setQuantity, setPrice} = useContext(EventContextTwo)
-
-  const handleContinue = () =>{
-    
-  }
+  const [eventCategory, setEventCategory] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handlePaidClick = (index) => {
     setSelectedTicketIndex(index);
@@ -62,15 +44,44 @@ const CreateEventTictetFormTwo = ({
       setTickets(updatedTickets);
     }
   };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    tickets.forEach((ticket, index) => {
+      if (!ticket.name.trim())
+        newErrors[`name_${index}`] = "Ticket name is required";
+      if (!ticket.quantity.trim())
+        newErrors[`quantity_${index}`] = "Quantity is required";
+      if (ticket.price !== "FREE TICKET" && !ticket.price.trim())
+        newErrors[`price_${index}`] = "Price is required";
+    });
+
+    if (!eventCategory.trim())
+      newErrors.eventCategory = "Event category is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      handleCreatTicketThreeContainerClick();
+    } else {
+      console.log("Form is not valid. Please fill in all required fields.");
+    }
+  };
 
   return (
     <>
       <div className="stepper-cont-bx">
         <div className="lin-btw"></div>
-
         <div className="pos-cir">
           <div className="cir-stepper-container flex">
             <div className="each-step-bx flex">
@@ -81,10 +92,9 @@ const CreateEventTictetFormTwo = ({
               <div className="ci-eac "></div>
               <div className="step-txtx ">Create ticket</div>
             </div>
-
             <div className="each-step-bx flex">
               <div className="ci-eac not-ac"></div>
-              <div className="step-txtx not-ac-txt">Additonal info</div>
+              <div className="step-txtx not-ac-txt">Additional info</div>
             </div>
           </div>
         </div>
@@ -131,8 +141,17 @@ const CreateEventTictetFormTwo = ({
                   type="text"
                   className="create-evt-inp"
                   placeholder="Enter ticket name"
-                  onChange={(e) => setTicket(e.target.value)}
+                  value={ticket.name}
+                  onChange={(e) => {
+                    const updatedTickets = [...tickets];
+                    updatedTickets[index].name = e.target.value;
+                    setTickets(updatedTickets);
+                    setErrors({ ...errors, [`name_${index}`]: "" });
+                  }}
                 />
+                {errors[`name_${index}`] && (
+                  <div style={{ color: "red" }}>{errors[`name_${index}`]}</div>
+                )}
               </div>
               <div className="event-inp-overall-cont">
                 <label htmlFor="" className="adj">
@@ -142,8 +161,19 @@ const CreateEventTictetFormTwo = ({
                   type="text"
                   className="create-evt-inp"
                   placeholder="Eg. 100"
-                  onChange={(e) => setQuantity(e.target.value)}
+                  value={ticket.quantity}
+                  onChange={(e) => {
+                    const updatedTickets = [...tickets];
+                    updatedTickets[index].quantity = e.target.value;
+                    setTickets(updatedTickets);
+                    setErrors({ ...errors, [`quantity_${index}`]: "" });
+                  }}
                 />
+                {errors[`quantity_${index}`] && (
+                  <div style={{ color: "red" }}>
+                    {errors[`quantity_${index}`]}
+                  </div>
+                )}
               </div>
               {ticket.price !== "FREE TICKET" ? (
                 <div className="event-inp-overall-cont">
@@ -154,8 +184,19 @@ const CreateEventTictetFormTwo = ({
                     type="text"
                     className="create-evt-inp"
                     placeholder="Eg. #12,000"
-                    onChange={(e) => setPrice(e.target.value)}
+                    value={ticket.price}
+                    onChange={(e) => {
+                      const updatedTickets = [...tickets];
+                      updatedTickets[index].price = e.target.value;
+                      setTickets(updatedTickets);
+                      setErrors({ ...errors, [`price_${index}`]: "" });
+                    }}
                   />
+                  {errors[`price_${index}`] && (
+                    <div style={{ color: "red" }}>
+                      {errors[`price_${index}`]}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="event-inp-overall-cont b-cr">
@@ -165,12 +206,9 @@ const CreateEventTictetFormTwo = ({
                   <div className="create-evt-inp free-tc">FREE TICKET</div>
                 </div>
               )}
-
               {index === 0 ? (
-                // Conditionally render the delete button for the first ticket
                 <></>
               ) : (
-                // Render other tickets with the delete button
                 <div
                   className="act-continue-btn"
                   onClick={() => handleDeleteTicket(index)}
@@ -193,20 +231,30 @@ const CreateEventTictetFormTwo = ({
             <label htmlFor="">Event category</label>
             <div className="claim-inp flex nobd">
               <MdOutlineCategory />
-              <select name="" id="" className="claim-inp noline">
+              <select
+                name=""
+                id=""
+                className="claim-inp noline"
+                value={eventCategory}
+                onChange={(e) => {
+                  setEventCategory(e.target.value);
+                  setErrors({ ...errors, eventCategory: "" });
+                }}
+              >
                 <option value="">Select category</option>
-                <option value="Driver_licence">Driver Licence</option>
-                <option value="NIN">NIN</option>
-                <option value="Voters_card">Voter's Card</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Festival">Festivals</option>
+                <option value="Concerts">Concerts </option>
+                <option value="Others">Others </option>
               </select>
             </div>
+            {errors.eventCategory && (
+              <div style={{ color: "red" }}>{errors.eventCategory}</div>
+            )}
           </div>
         </div>
 
-        <div
-          className="act-continue-btn"
-          onClick={handleCreatTicketThreeContainerClick}
-        >
+        <div className="act-continue-btn" onClick={handleSubmit}>
           <ActionButton label={"Continue"} type={"button"} />
         </div>
         <div

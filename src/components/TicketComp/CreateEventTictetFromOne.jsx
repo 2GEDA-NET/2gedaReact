@@ -1,200 +1,229 @@
-import { BsUpload, BsLaptop } from "react-icons/bs";
-import { IoLocation } from "react-icons/io5";
-import ActionButton from "../../components/Commons/Button";
-import { useContext, useState } from "react";
-import EventContextOne from "../../Context/EventContext/EventContext";
+import React, { useState } from "react";
+import ActionButton from "../Commons/Button";
+import { submitFormData } from "../../utils/apiService";
 
 const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
-  const [isPlatforn, setIsPlatforn] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [platform, setPlatform] = useState(false);
   const [image, setImage] = useState("");
-  const [platformArea, setPlatformArea] = useState("");
-  const [venueArea, setVenueArea] = useState("");
-  const [venueNameArea, setVenueNameArea] = useState("");
-  const [descriptionArea, setDescriptionArea] = useState("");
-  const [titlArea, setTitleArea] = useState("");
+  const [venueName, setVenueName] = useState("");
+  const [venueAddress, setVenueAddress] = useState("");
+  const [platformName, setPlatformName] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const { setTitle, title, description, setDescription,eventImage, setEventImage,
-    venue, setVenue, venueAddress, setVenueAddress } = useContext(EventContextOne);
+  const validateForm = () => {
+    const newErrors = {};
+    if (!title.trim()) newErrors.title = "Event title is required";
+    if (!description.trim())
+      newErrors.description = "Event description is required";
+    if (!image) newErrors.image = "Cover image is required";
 
-  const handleContinue = (e) =>{
-      setTitle(titlArea);
-      setDescription(descriptionArea);
-      setVenueAddress(venueArea);
-      setVenue(venueNameArea);
-      setEventImage(image);
-      console.log("done")
-      
-  }
+    if (platform) {
+      if (!platformName.trim())
+        newErrors.platformName = "Platform name is required";
+      if (!websiteUrl.trim()) newErrors.websiteUrl = "Website URL is required";
+    } else {
+      if (!venueName.trim()) newErrors.venueName = "Venue name is required";
+      if (!venueAddress.trim())
+        newErrors.venueAddress = "Venue address is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleImageChange = (event) => {
-    // Handling the image change
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
+    reader.onloadend = () => setImage(reader.result);
 
-    if (file) {
-      reader.readAsDataURL(file);
+    if (file) reader.readAsDataURL(file);
+  };
+
+  const handlePlatfornClick = () => setPlatform(!platform);
+
+  const handleContinueClick = async () => {
+    if (validateForm()) {
+      try {
+        const formData = {
+          title,
+          desc: description,
+          platform,
+          venueName,
+          venueAddress,
+          platformName,
+          websiteUrl,
+        };
+
+        await submitFormData(formData);
+
+        handleCreatTicketTwoContainerClick();
+      } catch (error) {
+        console.error("Error submitting form", error);
+      }
     }
   };
-  const handlePlatfornClick = () => {
-    setIsPlatforn(!isPlatforn);
-  };
+
   return (
     <>
-      <div className="stepper-cont-bx">
-        <div className="lin-btw"></div>
-
-        <div className="pos-cir">
-          <div className="cir-stepper-container flex">
-            <div className="each-step-bx flex">
-              <div className="ci-eac"></div>
-              <div className="step-txtx">Event info</div>
-            </div>
-            <div className="each-step-bx flex">
-              <div className="ci-eac not-ac"></div>
-              <div className="step-txtx not-ac-txt">Create ticket</div>
-            </div>
-
-            <div className="each-step-bx flex">
-              <div className="ci-eac not-ac"></div>
-              <div className="step-txtx not-ac-txt">Additonal info</div>
-            </div>
+      <div className="event-inp-overall-cont">
+        <label htmlFor="" className="adj">
+          Event title
+        </label>
+        <input
+          type="text"
+          className="create-evt-inp"
+          placeholder="Enter your event title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        {errors.title && (
+          <div className="error-message" style={{ color: "red" }}>
+            {errors.title}
           </div>
-        </div>
+        )}
+        <div className="ins-create">0/50 words</div>
       </div>
-      <div className="event-ead">Event info</div>
-      <div className="event-txt">Tell us a bit about your event</div>
-      <div className="main-event-container">
-        <div className="event-inp-overall-cont">
-          <label htmlFor="" className="adj">
-            Event title
+
+      <div className="event-inp-overall-cont">
+        <label htmlFor="" className="adj">
+          Event description
+        </label>
+        <textarea
+          type="text"
+          className="create-evt-inp area-evn"
+          placeholder="Enter your event details. It may contain FAQs and what attendees should expect from the event"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        {errors.description && (
+          <div className="error-message" style={{ color: "red" }}>
+            {errors.description}
+          </div>
+        )}
+        <div className="ins-create">0/500 words</div>
+      </div>
+
+      <div className="event-inp-overall-cont dotted">
+        {!image && (
+          <label htmlFor="" className="ad-pic">
+            Cover image
           </label>
-          <input
-            type="text"
-            className="create-evt-inp"
-            placeholder="Enter your event title"
-          />
-          <div className="ins-create">0/50 words</div>
-        </div>
-        <div className="event-inp-overall-cont">
-          <label htmlFor="" className="adj">
-            Event description
+        )}
+        <input
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          id="pic-input"
+          onChange={handleImageChange}
+        />
+        {image ? (
+          <label htmlFor="pic-input">
+            <div className="img-con-cv">
+              <img src={image} alt="uploaded" />
+            </div>
           </label>
-          <textarea
-            type="text"
-            className="create-evt-inp area-evn"
-            placeholder="Enter your event details. It may contain FAQs and what attendees should expect from the event"
-            onChange={(e) => e.target.value}
-          />
-          <div className="ins-create">0/500 wordss</div>
-        </div>
-        <div className="event-inp-overall-cont dotted">
-          {!image && (
-            <label htmlFor="" className="ad-pic">
-              Cover image
-            </label>
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            id="pic-input"
-            onChange={handleImageChange}
-          />
-          {image ? (
-            <label htmlFor="pic-input">
-              <div className="img-con-cv">
-                <img src={image} alt="uploaded" />
+        ) : (
+          <>
+            <label htmlFor="pic-input" className="dra-im">
+              <div className="add-vid">Upload event image</div>
+              <div className="even-inst">
+                Upload a compelling image. We recommend using at least a
+                2160x1080px (2:1 ratio) image that's no larger than 10MB
               </div>
             </label>
-          ) : (
-            <>
-              <label htmlFor="pic-input" className="dra-im">
-                <BsUpload />
-                <div className="add-vid">Upload event image</div>
-                <div className="even-inst">
-                  Upload a compelling image. We recommend using at least a
-                  2160x1080px (2:1 ratio) image that's no larger than 10MB
-                </div>
-              </label>
-            </>
-          )}
-        </div>
-        {isPlatforn ? (
-          <div className="plat-venue-bx" onClick={handlePlatfornClick}>
-            <IoLocation />
-            <div className="txt-pl-vn">Physical event?</div>
-          </div>
-        ) : (
-          <div className="plat-venue-bx" onClick={handlePlatfornClick}>
-            <BsLaptop />
-            <div className="txt-pl-vn">Online event?</div>
+          </>
+        )}
+        {errors.image && (
+          <div className="error-message" style={{ color: "red" }}>
+            {errors.image}
           </div>
         )}
+      </div>
 
-        {isPlatforn ? (
-          <div className="venu-plat-cont">
-            <div className="event-inp-overall-cont">
-              <label htmlFor="" className="adj">
-                Platform name
-              </label>
-              <input
-                type="text"
-                className="create-evt-inp"
-                placeholder="skype, google meet, webinar, etc."
-                onChange={(e) => setPlatformArea(e.target.value)}
-              />
-            </div>
-            <div className="event-inp-overall-cont">
-              <label htmlFor="" className="adj">
-                Website link or URL
-              </label>
-              <input
-                type="text"
-                className="create-evt-inp"
-                placeholder="https://www.example.com"
-                onChange={(e) => setPlatformArea(e.target.value)}
-              />
-            </div>
+      {platform ? (
+        <div className="venu-plat-cont">
+          <div className="event-inp-overall-cont">
+            <label htmlFor="" className="adj">
+              Platform name
+            </label>
+            <input
+              type="text"
+              className="create-evt-inp"
+              placeholder="skype, google meet, webinar, etc."
+              value={platformName}
+              onChange={(e) => setPlatformName(e.target.value)}
+            />
+            {errors.platformName && (
+              <div className="error-message" style={{ color: "red" }}>
+                {errors.platformName}
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="venu-plat-cont">
-            <div className="event-inp-overall-cont">
-              <label htmlFor="" className="adj">
-                Venue name
-              </label>
-              <input
-                type="text"
-                className="create-evt-inp"
-                placeholder="Name of hotel, building or event centre"
-                onChange={(e) => setVenueNameArea(e.target.value)}
-              />
-            </div>
-            <div className="event-inp-overall-cont">
-              <label htmlFor="" className="adj">
-                Venue address
-              </label>
-              <input
-                type="text"
-                className="create-evt-inp"
-                placeholder="Give a clear address to help your attendees locate your event. "
-                onChange={(e) => setVenueNameArea(e.target.value)}
-              />
-            </div>
+
+          <div className="event-inp-overall-cont">
+            <label htmlFor="" className="adj">
+              Website link or URL
+            </label>
+            <input
+              type="text"
+              className="create-evt-inp"
+              placeholder="https://www.example.com"
+              value={websiteUrl}
+              onChange={(e) => setWebsiteUrl(e.target.value)}
+            />
+            {errors.websiteUrl && (
+              <div className="error-message" style={{ color: "red" }}>
+                {errors.websiteUrl}
+              </div>
+            )}
           </div>
-        )}
-        <div
-          className="act-continue-btn"
-          onClick={() => {
-            handleCreatTicketTwoContainerClick();
-            handleContinue();
-          }}
-        >
-          <ActionButton label={"Continue"} type={"button"} />
         </div>
+      ) : (
+        <div className="venu-plat-cont">
+          <div className="event-inp-overall-cont">
+            <label htmlFor="" className="adj">
+              Venue name
+            </label>
+            <input
+              type="text"
+              className="create-evt-inp"
+              placeholder="Name of hotel, building or event centre"
+              value={venueName}
+              onChange={(e) => setVenueName(e.target.value)}
+            />
+            {errors.venueName && (
+              <div className="error-message" style={{ color: "red" }}>
+                {errors.venueName}
+              </div>
+            )}
+          </div>
+
+          <div className="event-inp-overall-cont">
+            <label htmlFor="" className="adj">
+              Venue address
+            </label>
+            <input
+              type="text"
+              className="create-evt-inp"
+              placeholder="Give a clear address to help your attendees locate your event."
+              value={venueAddress}
+              onChange={(e) => setVenueAddress(e.target.value)}
+            />
+            {errors.venueAddress && (
+              <div className="error-message" style={{ color: "red" }}>
+                {errors.venueAddress}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      <div className="act-continue-btn" onClick={handleContinueClick}>
+        <ActionButton label={"Continue"} type={"button"} />
       </div>
     </>
   );
