@@ -6,6 +6,7 @@ import { BsPersonFill } from "react-icons/bs";
 import { useState } from "react";
 import { url } from "../../utils";
 import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const EditProfile = ({ handleEditProClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -21,6 +22,7 @@ const EditProfile = ({ handleEditProClose }) => {
   const [work, setWork] = useState(null);
   const [city, setCity] = useState(null);
   const [bio, setBio] = useState(null);
+  const navigate = useNavigate();
 
   const handleImageChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -79,6 +81,7 @@ const EditProfile = ({ handleEditProClose }) => {
           .request(config)
           .then((response) => {
             console.log(JSON.stringify(response.data));
+            navigate("/");
           })
           .catch((error) => {
             console.log(error);

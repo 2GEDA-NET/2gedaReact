@@ -78,9 +78,10 @@ const SignForm = () => {
       console.log("response status :", response.status);
     } else {
       const token = responseBody.token;
-      localStorage.setItem("authToken", token);
-      console.log("authToken", token);
       
+      localStorage.setItem("authTOken", token);
+      console.log("authTOken", token);
+
 
       navigate("/Addprofile");
       console.log(responseBody);
