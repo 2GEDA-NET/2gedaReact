@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import EventContextOne from "../../Context/EventContext/EventContextOne";
+import EventContextTwo from "../../Context/EventContext/EventContextTwo";
+import EventContextThree from "../../Context/EventContext/EventContextThree";
 import ActionButton from "../../components/Commons/Button";
+import { url } from "../../utils";
 
 const CreateEventTictetFormThree = ({
   handleCreatTicketThreeCloseContainerClick,
   handleCreatTicketSucessClick,
 }) => {
-  const [isToggled, setToggled] = useState(false);
+  const contextOne = useContext(EventContextOne);
+  const contextTwo = useContext(EventContextTwo);
+  const contextThree = useContext(EventContextThree);const [isToggled, setToggled] = useState(false);
   const [isPublicToggled, setPublicToggled] = useState(true);
   const [feesOption, setFeesOption] = useState("");
   const [feesOptionError, setFeesOptionError] = useState("");
@@ -27,11 +33,58 @@ const CreateEventTictetFormThree = ({
     window.scrollTo(0, 0);
   }, []);
 
-  const handleContinueClick = () => {
-    if (!feesOption) {
-      setFeesOptionError("Please select an option for fees settings");
-    } else {
-      handleCreatTicketSucessClick();
+
+  const handleContinueClick = async () => {
+    const requestData = { ...contextOne, ...contextTwo, ...contextThree };
+ 
+    const token = localStorage.getItem('authToken')
+
+    const myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization", `${token}`
+    );
+
+    const formdata = new FormData();
+    formdata.append("title", requestData.title);
+    formdata.append("desc", requestData.description);
+    formdata.append("platform", requestData.platform);
+    formdata.append("events_category_name", requestData.eventCategory);
+    formdata.append("location", requestData.venue);
+    formdata.append("events_category_image", requestData.eventImage, "[PROXY]");
+    formdata.append("is_paid", requestData.isPaid);
+
+    requestData.tickets.forEach((ticket, index) => {
+      formdata.append(`ticket[${index}][ticket_category]`, ticket.ticket);
+      formdata.append(`ticket[${index}][ticket_price]`, ticket.price);
+      formdata.append(`ticket[${index}][ticket_quantity]`, ticket.quantity);
+      formdata.append(`ticket[${index}][is_free]`, ticket.isFree.toString());
+    });
+
+    formdata.append("is_public", requestData.isPublicToggled.toString());
+    formdata.append("add_to_sales", "true");
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+
+    try {
+      const response = await fetch(
+        `${url}/ticket/events/`,
+        requestOptions
+      );
+      if (response.ok) {
+        handleCreatTicketSucessClick();
+      } else {
+        console.error(
+          "Error sending data to the backend:",
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error("Error sending data to the backend:", error.message);
     }
   };
 
@@ -134,12 +187,15 @@ const CreateEventTictetFormThree = ({
           )}
         </div>
 
-        <div className="act-continue-btn" onClick={handleCreatTicketSucessClick}>
+        <div
+          className="act-continue-btn"
+          onClick={handleCreatTicketSucessClick}
+        >
           <ActionButton label={"Continue"} />
         </div>
         <div
           className="bac-formm"
-          onClick={handleCreatTicketThreeCloseContainerClick}
+          onClick={handleContinueClick}
         >
           Go Back
         </div>

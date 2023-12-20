@@ -1,5 +1,5 @@
 import React from "react";
-import EventContextOne from "./EventContext";
+import EventContextOne from "./EventContextOne";
 import { useState } from "react";
 
 const EventOneContextProvider = ({ children }) => {

@@ -9,7 +9,7 @@ const EventDetailDetailsComp = ({ handleGetTicketClick }) => {
         <div className="location-box chang">
           <MdLocationOn />
           <div className="loca-txt loc-red">
-            Eko Hotel and suites conference hall{" "}
+            Eko Hotel and suites conference hall
           </div>
         </div>
         <div className="location-box">

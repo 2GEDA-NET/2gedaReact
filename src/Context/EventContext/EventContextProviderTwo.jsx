@@ -16,5 +16,4 @@ const EventTwoContextProvider = ({ children }) => {
   );
 };
 
-
-export default EventTwoContextProvider
+export default EventTwoContextProvider;

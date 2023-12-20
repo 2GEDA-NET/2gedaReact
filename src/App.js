@@ -20,6 +20,8 @@ import Stereo from "./pages/Stereo";
 import NonAuthStero from "./pages/Stereo/NonAuthStero";
 import AddProfile from "./pages/Profile/AddProfile";
 import EditProfile from "./components/Modals/EditProfile";
+import TicketDashCard from "./components/TicketComp/TicketDashCard";
+// import { EventContextProvider } from "./Context/EventContext/EventContext";
 // import { AuthProvider } from "./Context/AuthContext";
 
 function ScrollToTop() {
@@ -48,10 +50,13 @@ function App() {
         <Route index path="/personaldetail" element={<PersonalDetails />} />
         <Route index path="/search" element={<SearchPage />} />
         <Route index path="/chat" element={<Chat />} />
+        <Route index path="/TicketDashCard" element={<TicketDashCard />} />
         <Route index path="/commerce" element={<Commerce />} />
         <Route index path="/category" element={<CategoryPage />} />
         <Route index path="/business" element={<BusinessDirectory />} />
-        <Route index path="/ticket" element={<Ticket />} />
+        <Route index path="/ticket" element={
+            <Ticket />
+        } />
         <Route index path="/connect" element={<Connect />} />
         <Route index path="/addprofile" element={<AddProfile />} />
         <Route index path="/EditProfile" element={<EditProfile />} />

@@ -3,6 +3,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
 import { useState, useEffect } from "react";
 
+
 const CreateEventTictetFormTwo = ({
   handleCreatTicketTwoCloseContainerClick,
   handleCreatTicketThreeContainerClick,
@@ -228,7 +229,7 @@ const CreateEventTictetFormTwo = ({
         </div>
         <div className="double-input">
           <div className="inp-label-box">
-            <label htmlFor="">Event category</label>
+            <label htmlFor=""> Event category</label>
             <div className="claim-inp flex nobd">
               <MdOutlineCategory />
               <select
