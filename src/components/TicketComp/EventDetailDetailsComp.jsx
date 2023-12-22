@@ -1,7 +1,7 @@
 import { MdLocationOn, MdOutlineCalendarMonth } from "react-icons/md";
 import ActionButton from "../Commons/Button";
 
-const EventDetailDetailsComp = ({ handleGetTicketClick }) => {
+const EventDetailDetailsComp = ({ handleGetTicketClick, location, eventDate, tickets }) => {
   return (
     <div className="event-details-box-cont">
       <div className="event-txt-detaill">
@@ -9,12 +9,12 @@ const EventDetailDetailsComp = ({ handleGetTicketClick }) => {
         <div className="location-box chang">
           <MdLocationOn />
           <div className="loca-txt loc-red">
-            Eko Hotel and suites conference hall
+            {location}
           </div>
         </div>
         <div className="location-box">
           <MdOutlineCalendarMonth />
-          <div className="loca-txt loc-red">Thur, 17 Aug 2023 , 9:30 PM </div>
+          <div className="loca-txt loc-red">{eventDate}</div>
         </div>
       </div>
       <div className="det-action-btn" onClick={handleGetTicketClick}>

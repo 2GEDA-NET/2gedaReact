@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { MdEdit } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
 import axios from "axios";
 import { url } from "../../utils";
@@ -18,6 +19,7 @@ const EditProfile = ({ handleEditProClose }) => {
   const [work, setWork] = useState("");
   const [city, setCity] = useState("");
   const [bio, setBio] = useState("");
+
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
@@ -26,7 +28,8 @@ const EditProfile = ({ handleEditProClose }) => {
     dob: "",
     gender: "",
   });
-
+  const navigate = useNavigate()
+  
   const handleImageChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -140,6 +143,7 @@ const EditProfile = ({ handleEditProClose }) => {
       console.log(error);
     } finally {
       setIsloading(true);
+      navigate("/")
       console.log("Finally block executed");
     }
   };

@@ -11,7 +11,7 @@ const SuccessTicketPurc = ({ handleCloseAllClick }) => {
         <div className="empt-box-sea">
           <img src="images/em2.png" alt="" />
           <div className="full-notin">
-            Your ticket purchase was successful You will receive a mail
+            Your ticket purchase is being processed You will receive a mail
             containing your ticket soon.
           </div>
           <div className="choose-act-btn" onClick={handleCloseAllClick}>

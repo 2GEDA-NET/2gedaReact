@@ -4,8 +4,10 @@ import EventDetailDetailsComp from "../../components/TicketComp/EventDetailDetai
 import TicketInfoCalender from "../../components/TicketComp/TicketInfoCalender";
 import ReceverDetail from "../../components/TicketComp/ReceverDetail";
 import ChooseTicket from "./ChooseTicket";
-const EventDetail = ({ handleCloseContainerClick }) => {
+
+const EventDetail = ({ handleCloseContainerClick, eventDetail }) => {
   const [isChooseOpen, setIsChooseOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleCloseAllClick = () => {
     handleCloseContainerClick();
@@ -29,13 +31,16 @@ const EventDetail = ({ handleCloseContainerClick }) => {
   }, []);
   return (
     <>
-      {isChooseOpen && (
+      {isChooseOpen ? (
         <ChooseTicket
+          eventDetail={eventDetail}
           handleCloseChooseClick={handleCloseChooseClick}
           handleCloseAllClick={handleCloseAllClick}
         />
+      ) : (
+        <></>
       )}
-      {!isChooseOpen && (
+      {!isChooseOpen && eventDetail !== null && (
         <div className="detail-bx-container">
           <TicketSearchComp
             label={"Event details"}
@@ -44,18 +49,25 @@ const EventDetail = ({ handleCloseContainerClick }) => {
           />
           <div className="event-detail-container">
             <div className="event-image-banner">
-              <img
-                src="https://img.freepik.com/free-photo/restaurant-hall-with-tables-decorated-with-tall-vases-with-roses_1304-4823.jpg"
-                alt=""
-              />
+              {eventDetail && eventDetail.image ? (
+                <img src={eventDetail.image} alt="" />
+              ) : (
+                <img
+                  src="https://img.freepik.com/free-photo/restaurant-hall-with-tables-decorated-with-tall-vases-with-roses_1304-4823.jpg"
+                  alt=""
+                />
+              )}
             </div>
             <EventDetailDetailsComp
+              location={eventDetail.location}
+              eventDate={eventDetail.formated_date}
               handleGetTicketClick={handleGetTicketClick}
             />
-            <TicketInfoCalender />
+            <TicketInfoCalender tickets={eventDetail} />
             <ReceverDetail
               receiverDetailRef={receiverDetailRef}
-              handleChooseClick={handleChooseClick}
+              eventDetail={eventDetail}
+              handleChooseClick = {handleChooseClick}
             />
           </div>
         </div>

@@ -1,12 +1,12 @@
 import "./second.css";
-const SmallTicketCard = ({
+const SmallTicketCardEvent = ({
   handleEventDetailContainerClick,
   description,
   date,
+  eventId,
   location,
   formatedDate,
   eventImage,
-  eventId,
 }) => {
   return (
     <div className="small-ticket-card">
@@ -41,4 +41,4 @@ const SmallTicketCard = ({
   );
 };
 
-export default SmallTicketCard;
+export default SmallTicketCardEvent;

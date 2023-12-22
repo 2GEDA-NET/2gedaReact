@@ -11,7 +11,8 @@ const CreateEventTictetFormThree = ({
 }) => {
   const contextOne = useContext(EventContextOne);
   const contextTwo = useContext(EventContextTwo);
-  const contextThree = useContext(EventContextThree);const [isToggled, setToggled] = useState(false);
+  const contextThree = useContext(EventContextThree);
+  const [isToggled, setToggled] = useState(false);
   const [isPublicToggled, setPublicToggled] = useState(true);
   const [feesOption, setFeesOption] = useState("");
   const [feesOptionError, setFeesOptionError] = useState("");

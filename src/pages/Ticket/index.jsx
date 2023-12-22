@@ -15,6 +15,11 @@ import SearchResultTicket from "./SearchResultTicket";
 import SellTicketDash from "./SellTicketDash";
 import TicketReport from "./TicketReport";
 import MyEvent from "./MyEvent";
+import { url } from "../../utils";
+
+import { EventProvider } from "../../Context/EventContext/EventDetail";
+// import EventThisWeek from './EventThisWeek';
+// import EventDetail from './EventDetail';
 
 const Ticket = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +29,10 @@ const Ticket = () => {
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
   const [isTicketReportOpen, setIsTicketReportOpen] = useState(false);
   const [isMyEventOpen, setIsMyEventOpen] = useState(false);
+  const [responseData, setResponseData] = useState(null);
+  const [eventDetail, setEventDetail] = useState(null);
+
+  const [isLoading, setIsloading] = useState(null);
   const handleMyEventContainerClick = () => {
     setIsMyEventOpen(true);
   };
@@ -61,8 +70,34 @@ const Ticket = () => {
     setIsModalOpen(false);
     setIsWeekOpen(false);
   };
-  const handleEventDetailContainerClick = () => {
+  const handleEventDetailContainerClick = async (eventId) => {
+    console.log("hello done");
     setIsEventDetailOpen(true);
+    console.log(eventId);
+    const token = localStorage.getItem("authTOken");
+    console.log(`Token ${token}`);
+    try {
+      const response = await fetch(`${url}/ticket/event/${eventId}/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Token ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        console.log("Response not ok");
+      }
+
+      const responseBody = await response.json();
+      setEventDetail(responseBody);
+      console.log("the detail", responseBody);
+    } catch (error) {
+      console.log(error);
+      // Handle errors as needed
+    } finally {
+      console.log("Finally block executed");
+    }
   };
   const handleEventDetailCloseContainerClick = () => {
     setIsEventDetailOpen(false);
@@ -84,6 +119,7 @@ const Ticket = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
       <div className="home-container">
@@ -123,12 +159,15 @@ const Ticket = () => {
                   handleCloseContainerClick={handleWeekCloseContainerClick}
                 />
               )}
-              {isEventDetailOpen && (
-                <EventDetail
-                  handleCloseContainerClick={
-                    handleEventDetailCloseContainerClick
-                  }
-                />
+              {isEventDetailOpen && setEventDetail && (
+                <EventProvider>
+                  <EventDetail
+                    eventDetail={eventDetail}
+                    handleCloseContainerClick={
+                      handleEventDetailCloseContainerClick
+                    }
+                  />
+                </EventProvider>
               )}
               {!isTicketReportOpen && !isMyEventOpen && isSellTicketOpen && (
                 <SellTicketDash
@@ -184,10 +223,16 @@ const Ticket = () => {
                     />
                     <PromoteTicket
                       handleContainerClick={handleContainerClick}
+                      handleEventDetailContainerClick={
+                        handleEventDetailContainerClick
+                      }
                     />
                     <EventCategory />
                     <EventThisWeek
                       handleWeekContainerClick={handleWeekContainerClick}
+                      handleEventDetailContainerClick={
+                        handleEventDetailContainerClick
+                      }
                     />
                   </div>
                 )}

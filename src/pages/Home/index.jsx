@@ -73,7 +73,7 @@ const Home = () => {
       }
     };
 
-    // Call the async function
+
     makeRequest();
   }, []);
   return (
