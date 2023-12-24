@@ -1,9 +1,7 @@
 .home-container {
   position: relative;
 }
-.App {
-  /* position: relative; */
-}
+
 .modal-full-container {
   position: fixed;
   top: 0%;

@@ -161,7 +161,7 @@ const PostFormModal = ({
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: `http://127.0.0.1:8000/feed/create_post/`,
+        url: `${url}/feed/create_post/`,
         headers: {
           Authorization: `Token ${token}`,
         },
@@ -347,7 +347,11 @@ const PostFormModal = ({
               onClick={() => handleIconClick("exe")}
             />
           </div>
-          <button className="post-btn" type="submit" onClick={handlePost}>
+          <button
+            className="post-btn"
+            type="submit"
+            onClick={handlePost}
+          >
             Post
           </button>
         </div>

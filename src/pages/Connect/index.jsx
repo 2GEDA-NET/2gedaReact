@@ -6,7 +6,6 @@ import "./style.css";
 import ConnectSearch from "../../components/ConnectComp/ConnectSearch";
 import SelectCategory from "../../components/Dashboard/SelectCategory";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-// import Carousel from "react-bootstrap/Carousel";
 import { GiShare } from "react-icons/gi";
 import ProfileStick from "../../components/Commons/ProfileStick";
 import SearchBusinessCard from "../../components/SearchComp/SearchBusinessCard";

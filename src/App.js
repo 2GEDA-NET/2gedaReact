@@ -21,6 +21,14 @@ import NonAuthStero from "./pages/Stereo/NonAuthStero";
 import AddProfile from "./pages/Profile/AddProfile";
 import EditProfile from "./components/Modals/EditProfile";
 import TicketDashCard from "./components/TicketComp/TicketDashCard";
+import CantVote from "./components/Modals/Vote/Cant/CantVote";
+import PollsSearch from "./components/PollsComp/PollsSearch";
+import Voting from "./pages/Polls/Voting";
+import Voted from "./components/Modals/Vote/Cant/Voted";
+// import Paid from "./components/Modals/Paid/Paid";
+import SuccessPoll from "./components/Modals/Vote/SuccessPoll";
+import MyPolls from "./components/Modals/Vote/MyPolls";
+import PollResult from "./components/Modals/Vote/PollResult";
 // import { EventContextProvider } from "./Context/EventContext/EventContext";
 // import { AuthProvider } from "./Context/AuthContext";
 
@@ -50,13 +58,19 @@ function App() {
         <Route index path="/personaldetail" element={<PersonalDetails />} />
         <Route index path="/search" element={<SearchPage />} />
         <Route index path="/chat" element={<Chat />} />
+        <Route index path="/CanVote" element={<CantVote />} />
+        <Route index path="/Voted" element={<Voted />} />
+        <Route index path="/MyPolls" element={<MyPolls />} />
+        <Route index path="/PollResult" element={<PollResult />} />
+        <Route index path="/Voting" element={<Voting />} />
+        <Route index path="/SuccessPoll" element={<SuccessPoll />} />
+        <Route index path="/PollsSearch" element={<PollsSearch />} />
+        <Route index path="/CantVote" element={<CantVote />} />
         <Route index path="/TicketDashCard" element={<TicketDashCard />} />
         <Route index path="/commerce" element={<Commerce />} />
         <Route index path="/category" element={<CategoryPage />} />
         <Route index path="/business" element={<BusinessDirectory />} />
-        <Route index path="/ticket" element={
-            <Ticket />
-        } />
+        <Route index path="/ticket" element={<Ticket />} />
         <Route index path="/connect" element={<Connect />} />
         <Route index path="/addprofile" element={<AddProfile />} />
         <Route index path="/EditProfile" element={<EditProfile />} />

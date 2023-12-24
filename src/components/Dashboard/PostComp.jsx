@@ -115,9 +115,9 @@ const PostComp = ({
           )}
         </div>
         <div className="dob-img flex" onClick={handleFeedOpen}>
-          <div className="post-media">
+          {/* <div className="post-media">
             <img src="" alt="" />
-          </div>
+          </div> */}
           <div className="post-media lay-post">
             {media && media[1] && <img src={media[1].media} alt="" />}
             <div className="over-lay-post flex">
