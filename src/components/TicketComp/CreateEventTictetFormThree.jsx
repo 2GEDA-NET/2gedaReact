@@ -8,6 +8,9 @@ import { url } from "../../utils";
 const CreateEventTictetFormThree = ({
   handleCreatTicketThreeCloseContainerClick,
   handleCreatTicketSucessClick,
+  setIsPublic,
+  setAddSales,
+  handleBuyTicket,
 }) => {
   const contextOne = useContext(EventContextOne);
   const contextTwo = useContext(EventContextTwo);
@@ -19,6 +22,7 @@ const CreateEventTictetFormThree = ({
 
   const handlePublicToggle = () => {
     setPublicToggled(!isPublicToggled);
+    setIsPublic(true);
   };
 
   const handleToggle = () => {
@@ -28,65 +32,19 @@ const CreateEventTictetFormThree = ({
   const handleFeesOptionChange = (e) => {
     setFeesOption(e.target.value);
     setFeesOptionError("");
+    if (e.target.value === "add") {
+      setAddSales(true);
+    } else {
+      setAddSales(false);
+    }
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-
   const handleContinueClick = async () => {
     const requestData = { ...contextOne, ...contextTwo, ...contextThree };
- 
-    const token = localStorage.getItem('authToken')
-
-    const myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization", `${token}`
-    );
-
-    const formdata = new FormData();
-    formdata.append("title", requestData.title);
-    formdata.append("desc", requestData.description);
-    formdata.append("platform", requestData.platform);
-    formdata.append("events_category_name", requestData.eventCategory);
-    formdata.append("location", requestData.venue);
-    formdata.append("events_category_image", requestData.eventImage, "[PROXY]");
-    formdata.append("is_paid", requestData.isPaid);
-
-    requestData.tickets.forEach((ticket, index) => {
-      formdata.append(`ticket[${index}][ticket_category]`, ticket.ticket);
-      formdata.append(`ticket[${index}][ticket_price]`, ticket.price);
-      formdata.append(`ticket[${index}][ticket_quantity]`, ticket.quantity);
-      formdata.append(`ticket[${index}][is_free]`, ticket.isFree.toString());
-    });
-
-    formdata.append("is_public", requestData.isPublicToggled.toString());
-    formdata.append("add_to_sales", "true");
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
-    };
-
-    try {
-      const response = await fetch(
-        `${url}/ticket/events/`,
-        requestOptions
-      );
-      if (response.ok) {
-        handleCreatTicketSucessClick();
-      } else {
-        console.error(
-          "Error sending data to the backend:",
-          response.statusText
-        );
-      }
-    } catch (error) {
-      console.error("Error sending data to the backend:", error.message);
-    }
   };
 
   return (
@@ -192,12 +150,17 @@ const CreateEventTictetFormThree = ({
           className="act-continue-btn"
           onClick={handleCreatTicketSucessClick}
         >
-          <ActionButton label={"Continue"} />
+          <div className="act-btn-cont">
+            <button
+              
+              onClick={handleBuyTicket}
+              className={`action-btn`}
+            >
+              Createeee
+            </button>
+          </div>
         </div>
-        <div
-          className="bac-formm"
-          onClick={handleContinueClick}
-        >
+        <div className="bac-formm" onClick={handleContinueClick}>
           Go Back
         </div>
       </div>

@@ -35,7 +35,7 @@ const PostFormPhotoModal = ({
         onDrop={handleImageDrop}
         onDragOver={preventDefault}
       >
-        {images.length > 0 ? (
+        { images.length > 0 ? (
           images.map((file, index) => {
             if (file.type.startsWith("image/")) {
               // Display images using <img> element
