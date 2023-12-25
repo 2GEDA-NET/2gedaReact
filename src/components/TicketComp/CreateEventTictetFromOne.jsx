@@ -3,16 +3,26 @@ import { IoLocation } from "react-icons/io5";
 import ActionButton from "../../components/Commons/Button";
 import { useState } from "react";
 
-
-const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
-  const [isPlatforn, setIsPlatforn] = useState(false);
-  const [image, setImage] = useState("");
-  const [eventTitle, setEventTitle] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
-  const [venueName, setVenueName] = useState("");
-  const [venueAddress, setVenueAddress] = useState("");
-  const [platformName, setPlatformName] = useState("");
-  const [websiteUrl, setWebsiteUrl] = useState("");
+const CreateEventTictetFromOne = ({
+  handleCreatTicketTwoContainerClick,
+  setImage,
+  setEventTitle,
+  setEventDescription,
+  setVenueName,
+  setVenueAddress,
+  setPlatformName,
+  setWebsiteUrl,
+  image,
+  isPlatforn,
+  eventTitle,
+  eventDescription,
+  venueName,
+  venueAddress,
+  platformName,
+  websiteUrl,
+  setIsPlatforn,
+  setEventImage,
+}) => {
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
@@ -55,6 +65,7 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
+    setEventImage(file);
 
     reader.onloadend = () => {
       setImage(reader.result);
@@ -128,7 +139,10 @@ const CreateEventTictetFromOne = ({ handleCreatTicketTwoContainerClick }) => {
           accept="image/*"
           style={{ display: "none" }}
           id="pic-input"
-          onChange={handleImageChange}
+          onChange={(e) => {
+            handleImageChange(e);
+            setEventImage(e.target.files[0])
+          }}
         />
         {image ? (
           <label htmlFor="pic-input">

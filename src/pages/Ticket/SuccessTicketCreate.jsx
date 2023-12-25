@@ -3,8 +3,8 @@ import ActionButton from "../../components/Commons/Button";
 import { PiCopySimple } from "react-icons/pi";
 import { useState } from "react";
 
-const SuccessTicketCreate = ({ handleCloseAllClick }) => {
-  const [url, setUrl] = useState("https://2geda.net/tickets/ID1298");
+const SuccessTicketCreate = ({ handleCloseAllClick, eventUrl }) => {
+  const [url, setUrl] = useState(eventUrl);
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopyClick = async () => {

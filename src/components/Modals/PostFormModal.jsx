@@ -102,25 +102,26 @@ const PostFormModal = ({
     setIsTagsFrd(false);
   };
 
+  // const setFilesNull = () => {
+  //   try {
+  //     setWord(null);
+  //     setImages(null);
+  //     setApk(null);
+  //     setAudioFile(null);
+  //     setExe(null);
+  //     setPDF(null);
+  //     setExcel(null);
+  //     setMusic(null);
+  //     setPowerpoint(null);
+  //   } catch (error) {}
+  // };
+
   const handlePost = async () => {
     // formdata.append("media", fileInput.current.files[0], "[PROXY]");
 
     try {
       const token = localStorage.getItem("authTOken");
 
-      // console.log(contentText);
-      // console.log(images[0]);
-
-      // const formdata = new FormData();
-      // formdata.append("content", contentText);
-      // formdata.append("hashtags", "Waw");
-      // formdata.append("is_business_post", true);
-      // formdata.append("tagged_users", "bigkid");
-
-      // formData.append(
-      //   "json",
-      //   new Blob([JSON.stringify(formNewdata)], { type: "application/json" })
-      // );
       console.log(images[0]);
 
       const FormData = require("form-data");
@@ -130,33 +131,33 @@ const PostFormModal = ({
       if (selectedIcon === "word") {
         console.log(word);
         data.append("media", word[0]);
+        data.append("file_type", "Word");
       } else if (selectedIcon === "photo") {
         data.append("media", images[0]);
+        data.append("file_type", "Images");
       } else if (selectedIcon === "pdf") {
         data.append("media", pdf[0]);
+        data.append("file_type", "PDF");
       } else if (selectedIcon === "powerpoint") {
         data.append("media", powerpoint[0]);
+        data.append("file_type", "PPT");
       } else if (selectedIcon === "apk") {
         console.log(apk[0]);
+        data.append("file_type", "Apk");
         data.append("media", apk[0]);
       } else if (selectedIcon === "exe") {
         data.append("media", exe[0]);
+        data.append("file_type", "EXE");
       } else if (selectedIcon === "excel") {
         data.append("media", excel[0]);
+        data.append("file_type", "Excel");
       } else if (selectedIcon === "rec") {
         data.append("media", audioFile[0]);
+        data.append("file_type", "Recording");
       } else if (selectedIcon === "music") {
         data.append("media", music[0]);
+        data.append("file_type", "Music");
       }
-
-      data.append("media", images[0]);
-      data.append("content", "Hello world");
-      data.append("url", "https://example.com");
-      data.append("hashtags", "@Waw");
-      data.append("is_business_post", "True");
-      data.append("tagged_users", '["bigkid"]');
-      data.append("media", images[0]);
-      data.append("hashtags", "@Werey");
 
       let config = {
         method: "post",
@@ -172,6 +173,7 @@ const PostFormModal = ({
         .request(config)
         .then((response) => {
           console.log(JSON.stringify(response.data));
+         
         })
         .catch((error) => {
           if (error.response) {
@@ -200,7 +202,10 @@ const PostFormModal = ({
           <div className="post-ead">Post on feed</div>
           <AiOutlineClose
             className="cls-post"
-            onClick={handleCloseMainContainerClick}
+            onClick={() => {
+              handleCloseMainContainerClick();
+
+            }}
           />
         </div>
         <textarea

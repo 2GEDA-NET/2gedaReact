@@ -3,15 +3,17 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
 import { useState, useEffect } from "react";
 
-
 const CreateEventTictetFormTwo = ({
   handleCreatTicketTwoCloseContainerClick,
   handleCreatTicketThreeContainerClick,
+  tickets,
+  setTickets,
+
 }) => {
   const [selectedTicketIndex, setSelectedTicketIndex] = useState(0);
-  const [tickets, setTickets] = useState([
-    { name: "", quantity: "", price: "FREE TICKET" },
-  ]);
+  // const [tickets, setTickets] = useState([
+  //   { name: "", quantity: "", price: "FREE TICKET" },
+  // ]);
   const [eventCategory, setEventCategory] = useState("");
   const [errors, setErrors] = useState({});
 

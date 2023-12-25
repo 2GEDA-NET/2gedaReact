@@ -18,6 +18,8 @@ import FeedDetail from "./FeedDetail";
 import { useState } from "react";
 import { useEffect } from "react";
 import { url } from "../../utils";
+import Lottie from "lottie-react";
+import preloader from "./Animation - 1703321875032 (1).json";
 
 const Home = () => {
   const [isFeedOpen, setIsFeedOpen] = useState(false);
@@ -42,13 +44,16 @@ const Home = () => {
     console.log(`Token ${token}`);
     const makeRequest = async () => {
       try {
-        const response = await fetch(`${url}/feed/create_post/`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Token ${token}`,
-          },
-        });
+        const response = await fetch(
+          `http://127.0.0.1:8000/feed/create_post/`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Token ${token}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           console.log("Response not ok");
@@ -57,7 +62,7 @@ const Home = () => {
         const responseBody = await response.json();
         setResponseData(responseBody);
 
-        // Move setIsLoading inside the try block if you want it to be set only on success
+        
         setIsloading(true);
 
         // Check if responseData is not null before mapping
@@ -72,7 +77,6 @@ const Home = () => {
         console.log("Finally block executed");
       }
     };
-
 
     makeRequest();
   }, []);
@@ -105,13 +109,31 @@ const Home = () => {
               </div>
               {activeTab === "All Posts" ? (
                 <>
+                  {!isLoading && (
+                    <div
+                      style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        display: "flex",
+                      }}
+                    >
+                      <Lottie
+                        animationData={preloader}
+                        style={{
+                          width: "300px",
+                          height: "100px",
+                        }}
+                      />
+                    </div>
+                  )}
+
                   {responseData !== null && responseData.length > 0 ? (
                     responseData.map((item, index) => (
                       <PostComp
                         handleFeedOpen={handleFeedOpen}
                         key={index}
-                        postID = {item.id}
-                         creator={item.user}
+                        postID={item.id}
+                        creator={item.user}
                         comment={item.comment_text}
                         media={item.each_media}
                         hashtag={item.hashtags}
@@ -123,7 +145,7 @@ const Home = () => {
                       />
                     ))
                   ) : (
-                    <></>
+                    <div>{console.log("Hello Lottie")}</div>
                   )}
 
                   <div className="music-das-row">
