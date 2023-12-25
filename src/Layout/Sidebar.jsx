@@ -15,7 +15,7 @@ const Sidebar = ({ isCollapsed }) => {
       className={isCollapsed ? "sidebar-container  nil" : "sidebar-container"}
     >
       <div className="sidebar-box">
-        <div className="sidebar-items">
+        <div className="sidebar-items ">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -126,10 +126,10 @@ const Sidebar = ({ isCollapsed }) => {
             <div className="sidebar-text">Education</div>
           </NavLink>
 
-          <div className="side-item lout">
+          {/* <div className="side-item lout">
             <IoLogOutOutline className="side-icon " />
             <div className="sidebar-text">Sign out</div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

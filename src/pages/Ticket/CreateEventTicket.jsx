@@ -1,10 +1,10 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import TicketSearchComp from "../../components/TicketComp/TicketSearchComp";
 import CreateEventTictetFromOne from "../../components/TicketComp/CreateEventTictetFromOne";
 import CreateEventTictetFormTwo from "../../components/TicketComp/CreateEventTictetFormTwo";
 import CreateEventTictetFormThree from "../../components/TicketComp/CreateEventTictetFormThree";
 import SuccessTicketCreate from "./SuccessTicketCreate";
-import React from "react";
 import EventOneContextProvider from "../../Context/EventContext/EventContextProvider";
 import EventTwoContextProvider from "../../Context/EventContext/EventContextProviderTwo";
 import { url } from "../../utils";

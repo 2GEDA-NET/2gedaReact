@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .layout-container {
   display: flex;
   width: 100%;
@@ -14,7 +19,7 @@
 }
 .sidebar-container {
   background: #4f0da3;
-  width: 30%;
+  width: 20%;
   min-height: 100vh;
   margin-top: 0;
   padding-top: 60px;
@@ -26,7 +31,11 @@
   justify-content: center;
   flex-direction: column;
   position: fixed;
-  left: 3%;
+}
+
+.side-items{
+  margin: 0;
+  padding: 0;
 }
 
 .ctrl-btn {
@@ -52,7 +61,7 @@
   font-weight: 500;
   align-items: center;
   color: #c47efb;
-  gap: 5px;
+  gap: 10px;
   margin-bottom: 15px;
   text-decoration: none;
 }
@@ -169,6 +178,8 @@ li {
     z-index: 11;
   }
 
+  
+
   .nil {
     display: none;
   }
@@ -199,6 +210,7 @@ li {
   }
 }
 @media only screen and (max-width: 940px) {
+  
   .mobile-searc {
     display: initial;
   }
@@ -215,6 +227,10 @@ li {
     left: 0;
     top: 10%;
   }
+ .sidebar-box {
+   left: -8%;
+ }
+   
 }
 @media only screen and (max-width: 750px) {
   .sidebar-container {
@@ -226,6 +242,9 @@ li {
   .lst {
     left: 0;
   }
+     .sidebar-box {
+       left: -14%;
+     }
 }
 @media only screen and (max-width: 700px) {
   .navbar-container {
