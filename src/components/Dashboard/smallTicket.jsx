@@ -15,12 +15,12 @@ const SmallTicketCard = ({
           <div className="live-tic">Live event</div>
         </div>
         <div className="live-tict-im">
-          <img src="images/lo5.png" alt="" />
+          <img  className="pics" src="images/lo5.png" alt="" />
         </div>
         {eventImage !== null ? (
-          <img src={eventImage} alt="" />
+          <img className="pics" src={eventImage} alt="" />
         ) : (
-          <img src="images/pic1.png" alt="" />
+          <img className="pics" src="images/pic1.png" alt="" />
         )}
       </div>
       <div className="tic-title">{description !== null ? description : ""}</div>

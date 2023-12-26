@@ -13,7 +13,7 @@ const Card = ({ icon, heading, paragraph, circleBackgroundColor }) => {
       </div>
       <div className="text-left">
         <h2 className="text-xl font-bold mb-2 text-gray-700">{heading}</h2>
-        <p className="text-md">{paragraph}</p>
+        <p className="text-md" style={{textAlign: "start"}}>{paragraph}</p>
       </div>
     </div>
   );

@@ -80,7 +80,7 @@ const AboutLanding = () => {
               </div>
             </div>
             <div className="about-text-container">
-              <p className="about-text">
+              <p className="about-text" style={{textAlign: "start"}}>
                 At 2GEDA, we're not just a social network; we're a global
                 community fostering connections and meaningful interactions.
                 Serving as your all-in-one platform, we're the marketplace for
@@ -105,11 +105,11 @@ const AboutLanding = () => {
           <div className="container mx-auto pt-9 md:flex-row items-center justify-center">
             <div className="cardGrid">
               {cardData.map((card, index) => (
-                <Card
+                <Card 
                   key={index}
                   heading={card.heading}
                   icon={card.icon}
-                  paragraph={card.paragraph}
+                  paragraph={card.paragraph } 
                   layout={card.layout}
                 />
               ))}
@@ -143,7 +143,7 @@ const AboutLanding = () => {
         <div className="about-content">
           <div className="about-text-container">
             <h3 className="header">Experience 2GEDA Anywhere, Anytime</h3>
-            <p className="download-text">
+            <p className="download-text" style={{textAlign: "start"}}>
               Connect seamlessly on 2GEDA - your social hub for local and global
               interactions. Download now to experience a world of connectivity,
               commerce, and community. Stay connected, stay informed, stay 2GEDA
@@ -160,20 +160,20 @@ const AboutLanding = () => {
       </div>
 
       <div className="footer">
+        <div className="fdiv" >
         <div>
           <img src={logo} alt="logo" className="logo" />
           <h2>www.2geda.net</h2>
         </div>
-        <div>
-          <p className="heading-secondary">Quick Links</p>
+        <div >
+          <p className="heading-secondary" style={{textAlign: "center"}}>Quick Links</p>
           <div className="link">
             <Link to="/#features">Features</Link>
             <Link to="/#about">About</Link>
+            <Link to="/#contact">Contact</Link>
+            <Link to="/#faq">FAQ</Link>
           </div>
         </div>
-        <div className="link">
-          <Link to="/#contact">Contact</Link>
-          <Link to="/#faq">FAQ</Link>
         </div>
         <div className="subscribe">
           <h2>Subscribe</h2>

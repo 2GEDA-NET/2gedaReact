@@ -29,6 +29,7 @@ import Voted from "./components/Modals/Vote/Cant/Voted";
 import SuccessPoll from "./components/Modals/Vote/SuccessPoll";
 import MyPolls from "./components/Modals/Vote/MyPolls";
 import PollResult from "./components/Modals/Vote/PollResult";
+import NonAuthNavbar from "./Layout/NonAuthNav/NonAuthNavbar";
 // import { EventContextProvider } from "./Context/EventContext/EventContext";
 // import { AuthProvider } from "./Context/AuthContext";
 
@@ -58,6 +59,7 @@ function App() {
         <Route index path="/personaldetail" element={<PersonalDetails />} />
         <Route index path="/search" element={<SearchPage />} />
         <Route index path="/chat" element={<Chat />} />
+        <Route index path="/NonAuthNavbar" element={<NonAuthNavbar />} />
         <Route index path="/CanVote" element={<CantVote />} />
         <Route index path="/Voted" element={<Voted />} />
         <Route index path="/MyPolls" element={<MyPolls />} />

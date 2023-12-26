@@ -3,45 +3,53 @@
   justify-content: space-between;
   padding: 20px 60px;
   align-items: center;
-  position: relative;
+  position: fixed;
+  width: 100%;
   background: #fff;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 .back-icon {
   font-size: 30px;
   color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
+
 .navbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  gap: 40px;
+  width: 100%;
 }
+
 .nav-ul {
-  display: flex;
   font-size: 20px;
   gap: 30px;
+  display: flex;
 }
+
 .nav-li {
   list-style: none;
   text-decoration: none;
 }
+
 .navbar_links {
   color: rgba(0, 0, 0, 0.8);
   text-decoration: none;
   cursor: pointer;
 }
+
 .active-link {
   color: #4f0da3;
   font-weight: 600;
   text-decoration: none;
 }
+
 .log-reg-btns {
   display: flex;
   gap: 20px;
 }
+
 .log-tbt {
   color: #4f0da3;
   background: none;
@@ -51,6 +59,7 @@
   font-weight: 500;
   cursor: pointer;
 }
+
 .log-btn {
   background: #4f0da3;
   border: none;
@@ -61,116 +70,132 @@
   box-shadow: 2px 6px 8px 0px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
+
 .logon img {
   width: 80px;
 }
+
 .nav-icon {
   display: none;
 }
+
+.menu-icon {
+  display: none;
+}
+
+.close-icon {
+  display: none;
+}
+
 .active-li button {
   background: rgba(88, 122, 133, 0.63);
 }
+
 .dash-layout-container {
   padding-top: 20px;
 }
+
 .das-nav {
   font-size: 25px;
   text-align: center;
 }
+
 .nonn {
   display: none;
 }
+
 .nk {
   display: none;
 }
+
+.menu-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  display: none;
+  flex-direction: column;
+}
+
+.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.active .menu-modal {
+  display: flex;
+}
+
+.active .nav-ul {
+  display: flex;
+  /* Show nav links when active */
+}
+
+.active .menu-icon {
+  display: none;
+}
+
+.active .close-icon {
+  display: initial;
+  font-size: 30px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 940px) {
-  .navbar-container {
-    padding: 20px;
+  .navbar {
+    width: 100%;
+    justify-content: space-between;
   }
+
+  .nav {
+    display: flex;
+    align-items: center;
+  }
+
   .nav-icon {
     display: initial;
     color: #4f0da3;
-  }
-  .nono {
-    display: none;
-  }
-  .nav-ul {
-    flex-direction: column;
-    width: 50%;
-    position: absolute;
-    top: 90%;
-    right: 110%;
-    opacity: 1;
-    transition: all 0.5s ease;
-    /* justify-content: center; */
-    align-items: flex-start;
-    padding: 10px;
-    gap: 25px;
-  }
-  .log-btnn {
-    width: 60px;
-    height: 30px;
-    border-radius: 5px;
-  }
-  .logon img {
-    width: 60px;
+    cursor: pointer;
+    margin-right: 10px;
   }
 
-  .active {
-    background: #fff;
-    left: 50%;
-    opacity: 1;
-    z-index: 99999;
-    height: 84vh;
+  .menu-icon {
+    display: initial;
+    color: #4f0da3;
+    cursor: pointer;
+    margin-right: 10px;
   }
-  /* body {
-      background-position: center;
-    } */
-}
-/* @media only screen and (max-width: 940px) {
-    .nav-icon {
-      margin-left: 10px;
-    }
-  } */
-@media only screen and (max-width: 680px) {
-  .log-reg-btns {
-    flex-direction: column;
-    gap: 25px;
-  }
-  .nill {
+
+  .close-icon {
     display: none;
   }
-  .non-navbar-container {
-    padding: 20px 20px;
-  }
-  .log-tbt {
-    height: 25px;
-    color: #000;
-    font-weight: 400;
-  }
-  .nonn {
-    display: flex;
-  }
-}
-@media only screen and (max-width: 430px) {
+
   .nav-ul {
-    padding: 20px;
-  }
-  .active {
-    height: 75vh;
-  }
-}
-@media only screen and (max-width: 360px) {
-  .nav-ul {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
     padding: 10px;
-    gap: 10px;
-    font-size: 15px;
-    height: 100vh;
   }
-  .nonn {
-    gap: 5px;
+
+  .active .nav-ul {
+    opacity: 1;
+    visibility: visible;
   }
-  .log-tbt {
-    font-size: 15px;
+
+  .active .menu-icon {
+    display: none;
+  }
+
+  .active .close-icon {
+    display: initial;
+  }
+
+  .active .menu-modal {
+    display: flex;
   }
 }

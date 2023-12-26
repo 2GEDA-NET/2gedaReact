@@ -7,10 +7,10 @@ const HeroSection = () => {
       <div>
         <div className="top">
           <div className='top-content'>
-          <h2 className="heading-primary">
+          <h2 className="heading-primary"> 
             Connect, Share, Discover and Empower
           </h2>
-          <p className="paragraph text-center text-slate-400">
+          <p className="paragraph" style={{color: "#f4f4f4"}}>
             Unleash connections. Explore entertainment and empower knowledge on
              2geda</p>
           <div className='cta'>

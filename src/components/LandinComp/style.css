@@ -14,12 +14,12 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   padding: 0 30%;
-  height: 82vh;
+  height: 92vh;
   color: #fff;
 }
 .top-content{
   text-align: center;
-  padding: 140px 0;
+  padding: 250px 0;
 }
 
 .heading-primary {
@@ -159,6 +159,7 @@ body {
   padding: 0.5rem;
 }
 
+
 .mr-4 {
   margin-right: 1rem;
 }
@@ -198,8 +199,8 @@ body {
 
 .download-text{
   font-size: 18px;
-    color: #fff;
-    margin-bottom: 20px;
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 .border{
@@ -207,7 +208,7 @@ body {
   color: white;
   border: 2px solid #000;
  }
-
+ 
  .footer {
    padding: 40px;
    display: flex;
@@ -219,64 +220,71 @@ body {
    display: flex;
    flex-direction: column;
    align-items: flex-start;
- }
+  }
 
- .link a {
-   margin-bottom: 10px;
-   text-decoration: none;
-   color: #000;
-   font-size: 15px;
- }
-
- .subscribe-form {
-   display: flex;
-   align-items: center;
+  .link a {
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #000;
+    font-size: 15px;
+  }
+  
+  .subscribe-form {
+    display: flex;
+    align-items: center;
    justify-content: center;
    margin-top: 10px;
    background-color: transparent;
  }
-
+ 
  input {
    padding: 10px;
    margin-right: 5px;
    background-color: transparent;
    border: 2px solid #ccc;
    border-radius: 7px 0 0 7px;
- }
+  }
+  
+  .arrow {
+    font-size: 20px;
+    color: #fff;
+    padding: 4px 7px;
+    background-color: #4b0289;
+    border-radius: 0  7px 7px 0;
+  }
 
- .arrow {
-   font-size: 20px;
-   color: #fff;
-   padding: 4px 7px;
-   background-color: #4b0289;
-   border-radius: 0  7px 7px 0;
- }
 
-/* Adjust as needed for responsiveness */
-@media (max-width: 760px) {
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .top{
-    padding:  10%;
-    height: 60vh;
-  }
-  .top-content{
-    padding: 80px 0;
-  }
-  .heading-primary{
-    font-size: 2.6rem;
-    padding: 0;
-  }
+     .fdiv {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       gap: 300px;
+     }
+  
+  @media (max-width: 1024px) {
+    .top{
+      padding:  10%;
+      height: 60vh;
+    }
+    .top-content{
+      padding: 160px 0;
+    }
+    .heading-primary{
+      font-size: 3rem;
+      padding: 0;
+    }
+    #contact{
+      padding: 30px 60px;
+    }
   .heading-secondary{
-    font-size: 2rem;
+    font-size: 2.6rem;
   }
   .paragraph{
-    font-size: 1.2rem;
+    font-size: 1.6rem;
   }
   .action-btn{
-    padding: 6px 10px;
-    font-size: 14px;
+    padding: 8px 12px;
+    font-size: 16px;
   }
   .about-container{
     padding: 40px 20px;
@@ -284,13 +292,7 @@ body {
   .heading-tertiary{
     font-size: 24px;
   }
-  .about-content{
-    display: block;
-    padding: 20px 0;
-  }
-  .image-container{
-    padding: 30px;
-  }
+  
   .board{
     width: 250px;
     height: 250px;
@@ -305,6 +307,10 @@ body {
   .features{
     padding: 0;
   }
+
+  .footer{
+    padding: 40px 10px;
+  }
   .imag{
     display: none;
   }
@@ -313,15 +319,105 @@ body {
     grid-template-columns: 1fr;
     gap: 2rem;
     margin: 10px;
+    margin-top: 40px;
   }
-  .cardGrid{
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+ 
+  .fdiv{
+    gap: 70px;
   }
-  .why{
+}
+
+
+@media (max-width: 760px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .top {
+    padding: 10%;
+    height: 70vh;
+  }
+
+  .top-content {
+    padding: 150px 0;
+  }
+
+  .heading-primary {
+    font-size: 2.6rem;
+    padding: 0;
+  }
+
+  .heading-secondary {
+    font-size: 2rem;
+  }
+
+  .paragraph {
+    font-size: 1.2rem;
+  }
+
+  .action-btn {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .about-container {
+    padding: 40px 20px;
+  }
+
+  .heading-tertiary {
+    font-size: 24px;
+  }
+
+  .about-content {
+    display: block;
+    padding: 20px 0;
+  }
+
+  .board {
+    width: 250px;
+    height: 250px;
+  }
+
+  .img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .about-text-container {
+    padding: 40px 10px 0 10px;
+  }
+
+  .features {
+    padding: 0;
+  }
+
+  .imag {
+    display: none;
+  }
+
+  .boxCard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 10px;
+  }
+
+  .cardGrid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .why {
     margin: 40px 0;
   }
-  .footer{
-    display: flex;
+
+  #contact{
+    padding: 30px 10px;
+  }
+  .footer {
     flex-direction: column;
+    padding: 10px;
+  }
+  .fdiv{
+    gap: 4px;
   }
 }
