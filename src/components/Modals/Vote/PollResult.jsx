@@ -1,10 +1,17 @@
 import React from 'react'
 import Stick from '../../Dashboard/Stick'
 import { FaArrowLeftLong, FaChevronDown } from 'react-icons/fa6';
+import MainLayout from '../../../Layout/MainLayout';
+import SearchBox from '../../SearchComp/searchBox';
+import Notify from './Notification/Notify';
 
 const PollResult = () => {
   return (
-    <div style={{ maxWidth: "500px"  }}>
+    <div className="home-container" style={{ background: "whiteSmoke" }}>
+      <MainLayout>
+        <div className="main-containe bus-box-con">
+          <div className="left-side-container buss-all-container">
+             <div style={{ maxWidth: "500px"  }}>
       <div
         className="createTop"
         style={{
@@ -44,7 +51,25 @@ const PollResult = () => {
       <Stick />
       <Stick />
     </div>
+          </div>
+
+
+         <div
+            className="left-side-container"
+            style={{
+              maxWidth: "525px",
+              padding: "20px",
+              background: "#fff",
+            }}
+          >
+            <SearchBox />
+            <Notify />
+          </div>
+              </div>
+      </MainLayout>
+    </div>
   );
+
 }
 
 export default PollResult
