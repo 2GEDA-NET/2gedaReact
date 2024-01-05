@@ -14,6 +14,7 @@ const Voting = () => {
 
   const [responseData, setResponseData] = useState(null);
   const [promoted, setPromoted] = useState(null);
+  const [suggested, setSuggested] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,6 +42,17 @@ const Voting = () => {
           },
         });
 
+        const suggestedResponse = await fetch(
+          `http://127.0.0.1:8000/poll/suggested-polls/`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Token ${token}`,
+            },
+          }
+        );
+
         if (!response.ok) {
           console.log("Response not ok");
         }
@@ -48,9 +60,18 @@ const Voting = () => {
         const responseBody = await response.json();
         console.log(responseBody);
         setResponseData(responseBody);
+        localStorage.setItem("allPolls", JSON.stringify(responseBody));
 
         const promotedResponseBody = await promotedResponse.json();
         setPromoted(promotedResponseBody);
+        localStorage.setItem(
+          "promotedPolls",
+          JSON.stringify(promotedResponseBody)
+        );
+
+        const suggestedBody = await suggestedResponse.json();
+        setSuggested(suggestedBody);
+        localStorage.setItem("suggestedPolls", JSON.stringify(suggestedBody));
         // Check if responseData is not null before mapping
       } catch (error) {
         console.log(error);
@@ -72,6 +93,44 @@ const Voting = () => {
     setIsModalOpen(false);
   };
 
+  const castVote = async (pollsId, content, cost) => {
+    const data = {
+      post_id: pollsId,
+      content: content,
+      cost: cost,
+    };
+    try {
+      const token = localStorage.getItem("authTOken");
+      const response = await fetch(`http://127.0.0.1:8000/poll/votes/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        console.log("Response not ok");
+      }
+
+      const responseBody = await response.json();
+      console.log(responseBody);
+
+      // Check if responseData is not null before mapping
+    } catch (error) {
+      console.log(error);
+      // Handle errors as needed
+    } finally {
+    }
+  };
+  const retrieved = localStorage.getItem("suggestedPolls");
+  const retrievedArrayString = JSON.parse(retrieved);
+  const promotedPollsretrieved = localStorage.getItem("promotedPolls");
+  const promotedPollsArrayString = JSON.parse(promotedPollsretrieved);
+  const allPollsretrieved = localStorage.getItem("allPolls");
+  const allPollsArrayString = JSON.parse(allPollsretrieved);
+
   return (
     <div className="home-container" style={{ background: "whiteSmoke" }}>
       <MainLayout>
@@ -83,26 +142,76 @@ const Voting = () => {
 
             <div className="pollsBox">
               <h2 className="head-line bus-dir">Suggested polls</h2>
-              <div className="grid">
-                <CantVote />
-                <CantVote />
+              <div className="grid" style={{ overflowX: "auto" }}>
+                {suggested && suggested.length > 1 ? (
+                  suggested.map((item, index) => (
+                    <CanVote
+                      key={index}
+                      voteOptions={item.options_list ? item.options_list : []}
+                      creator={ item.username ? item.username  : "unknown user"}
+                      question={item.question ? item.question : ""}
+                      duration={item.duration ? item.duration : ""}
+                      castVote={castVote}
+                      voteId={item.vote_id ? item.vote_id : ""}
+                    />
+                  ))
+                ) : (
+                  <>
+                    {retrievedArrayString &&
+                      retrievedArrayString.length > 1 &&
+                      retrievedArrayString.map((item, index) => (
+                        <CanVote
+                          key={index}
+                          voteOptions={
+                            item.options_list ? item.options_list : []
+                          }
+                          creator={ item.username ? item.username  : "unknown user"}
+                          question={item.question ? item.question : ""}
+                          duration={item.duration ? item.duration : ""}
+                          castVote={castVote}
+                          voteId={item.vote_id ? item.vote_id : ""}
+                          
+                        />
+                      ))}
+                  </>
+                )}
               </div>
             </div>
 
             <div className="pollsBox">
               <h2 className="head-line bus-dir">Promoted polls</h2>
-              <div className="grid">
-                {promoted &&
-                  promoted.length > 1 &&
+              <div className="grid" style={{ overflowX: "auto" }}>
+                {promoted && promoted.length > 1 ? (
                   promoted.map((item, index) => (
                     <CanVote
                       key={index}
                       voteOptions={item.options_list ? item.options_list : []}
-                      creator={item.user ? item.user : "unknown user"}
+                      creator={ item.username ? item.username  : "unknown user"}
                       question={item.question ? item.question : ""}
                       duration={item.duration ? item.duration : ""}
+                      castVote={castVote}
+                      voteId={item.vote_id ? item.vote_id : ""}
                     />
-                  ))}
+                  ))
+                ) : (
+                  <>
+                    {promotedPollsArrayString &&
+                      promotedPollsArrayString.length > 1 &&
+                      promotedPollsArrayString.map((item, index) => (
+                        <CanVote
+                          key={index}
+                          voteOptions={
+                            item.options_list ? item.options_list : []
+                          }
+                          creator={ item.username ? item.username  : "unknown user"}
+                          question={item.question ? item.question : ""}
+                          duration={item.duration ? item.duration : ""}
+                          castVote={castVote}
+                          voteId={item.vote_id ? item.vote_id : ""}
+                        />
+                      ))}
+                  </>
+                )}
               </div>
             </div>
 
@@ -113,17 +222,35 @@ const Voting = () => {
             </div>
 
             <div className="col">
-              {responseData &&
-                responseData.length > 1 &&
+              {responseData && responseData.length > 1 ? (
                 responseData.map((item, index) => (
                   <CanVote
                     key={index}
                     voteOptions={item.options_list ? item.options_list : []}
-                    creator={item.user ? item.user : "unknown user"}
+                    creator={ item.username ? item.username  : "unknown user"}
                     question={item.question ? item.question : ""}
                     duration={item.duration ? item.duration : ""}
+                    castVote={castVote}
+                    voteId={item.vote_id ? item.vote_id : ""}
                   />
-                ))}
+                ))
+              ) : (
+                <>
+                  {allPollsArrayString &&
+                    allPollsArrayString.length > 1 &&
+                    allPollsArrayString.map((item, index) => (
+                      <CanVote
+                        key={index}
+                        voteOptions={item.options_list ? item.options_list : []}
+                        creator={ item.username ? item.username  : "unknown user"}
+                        question={item.question ? item.question : ""}
+                        duration={item.duration ? item.duration : ""}
+                        castVote={castVote}
+                        voteId={item.vote_id ? item.vote_id : ""}
+                      />
+                    ))}
+                </>
+              )}
 
               {/* <img src="images/jumia.png" alt="" className="ads-img" />
               <CanVote />

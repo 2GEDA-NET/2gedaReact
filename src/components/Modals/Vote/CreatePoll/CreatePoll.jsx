@@ -6,6 +6,7 @@ import SearchBox from "../../../SearchComp/searchBox";
 import Notify from "../Notification/Notify";
 import MainLayout from "../../../../Layout/MainLayout";
 import { url } from "../../../../utils";
+import axios from "axios";
 
 const CreatePoll = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const CreatePoll = () => {
     options: ["", ""],
     duration: "",
     type: "",
-    media: null,
+    media: ["", ""],
   });
 
   const handleInputChange = (field, value) => {
@@ -40,29 +41,89 @@ const CreatePoll = () => {
     });
   };
 
- const handleCreatePoll = async () => {
-   try {
-     const token = localStorage.getItem("authToken");
-     const response = await fetch(`${url}/poll/polls`, {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`, 
-       },
-       body: JSON.stringify(pollData),
-     });
+  const handleCreatePoll = async () => {
+    let formdata = new FormData();
+    // formdata.append("question", pollData.question);
+    // formdata.append("duration", pollData.duration);
+    // formdata.append("type", pollData.type);
 
-     if (response.ok) {
-       navigate("/Voting");
-     } else {
-       const errorData = await response.json(); 
-       console.error("API request failed:", errorData);
-     }
-   } catch (error) {
-     console.error("Error making API request:", error);
-   }
- };
+    // pollData.options.forEach((item, index) => {
+    //   console.log(item);
+    //   formdata.append("content", item);
+    // });
 
+    // pollData.media.forEach((item, index) => {
+    //   formdata.append("media", item);
+    // });
+
+    // formdata.append("media", fileInput.files[0], "Group 63.png");
+    // formdata.append("media", fileInput.files[0], "Frame 24546.png");
+    // formdata.append("time_duration", "");
+    // formdata.append("content", "");
+    console.log(formdata);
+    try {
+      // const token = localStorage.getItem("authToken");
+      // const response = await fetch(`http://127.0.0.1:8000/poll/polls/`, {
+      //   method: "POST",
+      //   headers: {
+
+      //     Authorization: `Token ${token}`,
+      //   },
+      //   body: formdata,
+      // });
+
+      // const responseBody = await response.text()
+      // console.log(responseBody)
+      // if (response.ok) {
+      //   navigate("/Voting");
+      // } else {
+      //   const errorData = await response.json();
+      //   console.error("API request failed:", errorData);
+      // }
+
+      let data = new FormData();
+      data.append("question", pollData.question);
+      data.append("duration", pollData.duration);
+      data.append("type", pollData.type);
+
+      pollData.media.forEach((item, index) => {
+        console.log(item);
+        data.append("media", item);
+      });
+
+      pollData.options.forEach((item, index) => {
+        console.log(item);
+        data.append("content", `${item}`);
+      });
+
+      
+        
+
+      // data.append("content", "wale");
+
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "http://127.0.0.1:8000/poll/polls/",
+        headers: {
+          Authorization: "Token 65b55bb46605a175c3d5f16be2bcb83e7015305c",
+        },
+        data: data,
+      };
+
+      axios
+        .request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+          navigate("/Voting");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.error("Error making API request:", error);
+    }
+  };
 
   return (
     <div className="home-container" style={{ background: "whiteSmoke" }}>
@@ -112,6 +173,20 @@ const CreatePoll = () => {
                         handleInputChange("options", updatedOptions);
                       }}
                     />
+
+                    <div className="form-field">
+                      <label htmlFor="media">Add image or video</label>
+                      <input
+                        type="file"
+                        id="media"
+                        accept="image/*, video/*"
+                        onChange={(e) => {
+                          const updatedMedia = [...pollData.media];
+                          updatedMedia[index] = e.target.files[0];
+                          handleInputChange("media", updatedMedia);
+                        }}
+                      />
+                    </div>
                   </div>
                 ))}
 
@@ -130,9 +205,9 @@ const CreatePoll = () => {
                     }
                   >
                     <option value="">Select one</option>
-                    <option value="1">1 hour</option>
-                    <option value="24">24 hours</option>
-                    <option value="72">72 hours</option>
+                    <option value="22 hours">22 hours</option>
+                    <option value="24 hours">24 hours</option>
+                    <option value="3 days">3 days</option>
                   </select>
                 </div>
 
@@ -144,19 +219,9 @@ const CreatePoll = () => {
                     onChange={(e) => handleInputChange("type", e.target.value)}
                   >
                     <option value="">Select one</option>
-                    <option value="multiple">Multiple Choice</option>
-                    <option value="binary">Binary (Yes/No)</option>
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
                   </select>
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="media">Add image or video</label>
-                  <input
-                    type="file"
-                    id="media"
-                    accept="image/*, video/*"
-                    onChange={handleMediaChange}
-                  />
                 </div>
 
                 <div className="create-poll-btn" onClick={handleCreatePoll}>
