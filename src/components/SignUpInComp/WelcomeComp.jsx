@@ -42,7 +42,7 @@ const WelcomeComp = () => {
   };
 
   return (
-    <div className="welcome-comp-box">
+    <div className="welcome-comp-box" >
       <img src="images/hero3.jpg" alt="" />
       <div className=" up-wel">Welcome to 2geda</div>
 

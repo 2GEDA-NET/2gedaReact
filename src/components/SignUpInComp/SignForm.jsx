@@ -4,7 +4,7 @@ import InputField from "../Commons/InputField";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { url } from "../../utils";
 
@@ -185,10 +185,10 @@ const SignForm = () => {
           <ActionButton label={"Continue"} bg={"ma-d"} type={"submit"} />
           {/* <button type="submit">Submit</button> */}
         </div>
-        <div className="alr-ave">
+          <NavLink to="/" className="alr-ave">
           Already have an account?
           <span>Sign in</span>
-        </div>
+          </NavLink>
       </form>
     </div>
   );

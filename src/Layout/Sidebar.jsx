@@ -17,7 +17,7 @@ const Sidebar = ({ isCollapsed }) => {
       <div className="sidebar-box">
         <div className="sidebar-items ">
           <NavLink
-            to="/"
+            to="/Home"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -81,7 +81,7 @@ const Sidebar = ({ isCollapsed }) => {
             <div className="sidebar-text">Tickets</div>
           </NavLink>
           <NavLink
-            to="/not"
+            to="/ComingSoonPage"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -99,7 +99,7 @@ const Sidebar = ({ isCollapsed }) => {
             <div className="sidebar-text">Stereo</div>
           </NavLink>
           <NavLink
-            to="/not"
+            to="/ComingSoonPage"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -117,7 +117,7 @@ const Sidebar = ({ isCollapsed }) => {
             <div className="sidebar-text">Voting</div>
           </NavLink>
           <NavLink
-            to="/not"
+            to="/ComingSoonPage"
             className={({ isActive }) =>
               isActive ? "active_link side-item" : "side-item"
             }
@@ -126,10 +126,10 @@ const Sidebar = ({ isCollapsed }) => {
             <div className="sidebar-text">Education</div>
           </NavLink>
 
-          {/* <div className="side-item lout">
+          <NavLink to="/" className="side-item lout">
             <IoLogOutOutline className="side-icon " />
-            <div className="sidebar-text">Sign out</div>
-          </div> */}
+            <div className="sidebar-text">Sign Out</div>
+          </NavLink>
         </div>
       </div>
     </div>

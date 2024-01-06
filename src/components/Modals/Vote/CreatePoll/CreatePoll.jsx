@@ -62,32 +62,31 @@ const CreatePoll = () => {
     // formdata.append("content", "");
     console.log(formdata);
     try {
-      // const token = localStorage.getItem("authToken");
       // const response = await fetch(`http://127.0.0.1:8000/poll/polls/`, {
-      //   method: "POST",
-      //   headers: {
-
-      //     Authorization: `Token ${token}`,
-      //   },
-      //   body: formdata,
-      // });
-
-      // const responseBody = await response.text()
-      // console.log(responseBody)
+        //   method: "POST",
+        //   headers: {
+          
+          //     Authorization: `Token ${token}`,
+          //   },
+          //   body: formdata,
+          // });
+          
+          // const responseBody = await response.text()
+          // console.log(responseBody)
       // if (response.ok) {
-      //   navigate("/Voting");
-      // } else {
-      //   const errorData = await response.json();
-      //   console.error("API request failed:", errorData);
-      // }
-
-      let data = new FormData();
-      data.append("question", pollData.question);
-      data.append("duration", pollData.duration);
-      data.append("type", pollData.type);
-
-      pollData.media.forEach((item, index) => {
-        console.log(item);
+        //   navigate("/Voting");
+        // } else {
+          //   const errorData = await response.json();
+          //   console.error("API request failed:", errorData);
+          // }
+          
+          let data = new FormData();
+          data.append("question", pollData.question);
+          data.append("duration", pollData.duration);
+          data.append("type", pollData.type);
+          
+          pollData.media.forEach((item, index) => {
+            console.log(item);
         data.append("media", item);
       });
 
@@ -97,7 +96,9 @@ const CreatePoll = () => {
       });
 
       
-        
+      
+      
+      const token = localStorage.getItem("authToken");
 
       // data.append("content", "wale");
 
@@ -106,7 +107,7 @@ const CreatePoll = () => {
         maxBodyLength: Infinity,
         url: `${url}/poll/polls/`,
         headers: {
-          Authorization: "Token 65b55bb46605a175c3d5f16be2bcb83e7015305c",
+          Authorization: `${token}`,
         },
         data: data,
       };

@@ -31,6 +31,7 @@ import MyPolls from "./components/Modals/Vote/MyPolls";
 import PollResult from "./components/Modals/Vote/PollResult";
 import NonAuthNavbar from "./Layout/NonAuthNav/NonAuthNavbar";
 import CreatePoll from "./components/Modals/Vote/CreatePoll/CreatePoll";
+import ComingSoonPage from "./pages/ComingSoon";
 // import { EventContextProvider } from "./Context/EventContext/EventContext";
 // import { AuthProvider } from "./Context/AuthContext";
 
@@ -51,9 +52,9 @@ function App() {
       {/* <AuthProvider> */}
       <Routes>
         {/* <Route index path="/" element={<Home />} /> */}
-        <Route index path="/" element={<Home />} />
+        <Route index path="/Home" element={<Home />} />
         <Route index path="/signup" element={<Signup />} />
-        <Route index path="/signin" element={<Signin />} />
+        <Route index path="/" element={<Signin />} />
         <Route index path="/landing" element={<Landing />} />
         <Route index path="/verify" element={<Verify />} />
         <Route index path="/forgot" element={<ForgotPassword />} />
@@ -63,6 +64,7 @@ function App() {
         <Route index path="/NonAuthNavbar" element={<NonAuthNavbar />} />
         <Route index path="/CanVote" element={<CantVote />} />
         <Route index path="/CreatePoll" element={<CreatePoll />} />
+        <Route index path="/ComingSoonPage" element={<ComingSoonPage />} />
         <Route index path="/Voted" element={<Voted />} />
         <Route index path="/MyPolls" element={<MyPolls />} />
         <Route index path="/PollResult" element={<PollResult />} />
