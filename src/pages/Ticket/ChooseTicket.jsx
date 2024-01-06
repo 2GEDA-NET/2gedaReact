@@ -64,7 +64,7 @@ const ChooseTicket = ({
       total_amount: quantity * amount,
     };
     try {
-      const response = await fetch(`http://127.0.0.1:8000/ticket/buy-ticket`, {
+      const response = await fetch(`${url}/ticket/buy-ticket`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,8 +1,10 @@
 import "./style.css";
 import SmallTicketCard from "../Dashboard/smallTicket";
 import SmallTicketPromoteCard from "../Dashboard/smallTicketsPromoted";
+
 import { url } from "../../utils";
 import { useState, useEffect } from "react";
+import { Skeleton } from "@mui/material";
 
 const PromoteTicket = ({
   handleContainerClick,
@@ -10,6 +12,9 @@ const PromoteTicket = ({
 }) => {
   const [responseData, setResponseData] = useState([]);
   const [isLoading, setIsloading] = useState(null);
+
+  const PromoteTicket = localStorage.getItem("PromotedTicket");
+  const PromoteTicketArray = JSON.parse(PromoteTicket);
 
   useEffect(() => {
     const token = localStorage.getItem("authTOken");
@@ -31,6 +36,7 @@ const PromoteTicket = ({
         const responseBody = await response.json();
         console.log(responseBody);
         setResponseData(responseBody);
+        localStorage.setItem("PromotedTicket", JSON.stringify(responseBody));
         console.log("response data", responseData);
         // Move setIsLoading inside the try block if you want it to be set only on success
         setIsloading(true);
@@ -61,7 +67,7 @@ const PromoteTicket = ({
             <SmallTicketPromoteCard
               key={index} // Add a unique key for each item in the map function
               description={item.desc}
-              eventId = {item.id}
+              eventId={item.id}
               formatedDate={item.formated_date}
               location={item.location}
               eventImage={item.image}
@@ -69,7 +75,72 @@ const PromoteTicket = ({
             />
           ))
         ) : (
-          <p></p>
+          <>
+            {PromoteTicketArray && PromoteTicketArray.length > 0 ? (
+              PromoteTicketArray.map((item, index) => (
+                <SmallTicketPromoteCard
+                  key={index} // Add a unique key for each item in the map function
+                  description={item.desc}
+                  eventId={item.id}
+                  formatedDate={item.formated_date}
+                  location={item.location}
+                  eventImage={item.image}
+                  handleEventDetailContainerClick={
+                    handleEventDetailContainerClick
+                  }
+                />
+              ))
+            ) : (
+              <>
+                <div style={{ height: 200, width: "45%", marginRight: 20 }}>
+                  <Skeleton
+                    variant="rectangular"
+                    width={"100%"}
+                    height={120}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    width={"50%"}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                </div>
+
+                {/* <Skeleton variant="rounded" width={210} height={60} /> */}
+                <div style={{ height: 200, width: "45%" }}>
+                  <Skeleton
+                    variant="rectangular"
+                    width={"100%"}
+                    height={120}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    width={"70%"}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                </div>
+              </>
+            )}
+          </>
         )}
       </div>
     </div>

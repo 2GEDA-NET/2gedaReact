@@ -8,6 +8,7 @@ import Poll from "../../components/Modals/Vote/Can/Poll";
 import SearchBox from "../../components/SearchComp/searchBox";
 import Notify from "../../components/Modals/Vote/Notification/Notify";
 import { Modal } from "react-bootstrap";
+import { url } from "../../utils";
 
 const Voting = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,6 +16,8 @@ const Voting = () => {
   const [responseData, setResponseData] = useState(null);
   const [promoted, setPromoted] = useState(null);
   const [suggested, setSuggested] = useState(null);
+
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,7 +27,7 @@ const Voting = () => {
     const makeRequest = async () => {
       try {
         const promotedResponse = await fetch(
-          `http://127.0.0.1:8000/poll/promoted/`,
+          `${url}/poll/promoted/`,
           {
             method: "GET",
             headers: {
@@ -34,7 +37,7 @@ const Voting = () => {
           }
         );
 
-        const response = await fetch(`http://127.0.0.1:8000/poll/polls/`, {
+        const response = await fetch(`${url}/poll/polls/`, {
           method: "GET",
           headers: {
             "Content-Type": "multipart/form-data",
@@ -43,7 +46,7 @@ const Voting = () => {
         });
 
         const suggestedResponse = await fetch(
-          `http://127.0.0.1:8000/poll/suggested-polls/`,
+          `${url}/poll/suggested-polls/`,
           {
             method: "GET",
             headers: {
@@ -101,7 +104,7 @@ const Voting = () => {
     };
     try {
       const token = localStorage.getItem("authTOken");
-      const response = await fetch(`http://127.0.0.1:8000/poll/votes/`, {
+      const response = await fetch(`${url}/poll/votes/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -295,7 +298,7 @@ const Votingg = () => {
     console.log(`Token ${token}`);
     const makeRequest = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/poll/polls/`, {
+        const response = await fetch(`${url}/poll/polls/`, {
           method: "GET",
           headers: {
             "Content-Type": "multipart/form-data",

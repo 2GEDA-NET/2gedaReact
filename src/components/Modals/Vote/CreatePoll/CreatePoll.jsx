@@ -104,7 +104,7 @@ const CreatePoll = () => {
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: "http://127.0.0.1:8000/poll/polls/",
+        url: `${url}/poll/polls/`,
         headers: {
           Authorization: "Token 65b55bb46605a175c3d5f16be2bcb83e7015305c",
         },

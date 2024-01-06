@@ -2,10 +2,17 @@ import SmallTicketCard from "../Dashboard/smallTicket";
 import SmallTicketCardEvent from "../Dashboard/smallTicketEvent";
 import { useEffect, useState } from "react";
 import { url } from "../../utils";
+import { Skeleton } from "@mui/material";
 
-const EventThisWeek = ({ handleWeekContainerClick, handleEventDetailContainerClick }) => {
+const EventThisWeek = ({
+  handleWeekContainerClick,
+  handleEventDetailContainerClick,
+}) => {
   const [responseData, setResponseData] = useState([]);
   const [isLoading, setIsloading] = useState(null);
+  const eventThisWeek = localStorage.getItem("eventThisWeek");
+  const eventThisWeekArray = JSON.parse(eventThisWeek);
+
   useEffect(() => {
     const token = localStorage.getItem("authTOken");
     console.log(`Token ${token}`);
@@ -27,6 +34,7 @@ const EventThisWeek = ({ handleWeekContainerClick, handleEventDetailContainerCli
         console.log(responseBody);
         setResponseData(responseBody);
         console.log("response data", responseData);
+        localStorage.setItem("eventThisWeek", JSON.stringify(responseBody));
         // Move setIsLoading inside the try block if you want it to be set only on success
         setIsloading(true);
 
@@ -53,17 +61,80 @@ const EventThisWeek = ({ handleWeekContainerClick, handleEventDetailContainerCli
         {responseData !== null && responseData.length > 0 ? (
           responseData.map((item, index) => (
             <SmallTicketCardEvent
-              key={index} // Add a unique key for each item in the map function
+              key={index}
               description={item.desc}
-              eventId = {item.id}
+              eventId={item.id}
               formatedDate={item.formated_date}
               location={item.location}
               eventImage={item.image}
-              handleEventDetailContainerClick = {handleEventDetailContainerClick}
+              handleEventDetailContainerClick={handleEventDetailContainerClick}
             />
           ))
         ) : (
-          <p></p>
+          <>
+            {eventThisWeekArray && eventThisWeekArray.length > 0 ? (
+              eventThisWeekArray.map((item, index) => (
+                <SmallTicketCardEvent
+                  key={index}
+                  description={item.desc}
+                  eventId={item.id}
+                  formatedDate={item.formated_date}
+                  location={item.location}
+                  eventImage={item.image}
+                  handleEventDetailContainerClick={
+                    handleEventDetailContainerClick
+                  }
+                />
+              ))
+            ) : (
+              <>
+                <div style={{ height: 200, width: "45%", marginRight: 20 }}>
+                  <Skeleton
+                    variant="rectangular"
+                    width={"100%"}
+                    height={120}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    width={"50%"}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                </div>
+                <div style={{ height: 200, width: "45%", marginRight: 20 }}>
+                  <Skeleton
+                    variant="rectangular"
+                    width={"100%"}
+                    height={120}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    width={"50%"}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                </div>
+              </>
+            )}
+          </>
         )}
       </div>
     </div>

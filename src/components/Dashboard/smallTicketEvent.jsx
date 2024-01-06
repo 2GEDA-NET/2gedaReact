@@ -1,4 +1,5 @@
 import "./second.css";
+import { Skeleton } from "@mui/material";
 const SmallTicketCardEvent = ({
   handleEventDetailContainerClick,
   description,
@@ -20,7 +21,7 @@ const SmallTicketCardEvent = ({
         {eventImage !== null ? (
           <img src={eventImage} alt="" />
         ) : (
-          <img src="images/pic1.png" alt="" />
+          <img className="pics" src="images/pic1.png" alt="" />
         )}
       </div>
       <div className="tic-title">{description !== null ? description : ""}</div>

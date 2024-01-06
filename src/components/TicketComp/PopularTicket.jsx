@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 import SmallTicketCard from "../Dashboard/smallTicket";
 import { url } from "../../utils";
-import { useEventContext } from '../../Context/EventContext/EventDetail';
+import { useEventContext } from "../../Context/EventContext/EventDetail";
+// import preloader from "./Animation - 1703321875032 (1).json";
+import preloader from "../../pages/Home/Animation - 1703321875032 (1).json";
+import Lottie from "lottie-react";
+import { Skeleton } from "@mui/material";
 
 const PopularTicket = ({ handleEventDetailContainerClick }) => {
   const [responseData, setResponseData] = useState([]);
   const [isLoading, setIsloading] = useState(null);
+
+  const cachedPopularTicket = localStorage.getItem("PopularTicket");
+
+  const PopularTicketArray = JSON.parse(cachedPopularTicket);
 
   useEffect(() => {
     const token = localStorage.getItem("authTOken");
@@ -27,6 +35,7 @@ const PopularTicket = ({ handleEventDetailContainerClick }) => {
         const responseBody = await response.json();
         console.log(responseBody);
         setResponseData(responseBody);
+        localStorage.setItem("PopularTicket", JSON.stringify(responseBody));
         console.log("response data", responseData);
         // Move setIsLoading inside the try block if you want it to be set only on success
         setIsloading(true);
@@ -51,16 +60,57 @@ const PopularTicket = ({ handleEventDetailContainerClick }) => {
           responseData.map((item, index) => (
             <SmallTicketCard
               key={index} // Add a unique key for each item in the map function
-              eventId = {item.id}
+              eventId={item.id}
               description={item.desc}
               formatedDate={item.formated_date}
-              location = {item.location}
-              eventImage = {item.image}
+              location={item.location}
+              eventImage={item.image}
               handleEventDetailContainerClick={handleEventDetailContainerClick}
             />
           ))
         ) : (
-          <p></p>
+          <>
+            {PopularTicketArray && PopularTicketArray.length > 0 ? (
+              PopularTicketArray.map((item, index) => (
+                <SmallTicketCard
+                  key={index} // Add a unique key for each item in the map function
+                  eventId={item.id}
+                  description={item.desc}
+                  formatedDate={item.formated_date}
+                  location={item.location}
+                  eventImage={item.image}
+                  handleEventDetailContainerClick={
+                    handleEventDetailContainerClick
+                  }
+                />
+              ))
+            ) : (
+              <>
+                <div style={{ height: 200, width: "45%", marginRight: 20 }}>
+                  <Skeleton
+                    variant="rectangular"
+                    width={"100%"}
+                    height={120}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                  <Skeleton
+                    variant="text"
+                    sx={{ fontSize: "2rem" }}
+                    width={"50%"}
+                    style={{ borderRadius: 5 }}
+                    animation="wave"
+                  />
+                </div>
+              </>
+            )}
+          </>
         )}
       </div>
     </div>

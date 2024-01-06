@@ -126,7 +126,7 @@ const CreateEventTicket = ({ handleCreatTicketCloseContainerClick }) => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/ticket/events/`,
+        `${url}/ticket/events/`,
         requestOptions
       );
       const responseBody = await response.json();

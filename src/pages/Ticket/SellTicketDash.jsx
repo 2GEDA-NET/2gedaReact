@@ -70,7 +70,7 @@ const SellTicketDash = ({
     const makeRequest = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/ticket/event-transactions?filter=${filter}`,
+          `${url}/ticket/event-transactions?filter=${filter}`,
           {
             method: "GET",
             headers: {

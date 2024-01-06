@@ -21,6 +21,7 @@ import { url } from "../../utils";
 import Lottie from "lottie-react";
 import preloader from "./Animation - 1703321875032 (1).json";
 
+
 const Home = () => {
   const [isFeedOpen, setIsFeedOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("All Posts");
@@ -45,7 +46,7 @@ const Home = () => {
     const makeRequest = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/feed/create_post/`,
+          `${url}/feed/create_post/`,
           {
             method: "GET",
             headers: {
@@ -62,9 +63,8 @@ const Home = () => {
         const responseBody = await response.json();
         setResponseData(responseBody);
 
-        
         setIsloading(true);
-
+        localStorage.setItem("Feeds", JSON.stringify(responseBody));
         // Check if responseData is not null before mapping
         if (responseBody !== null) {
           responseBody.map((item, index) => console.log(item.user.username));
