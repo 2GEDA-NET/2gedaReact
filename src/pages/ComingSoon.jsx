@@ -24,6 +24,7 @@ const ComingSoonPage = () => {
   const buttonStyle = {
     padding: "10px",
     fontSize: "16px",
+    backgroundColor: "#f4f4f4",
     margin: "10px",
     cursor: "pointer",
     borderRadius: "10px",
