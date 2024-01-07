@@ -1,4 +1,4 @@
-name: Publish Website to CPanel
+name: Deploy to FTP
 
 on:
   push:
@@ -7,15 +7,17 @@ on:
 
 jobs:
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2.1.0
 
     - name: Deploy to FTP
-      uses: SamKirkland/FTP-Deploy-Action@v3.1.1
+      uses: appleboy/ftp-action@v0.2.0
       with:
-        ftp-server: ${{ secrets.FTP_SERVER }}
-        ftp-username: ${{ secrets.FTP_USERNAME }}
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
+        host: ${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local: "."  
+        remote: "/" 
