@@ -11,13 +11,11 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2.1.0
+      uses: actions/checkout@v3
 
     - name: Deploy to FTP
-      uses: appleboy/ftp-action@v0.2.0
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local: "."  
-        remote: "/" 
+        password: ${{ secrets.FTP_PASSWORD }} 
